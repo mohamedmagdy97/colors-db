@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "590499560296",
+    "project_id": "flutter-base-a428c",
+    "storage_bucket": "flutter-base-a428c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590499560296:android:a7b3a0d19abcd4d73674dd",
+        "android_client_info": {
+          "package_name": "sa.aait.aspbranch.baseFlutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590499560296-fe5ijjgktqdm8qhacp621e6t3btjqj0i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWWwNklL6kn2iGdgjYGKm3qGEfUMXpLNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590499560296-fe5ijjgktqdm8qhacp621e6t3btjqj0i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "590499560296-0gp7c8qda4idesf8vikvv45r2s3r3t7r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "sa.aait.aspbranch.basestruct"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590499560296:android:c58b54d86786b03e3674dd",
+        "android_client_info": {
+          "package_name": "sa.aait.aspbranch.basestruct"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590499560296-fe5ijjgktqdm8qhacp621e6t3btjqj0i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWWwNklL6kn2iGdgjYGKm3qGEfUMXpLNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590499560296-fe5ijjgktqdm8qhacp621e6t3btjqj0i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "590499560296-0gp7c8qda4idesf8vikvv45r2s3r3t7r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "sa.aait.aspbranch.basestruct"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
