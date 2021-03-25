@@ -5,7 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'general/utilities/localization/SetLocalization.dart';
 import 'general/utilities/routers/RouterImports.gr.dart';
 // import 'main.mapper.g.dart' show initializeJsonMapper;
 
@@ -38,8 +39,16 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         theme: MainData.defaultThem,
         title: "Base Flutter",
-        localizationsDelegates: AppLocalizations.localizationsDelegates, // Add this line
-        supportedLocales: AppLocalizations.supportedLocales,
+          supportedLocales: [
+            Locale('en', 'US'),
+            Locale('ar', 'EG')
+          ],
+          localizationsDelegates: [
+            SetLocalization.localizationsDelegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
         locale: context.watch<LangCubit>().state.locale,
           routerDelegate: _appRouter.delegate(
             navigatorObservers: [BotToastNavigatorObserver()],

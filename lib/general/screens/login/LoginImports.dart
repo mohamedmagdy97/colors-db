@@ -1,4 +1,5 @@
 import 'package:base_flutter/general/blocks/auth_cubit/auth_cubit.dart';
+import 'package:base_flutter/general/utilities/localization/LocalizationMethods.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:base_flutter/general/resources/GeneralRepository.dart';

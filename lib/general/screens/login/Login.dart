@@ -43,7 +43,7 @@ class _LoginState extends State<Login> with LoginData{
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 MyText(
-                                  title:("login"),
+                                  title: tr(context,"login"),
                                   size: 16,
                                   color: MyColors.primary,
                                   alien: TextAlign.center,
