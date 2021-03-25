@@ -55,8 +55,11 @@ class GlobalNotification {
         ExtendedNavigator.of(context).push(Routes.login);
       }
     });
-    // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      flutterNotificationClick(json.encode(message.data));
+    });
     messaging.getToken().then((token) {
       print(token);
     });
@@ -93,7 +96,7 @@ class GlobalNotification {
         payload: json.encode(message.data));
   }
 
-  Future flutterNotificationClick(payload) async {
+  Future flutterNotificationClick(String payload) async {
 
     print("tttttttttt $payload");
 
