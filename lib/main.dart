@@ -28,32 +28,29 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final navigatorKey = new GlobalKey<NavigatorState>();
-
+  final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) {
     final botToastBuilder = BotToastInit();
     return MultiBlocProvider(
       providers: MainData.providers(context),
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: MainData.defaultThem,
         title: "Base Flutter",
         localizationsDelegates: AppLocalizations.localizationsDelegates, // Add this line
         supportedLocales: AppLocalizations.supportedLocales,
         locale: context.watch<LangCubit>().state.locale,
-        navigatorObservers: [BotToastNavigatorObserver()],
-        home: Splash(),
-        builder: ExtendedNavigator.builder<AppRouter>(
-            router: AppRouter(),
-            initialRoute: Routes.splash,
-            // initialRouteArgs: navigatorKey,
-            navigatorKey: navigatorKey,
-            builder: (ctx, child) {
-              child = FlutterEasyLoading(child: child);  //do something
-              child = botToastBuilder(context,child);
-              return child;
-            }
-        ),
+          routerDelegate: _appRouter.delegate(
+            navigatorObservers: [BotToastNavigatorObserver()],
+            navigatorKey: navigatorKey
+          ),
+          routeInformationParser: _appRouter.defaultRouteParser(),
+          builder: (ctx, child) {
+            child = FlutterEasyLoading(child: child);  //do something
+            child = botToastBuilder(context,child);
+            return child;
+          }
       ),
     );
   }

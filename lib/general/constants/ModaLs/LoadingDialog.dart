@@ -54,7 +54,7 @@ class LoadingDialog {
       builder: (BuildContext context) {
         return _alertDialog(
             "قم بتسجيل الدخول للمتابعة",
-            () => ExtendedNavigator.of(context).popUntilPath(Routes.login),
+            () => context.router.popUntilRouteWithName(LoginRoute.name),
             context,
             "دخول");
       },

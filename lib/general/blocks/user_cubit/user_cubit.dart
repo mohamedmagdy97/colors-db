@@ -1,4 +1,4 @@
-import 'package:base_flutter/general/models/user_model.dart';
+import 'package:base_flutter/general/models/UserModel.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 

@@ -51,7 +51,7 @@ class GlobalNotification {
       _onMessageStreamController.add(message.data);
       if (int.parse(message.data["type"]) == -1) {
         Utils.clearSavedData();
-        ExtendedNavigator.of(context).push(Routes.login);
+        context.router.push(LoginRoute());
       }
     });
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
