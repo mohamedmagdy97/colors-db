@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:base_flutter/general/blocks/lang_cubit.dart';
 import 'package:base_flutter/general/utilities/main_data/MainDataImports.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -7,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'general/screens/splash/Splash.dart';
 import 'general/utilities/routers/RouterImports.gr.dart';
+// import 'main.mapper.g.dart' show initializeJsonMapper;
 
 void main()async{
+  // initializeJsonMapper();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
