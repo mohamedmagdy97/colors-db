@@ -13,7 +13,7 @@ class ForgetPasswordData{
     FocusScope.of(context).requestFocus(FocusNode());
     if(formKey.currentState.validate()){
       forgetPasswordCubit.onUpdateLoading(true); 
-      await GeneralRepository(context).forgetPassword(phone.text);
+      // await GeneralRepository(context).forgetPassword(phone.text);
       forgetPasswordCubit.onUpdateLoading(false);
     }
 

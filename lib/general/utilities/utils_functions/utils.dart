@@ -15,7 +15,7 @@ class Utils {
       setCurrentUserData(data,context);
     } else {
       changeLanguage("ar",context);
-      ExtendedNavigator.of(context).push(Routes.login);
+      // ExtendedNavigator.of(context).push(Routes.login);
     }
 
   }

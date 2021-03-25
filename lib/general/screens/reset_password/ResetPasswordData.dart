@@ -13,11 +13,11 @@ class ResetPasswordData{
     FocusScope.of(context).requestFocus(FocusNode());
     if(_formKey.currentState.validate()){
       resetPasswordCubit.onUpdateLoadingState(true);
-      bool result= await GeneralRepository(context).resetUserPassword(userId, _code.text, _new.text);
+      // bool result= await GeneralRepository(context).resetUserPassword(userId, _code.text, _new.text);
       resetPasswordCubit.onUpdateLoadingState(false);
-      if(result){
-        // ExtendedNavigator.of(context).popUntilPath(Routes.login);
-      }
+      // if(result){
+      //   // ExtendedNavigator.of(context).popUntilPath(Routes.login);
+      // }
     }
 
   }
