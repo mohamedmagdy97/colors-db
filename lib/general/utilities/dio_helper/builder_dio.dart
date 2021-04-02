@@ -1,4 +1,5 @@
-import 'package:dio/dio.dart';
+import 'package:dio2/dio2.dart';
+
 import 'DioCacheManager.dart';
 
 /// try to get maxAge and maxStale from response headers.

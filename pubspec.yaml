@@ -62,7 +62,7 @@ dependencies:
   dart_json_mapper: ^2.0.6
   quiver: ^3.0.0
   crypto: ^3.0.1
-  dio: ^4.0.0
+  dio2: ^5.0.0-nullsafety
 
 
 
