@@ -20,7 +20,7 @@ class _SplashState extends State<Splash> {
 
   @override
   void initState() {
-    GlobalNotification.instance.setupNotification(context: context);
+    // GlobalNotification.instance.setupNotification(context: context);
     Utils.manipulateSplashData(context);
     super.initState();
   }
