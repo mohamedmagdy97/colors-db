@@ -221,12 +221,12 @@ class Utils {
 
   static Future<bool> askForPermission(Location location)async{
     var permission = await location.hasPermission();
-    if (permission == PermissionStatus.DENIED_FOREVER) {
+    if (permission == PermissionStatus.deniedForever) {
       return false;
-    } else if (permission == PermissionStatus.DENIED) {
+    } else if (permission == PermissionStatus.denied) {
       permission = await location.requestPermission();
-      if (permission == PermissionStatus.DENIED ||
-          permission == PermissionStatus.DENIED_FOREVER) {
+      if (permission == PermissionStatus.denied ||
+          permission == PermissionStatus.deniedForever) {
         return false;
       }
     }
