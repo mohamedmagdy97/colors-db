@@ -58,7 +58,7 @@ class GlobalNotification {
 
   }
 
-  Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     print("Handling a background message: ${message..messageId}");
     flutterNotificationClick(json.encode(message.data));
   }
@@ -85,7 +85,7 @@ class GlobalNotification {
         payload: json.encode(message.data));
   }
 
-  Future flutterNotificationClick(String payload) async {
+  static Future flutterNotificationClick(String payload) async {
     print("tttttttttt $payload");
     var _data = json.decode(payload);
 
