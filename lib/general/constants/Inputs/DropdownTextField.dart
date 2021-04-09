@@ -1,8 +1,10 @@
+import 'package:base_flutter/general/blocks/lang_cubit/lang_cubit.dart';
+import 'package:base_flutter/general/constants/Inputs/CustomInputDecoration.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:base_flutter/general/constants/MyColors.dart';
 import 'package:base_flutter/general/widgets/MyText.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'CustomInputTextStyle.dart';
 import 'custom_dropDown/CustomDropDown.dart';
 
 class DropdownTextField<DataType> extends StatefulWidget {
@@ -32,6 +34,7 @@ class _DropdownTextFieldState<DataType> extends State<DropdownTextField> {
 
   @override
   Widget build(BuildContext context) {
+    var lang = context.watch<LangCubit>().state.locale.languageCode;
     return  Container(
       margin: widget.margin?? EdgeInsets.symmetric(vertical: 10),
       child: CustomDropDown<DataType>(
@@ -50,14 +53,7 @@ class _DropdownTextFieldState<DataType> extends State<DropdownTextField> {
         selectedItem: widget.selectedItem,
         itemAsString: (dynamic u) => widget.useName? u.name:u,
         showSelectedItem: widget.showSelectedItem,
-        searchBoxDecoration: InputDecoration(
-          border: OutlineInputBorder(
-              borderSide: BorderSide(color: MyColors.grey.withOpacity(.5),width: 1),
-              borderRadius: BorderRadius.circular(10)
-          ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 10),
-          labelText: "Search",
-        ),
+        searchBoxDecoration: CustomInputDecoration(lang: lang,label:"بحث"),
         popupTitle: Container(
           height: 50,
           decoration: BoxDecoration(
@@ -77,16 +73,10 @@ class _DropdownTextFieldState<DataType> extends State<DropdownTextField> {
             topRight: Radius.circular(24),
           ),
         ),
-        dropdownSearchDecoration:  InputDecoration(
-          border: OutlineInputBorder(
-              borderSide: BorderSide(color: MyColors.grey.withOpacity(.5),width: 1),
-              borderRadius: BorderRadius.circular(10)
-          ),
-          contentPadding: EdgeInsets.only(right: 10),
-        ),
-        hintStyle: GoogleFonts.cairo(fontSize: 14,),
-        labelStyle: GoogleFonts.roboto(fontSize: 18),
-        inputStyle: GoogleFonts.roboto(fontSize: 20,color: Colors.black),
+        dropdownSearchDecoration:  CustomInputDecoration(lang: lang,label:widget.label),
+        // hintStyle: GoogleFonts.cairo(fontSize: 14,),
+        // labelStyle: GoogleFonts.roboto(fontSize: 18),
+        inputStyle: CustomInputTextStyle(lang: lang),
 
     ),
     );

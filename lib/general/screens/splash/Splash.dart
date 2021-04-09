@@ -1,70 +1,47 @@
-import 'package:flutter/widgets.dart';
-import 'package:base_flutter/general/constants/GlobalNotification.dart';
-import 'package:base_flutter/general/utilities/utils_functions/UtilsImports.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:base_flutter/general/constants/MyColors.dart';
-import 'package:base_flutter/general/widgets/AnimationContainer.dart';
-import 'package:base_flutter/res.dart';
-
+part of 'SplashImports.dart';
 
 class Splash extends StatefulWidget {
+  final GlobalKey<NavigatorState> navigatorKey;
+
+  const Splash({@required this.navigatorKey});
   @override
-  State<StatefulWidget> createState()=>_SplashState();
+  _SplashState createState() => _SplashState();
 }
 
 class _SplashState extends State<Splash> {
-
-  GlobalKey<ScaffoldState> _scaffold = new GlobalKey<ScaffoldState>();
-
-
   @override
   void initState() {
-    // GlobalNotification.instance.setupNotification(context: context);
-    Utils.manipulateSplashData(context);
+    _checkingData();
     super.initState();
   }
 
+  _checkingData() async {
+    GlobalNotification.instance.setupNotification(widget.navigatorKey);
+    Utils.manipulateSplashData(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffold,
-      backgroundColor: MyColors.primary,
       body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-
-            AnimationContainer(
-              distance: 500,
+        alignment: Alignment.bottomCenter,
+        color: MyColors.white,
+        child: Center(
+          child: AnimationContainer(
               index: 0,
-              duration: Duration(seconds: 2),
               vertical: true,
-              child: Image(
-                width: 250,
-                height: MediaQuery.of(context).size.width,
-                image: AssetImage(Res.logoWhite),
-                fit: BoxFit.contain,
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                height: 220,
-                width: MediaQuery.of(context).size.width,
-                child: Image(
-                  image: AssetImage(Res.splash),
-                  fit: BoxFit.fill,
-                  color: Colors.white,
+              duration: Duration(milliseconds: 500),
+              distance: MediaQuery.of(context).size.height * .3,
+              child: Hero(
+                tag: Res.logo,
+                child: Image.asset(
+                  Res.logo,
+                  width: 200,
+                  height: 150,
                 ),
-              ),
-            ),
-          ],
+              )),
         ),
-      )
+      ),
     );
   }
 }

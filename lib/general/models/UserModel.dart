@@ -12,6 +12,8 @@ class UserModel {
   String token;
   @JsonProperty(name: "lang")
   String lang;
+  @JsonProperty(name: "type")
+  String type;
 
 
   UserModel({this.userName, this.id, this.token, this.lang});

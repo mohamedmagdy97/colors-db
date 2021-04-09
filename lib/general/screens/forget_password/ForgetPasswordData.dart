@@ -1,22 +1,17 @@
 part of 'ForgetPasswordImports.dart';
 
-
-class ForgetPasswordData{
-
+class ForgerPasswordData {
   final GlobalKey<ScaffoldState> scaffold = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
-  final TextEditingController phone= new TextEditingController();
-  final ForgetPasswordCubit forgetPasswordCubit =new ForgetPasswordCubit();
+  final GlobalKey<CustomButtonState> btnKey = new GlobalKey<CustomButtonState>();
+  final TextEditingController phone = new TextEditingController();
 
 
-  void setForgetPassword(BuildContext context) async {
-    FocusScope.of(context).requestFocus(FocusNode());
-    if(formKey.currentState.validate()){
-      forgetPasswordCubit.onUpdateLoading(true); 
-      // await GeneralRepository(context).forgetPassword(phone.text);
-      forgetPasswordCubit.onUpdateLoading(false);
+  void onForgetPassword(BuildContext context) async {
+    if (formKey.currentState.validate()) {
+      btnKey.currentState.animateForward();
+      await GeneralRepository(context).forgetPassword(phone.text);
+      btnKey.currentState.animateReverse();
     }
-
   }
-
 }

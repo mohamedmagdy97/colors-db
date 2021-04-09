@@ -7,7 +7,6 @@ class MainData {
 
   static ThemeData defaultThem=ThemeData(
     primarySwatch: Colors.grey,
-    cursorColor: MyColors.primary,
     focusColor: MyColors.primary,
     accentColor: MyColors.primary,
     primaryColor: MyColors.primary,

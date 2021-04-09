@@ -15,7 +15,7 @@ class Utils {
       setCurrentUserData(data,context);
     } else {
       changeLanguage("ar",context);
-      context.router.push(LoginRoute());
+      context.router.push(SelectUserRoute());
     }
 
   }
@@ -30,7 +30,7 @@ class Utils {
     prefs.setString("user", json.encode(model.toJson()));
   }
 
-  static void  changeLanguage(String lang,BuildContext context){
+  static void changeLanguage(String lang,BuildContext context){
     context.read<LangCubit>().onUpdateLanguage(lang);
   }
 
