@@ -39,7 +39,6 @@ class CacheObj {
   _convertDuration(Duration duration) =>
       DateTime.now().add(duration).millisecondsSinceEpoch;
 
-
   factory CacheObj.fromJson(Map<String, dynamic> json) => JsonMapper.fromMap<CacheObj>(json);
   Map<String, dynamic> toJson() => JsonMapper.toMap(this);
 }

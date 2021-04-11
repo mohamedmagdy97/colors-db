@@ -15,6 +15,8 @@ class GeneralRepository {
   Future<bool> setUserLogin(String phone, String pass) =>
       _generalHttpMethods.userLogin(phone, pass);
 
+  Future<void> getHomeConstData()=>_generalHttpMethods.getHomeConstData();
+
   Future<bool> sendCode(String code, String userId) =>
       _generalHttpMethods.sendCode(code, userId);
 

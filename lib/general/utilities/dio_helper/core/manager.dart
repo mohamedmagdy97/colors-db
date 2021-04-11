@@ -6,7 +6,7 @@ import 'package:crypto/crypto.dart';
 import 'package:sqflite/utils/utils.dart';
 
 import 'config.dart';
-import 'obj.dart';
+import 'CacheObj.dart';
 
 class CacheManager {
   CacheConfig _config;

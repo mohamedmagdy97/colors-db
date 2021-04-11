@@ -5,7 +5,7 @@ import 'package:dio2/dio2.dart';
 
 import 'core/config.dart';
 import 'core/manager.dart';
-import 'core/obj.dart';
+import 'core/CacheObj.dart';
 
 const DIO_CACHE_KEY_TRY_CACHE = "dio_cache_try_cache";
 const DIO_CACHE_KEY_MAX_AGE = "dio_cache_max_age";

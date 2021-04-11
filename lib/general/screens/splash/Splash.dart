@@ -17,7 +17,9 @@ class _SplashState extends State<Splash> {
 
   _checkingData() async {
     GlobalNotification.instance.setupNotification(widget.navigatorKey);
-    Utils.manipulateSplashData(context);
+    GeneralRepository(context).getHomeConstData().then((value){
+      Utils.manipulateSplashData(context);
+    });
   }
 
   @override

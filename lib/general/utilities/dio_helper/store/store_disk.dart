@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:base_flutter/general/utilities/dio_helper/core/config.dart';
-import 'package:base_flutter/general/utilities/dio_helper/core/obj.dart';
+import 'package:base_flutter/general/utilities/dio_helper/core/CacheObj.dart';
 import 'package:base_flutter/general/utilities/dio_helper/store/store_impl.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';

@@ -7,7 +7,6 @@ import 'package:base_flutter/general/screens/contact_us/ContactUsImports.dart';
 import 'package:base_flutter/general/screens/forget_password/ForgetPasswordImports.dart';
 import 'package:base_flutter/general/screens/image_zoom/ImageZoom.dart';
 import 'package:base_flutter/general/screens/login/LoginImports.dart';
-import 'package:base_flutter/general/screens/register/RegisterImports.dart';
 import 'package:base_flutter/general/screens/reset_password/ResetPasswordImports.dart';
 import 'package:base_flutter/general/screens/select_lang/SelectLangImports.dart';
 import 'package:base_flutter/general/screens/select_user/SelectUserImports.dart';

@@ -53,6 +53,17 @@ class GeneralHttpMethods {
     }
   }
 
+  Future<void> getHomeConstData()async{
+    Map<String,dynamic> body={
+      "lang":context.read<LangCubit>().state.locale.languageCode,
+    };
+    var _data= await DioHelper(forceRefresh: false).get("/api/v1/ListAllCat", body);
+    if(_data!=null){
+     return _data;
+    }
+    return null;
+  }
+
   Future<bool> sendCode(String code, String userId) async {
     String lang = context.read<LangCubit>().state.locale.languageCode;
     Map<String, dynamic> body = {"lang": lang, "code": code, "userId": userId};

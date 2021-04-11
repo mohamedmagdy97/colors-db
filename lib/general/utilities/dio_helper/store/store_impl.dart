@@ -1,5 +1,5 @@
 
-import 'package:base_flutter/general/utilities/dio_helper/core/obj.dart';
+import 'package:base_flutter/general/utilities/dio_helper/core/CacheObj.dart';
 
 abstract class ICacheStore {
   ICacheStore();
