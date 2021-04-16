@@ -1,6 +1,9 @@
+
+
+
 import 'package:dio2/dio2.dart';
 
-import 'DioCacheManager.dart';
+import 'manager_dio.dart';
 
 /// try to get maxAge and maxStale from response headers.
 /// local settings will always overview the value get from service.

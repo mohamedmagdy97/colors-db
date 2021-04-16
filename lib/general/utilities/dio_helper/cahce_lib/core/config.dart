@@ -1,5 +1,6 @@
 
-import 'package:base_flutter/general/utilities/dio_helper/store/store_impl.dart';
+
+import 'package:base_flutter/general/utilities/dio_helper/cahce_lib/store/store_impl.dart';
 
 typedef Future<List<int>> Encrypt(List<int> str);
 typedef Future<List<int>> Decrypt(List<int> str);

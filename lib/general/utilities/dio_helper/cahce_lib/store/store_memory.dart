@@ -1,7 +1,7 @@
 import 'dart:collection';
 
-import 'package:base_flutter/general/utilities/dio_helper/core/CacheObj.dart';
-import 'package:base_flutter/general/utilities/dio_helper/store/store_impl.dart';
+import 'package:base_flutter/general/utilities/dio_helper/cahce_lib/core/obj.dart';
+import 'package:base_flutter/general/utilities/dio_helper/cahce_lib/store/store_impl.dart';
 import 'package:quiver/cache.dart';
 
 class MemoryCacheStore extends ICacheStore {

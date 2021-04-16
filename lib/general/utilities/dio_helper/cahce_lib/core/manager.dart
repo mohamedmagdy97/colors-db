@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:base_flutter/general/utilities/dio_helper/store/store_disk.dart';
-import 'package:base_flutter/general/utilities/dio_helper/store/store_impl.dart';
-import 'package:base_flutter/general/utilities/dio_helper/store/store_memory.dart';
+import 'package:base_flutter/general/utilities/dio_helper/cahce_lib/store/store_disk.dart';
+import 'package:base_flutter/general/utilities/dio_helper/cahce_lib/store/store_impl.dart';
+import 'package:base_flutter/general/utilities/dio_helper/cahce_lib/store/store_memory.dart';
 import 'package:crypto/crypto.dart';
 import 'package:sqflite/utils/utils.dart';
 
 import 'config.dart';
-import 'CacheObj.dart';
+import 'obj.dart';
 
 class CacheManager {
   CacheConfig _config;

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:base_flutter/general/utilities/dio_helper/core/config.dart';
-import 'package:base_flutter/general/utilities/dio_helper/core/CacheObj.dart';
-import 'package:base_flutter/general/utilities/dio_helper/store/store_impl.dart';
+import 'package:base_flutter/general/utilities/dio_helper/cahce_lib/core/config.dart';
+import 'package:base_flutter/general/utilities/dio_helper/cahce_lib/core/obj.dart';
+import 'package:base_flutter/general/utilities/dio_helper/cahce_lib/store/store_impl.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -115,15 +115,15 @@ class DiskCacheStore extends ICacheStore {
     if (null != subKey) where += " and $_columnSubKey=\"$subKey\"";
     var resultList = await db.query(_tableCacheObject, where: where);
     if (null == resultList || resultList.length <= 0) return null;
-    return await _decryptCacheObj(CacheObj.fromJson(resultList[0]));
+    return await _decryptCacheObj(CacheObj.fromMap(resultList[0]));
   }
 
   @override
   Future<bool> setCacheObj(CacheObj obj) async {
     var db = await _database;
     if (null == db) return false;
-    var content = await _encryptCacheStr(obj.content);
-    var headers = await _encryptCacheStr(obj.headers);
+    var content = await _encryptCacheStr(context,obj.content);
+    var headers = await _encryptCacheStr(context,obj.headers);
     await db.insert(
         _tableCacheObject,
         {
@@ -171,12 +171,12 @@ class DiskCacheStore extends ICacheStore {
   }
 
   Future<CacheObj> _decryptCacheObj(CacheObj obj) async {
-    obj.content = await _decryptCacheStr(obj.content);
-    obj.headers = await _decryptCacheStr(obj.headers);
+    obj.content = await _decryptCacheStr(context,obj.content);
+    obj.headers = await _decryptCacheStr(context,obj.headers);
     return obj;
   }
 
-  Future<List<int>> _decryptCacheStr(List<int> bytes) async {
+  Future<List<int>> _decryptCacheStr(context,List<int> bytes) async {
     if (null == bytes) return null;
     if (null != _decrypt) {
       bytes = await _decrypt(bytes);
@@ -184,7 +184,7 @@ class DiskCacheStore extends ICacheStore {
     return bytes;
   }
 
-  Future<List<int>> _encryptCacheStr(List<int> bytes) async {
+  Future<List<int>> _encryptCacheStr(context,List<int> bytes) async {
     if (null == bytes) return null;
     if (null != _encrypt) {
       bytes = await _encrypt(bytes);
