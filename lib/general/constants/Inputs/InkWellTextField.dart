@@ -1,6 +1,4 @@
 import 'package:base_flutter/general/blocks/lang_cubit/lang_cubit.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:base_flutter/general/constants/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,7 +48,7 @@ class InkWellTextField extends StatelessWidget {
               enabled: true,
               validator: (value) => validate(value),
               style: CustomInputTextStyle(lang: lang),
-              decoration: CustomInputDecoration(lang: lang,label: label),
+              decoration: CustomInputDecoration(lang: lang,label: label,prefix: prefix),
             ),
           ),
         ),
