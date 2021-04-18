@@ -48,7 +48,7 @@ class InkWellTextField extends StatelessWidget {
               enabled: true,
               validator: (value) => validate(value),
               style: CustomInputTextStyle(lang: lang),
-              decoration: CustomInputDecoration(lang: lang,label: label,prefix: prefix),
+              decoration: CustomInputDecoration(lang: lang,label: label,prefixIcon: prefix,suffixIcon: icon),
             ),
           ),
         ),

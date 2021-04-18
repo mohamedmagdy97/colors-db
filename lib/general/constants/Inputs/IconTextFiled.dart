@@ -56,7 +56,7 @@ class IconTextFiled extends StatelessWidget {
           onChanged: onChange,
           validator: (value) => validate(value),
           style: CustomInputTextStyle(lang: lang),
-          decoration: CustomInputDecoration(lang: lang,label: label,prefix: prefixIcon,suffix: suffixIcon,),
+          decoration: CustomInputDecoration(lang: lang,label: label,prefixIcon: prefixIcon,suffixIcon: suffixIcon,),
         ),
       ),
     );

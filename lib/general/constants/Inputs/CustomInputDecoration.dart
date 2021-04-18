@@ -6,10 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomInputDecoration extends InputDecoration {
   final String lang;
   final String label;
-  final Widget prefix;
-  final Widget suffix;
+  final Widget prefixIcon;
+  final Widget suffixIcon;
 
-  CustomInputDecoration({this.lang, this.label,this.prefix, this.suffix});
+  CustomInputDecoration({this.lang, this.label,this.prefixIcon, this.suffixIcon}):super();
 
   @override
   // TODO: implement enabledBorder
@@ -65,19 +65,12 @@ class CustomInputDecoration extends InputDecoration {
 
   @override
   // TODO: implement fillColor
-  Color get fillColor => MyColors.white;
+  Color get fillColor => MyColors.secondary;
 
   @override
   // TODO: implement alignLabelWithHint
   bool get alignLabelWithHint => true;
 
-  @override
-  // TODO: implement prefixIcon
-  Widget get prefixIcon => prefixIcon;
-
-  @override
-  // TODO: implement suffixIcon
-  Widget get suffixIcon => suffixIcon;
 
 }
 
