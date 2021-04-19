@@ -14,7 +14,7 @@ void main()async{
   runApp(
     BlocProvider(
       create: (BuildContext context) => LangCubit(),
-      child: MyApp(),
+      child:  Phoenix(child: MyApp()),
     )
   );
 }
