@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:auto_route/auto_route.dart';
 import 'package:base_flutter/general/blocks/lang_cubit/lang_cubit.dart';
 import 'package:base_flutter/general/blocks/user_cubit/user_cubit.dart';
 import 'package:base_flutter/general/constants/GlobalState.dart';
@@ -14,8 +12,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GeneralHttpMethods {
   BuildContext context;
+  DioHelper dioHelper;
 
-  GeneralHttpMethods({@required this.context});
+  GeneralHttpMethods({@required this.context}){
+    dioHelper = context.read<DioHelper>();
+  }
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -30,7 +31,7 @@ class GeneralHttpMethods {
       "deviceType": Platform.isIOS ? "ios" : "android",
     };
     var _data =
-        await DioHelper().post("/api/v1/login", body, showLoader: false);
+        await dioHelper.post(url: "/api/v1/login",body: body,showLoader: false);
     if (_data != null) {
       int status = _data["status"];
       if (status == 1) {
@@ -57,7 +58,7 @@ class GeneralHttpMethods {
     Map<String,dynamic> body={
       "lang":context.read<LangCubit>().state.locale.languageCode,
     };
-    var _data= await DioHelper(forceRefresh: false).get("/api/v1/ListAllCat", body);
+    var _data= await dioHelper.get(url: "/api/v1/ListAllCat",body: body,refresh: false);
     if(_data!=null){
      return _data;
     }
@@ -67,8 +68,8 @@ class GeneralHttpMethods {
   Future<bool> sendCode(String code, String userId) async {
     String lang = context.read<LangCubit>().state.locale.languageCode;
     Map<String, dynamic> body = {"lang": lang, "code": code, "userId": userId};
-    var _data = await DioHelper()
-        .post("/api/v1/ConfirmCodeRegister", body, showLoader: false);
+    var _data = await dioHelper
+        .post(url: "/api/v1/ConfirmCodeRegister", body: body, showLoader: false);
     if (_data != null) {
       return true;
     } else {
@@ -79,7 +80,7 @@ class GeneralHttpMethods {
   Future<bool> resendCode(String userId) async {
     String lang = context.read<LangCubit>().state.locale.languageCode;
     Map<String, dynamic> body = {"lang": lang, "userId": userId};
-    var _data = await DioHelper().post("/api/v1/ResendCode", body);
+    var _data = await dioHelper.post(url: "/api/v1/ResendCode", body:body);
     return (_data != null);
   }
 
@@ -88,7 +89,7 @@ class GeneralHttpMethods {
       "lang": context.read<LangCubit>().state.locale.languageCode,
     };
     var _data =
-        await DioHelper(forceRefresh: false).get("/api/v1/AboutApp", body);
+        await dioHelper.get(url: "/api/v1/AboutApp", body:body);
     if (_data != null) {
       return _data["data"]["about_app"];
     } else {
@@ -101,7 +102,7 @@ class GeneralHttpMethods {
       "lang": context.read<LangCubit>().state.locale.languageCode,
     };
     var _data =
-        await DioHelper(forceRefresh: false).get("/api/v1/AboutApp", body);
+        await dioHelper.get(url: "/api/v1/AboutApp", body:body);
     if (_data != null) {
       return _data["data"]["condetions"];
     } else {
@@ -113,8 +114,7 @@ class GeneralHttpMethods {
     Map<String, dynamic> body = {
       "lang": context.read<LangCubit>().state.locale.languageCode,
     };
-    var _data = await DioHelper(forceRefresh: false)
-        .get("/api/v1/FrequentlyAskedQuestions", body);
+    var _data = await dioHelper.get(url: "/api/v1/FrequentlyAskedQuestions", body:body);
     if (_data != null) {
       return List<QuestionModel>.from(
           _data["data"].map((e) => QuestionModel.fromJson(e)));
@@ -127,7 +127,7 @@ class GeneralHttpMethods {
     Map<String, dynamic> body = {
       "lang": context.read<LangCubit>().state.locale.languageCode,
     };
-    var _data = await DioHelper().post("Client/SwitchNotify", body);
+    var _data = await dioHelper.post(url : "Client/SwitchNotify", body:body);
     if (_data != null) {
       return true;
     } else {
@@ -141,8 +141,8 @@ class GeneralHttpMethods {
       "phone": "$phone",
       "lang": lang,
     };
-    var _data = await DioHelper()
-        .post("/api/v1/ForgetPassword", body, showLoader: false);
+    var _data = await dioHelper
+        .post(url : "/api/v1/ForgetPassword", body:body, showLoader: false);
     if (_data != null) {
       // ExtendedNavigator.of(context).push(Routes.resetPassword,
       //     arguments: ResetPasswordArguments(userId: _data["code"]["user_id"]));
@@ -161,7 +161,7 @@ class GeneralHttpMethods {
       "newPassword": "$pass",
       "lang": lang,
     };
-    var _data = await DioHelper().get("/api/v1/ChangePasswordByCode", body);
+    var _data = await dioHelper.get(url: "/api/v1/ChangePasswordByCode", body:body);
     if (_data != null) {
       return true;
     } else {
@@ -178,7 +178,7 @@ class GeneralHttpMethods {
       "comment": "$message",
     };
     var _data =
-        await DioHelper().post("/api/v1/ContactUs", body, showLoader: false);
+        await dioHelper.post(url : "/api/v1/ContactUs", body:body, showLoader: false);
     if (_data != null) {
       return true;
     } else {
@@ -190,7 +190,7 @@ class GeneralHttpMethods {
     Map<String, dynamic> body = {
       "phone": "$phone",
     };
-    var _data = await DioHelper().get("/api/v1/CheckActive", body);
+    var _data = await dioHelper.get(url: "/api/v1/CheckActive", body:body);
     print("data is $_data");
     if (_data != null) {
       final userCubit = context.read<UserCubit>().state.model;

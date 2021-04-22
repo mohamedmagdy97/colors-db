@@ -17,8 +17,10 @@ class _SplashState extends State<Splash> {
 
   _checkingData() async {
     GlobalNotification.instance.setupNotification(widget.navigatorKey);
-    GeneralRepository(context).getHomeConstData().then((value){
-      Utils.manipulateSplashData(context);
+    context.read<DioHelper>().intiDio().then((value){
+      GeneralRepository(context).getHomeConstData().then((value){
+        Utils.manipulateSplashData(context);
+      });
     });
   }
 
