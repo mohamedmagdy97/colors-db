@@ -19,7 +19,8 @@ class DioHelper {
       )
         ..interceptors.add(
           DioCacheInterceptor(options: _buildCacheOptions(cacheStore)),
-        );
+        )
+      ..interceptors.add(PrettyDioLogger(requestHeader: true,requestBody: true));
     }
   }
 
@@ -36,12 +37,10 @@ class DioHelper {
 
   Future<dynamic> get({String url, Map<String, dynamic> body, BuildContext context, bool refresh = true}) async {
     body.addAll({"branchId": _branch});
-    _printRequestBody(body);
     _dio.options.headers = await _getHeader();
     try {
       var response = await _dio.post("$baseUrl$url", data: FormData.fromMap(body),
           options: options.copyWith(policy: refresh? CachePolicy.refresh:CachePolicy.refresh).toOptions());
-      print("response ${response.statusCode} ${response.data}");
       var data = response.data;
       if (data["key"] == 1) {
         return data;
@@ -61,12 +60,10 @@ class DioHelper {
   Future<dynamic> post({String url, Map<String, dynamic> body, BuildContext context, bool showLoader = true}) async {
     if(showLoader)LoadingDialog.showLoadingDialog();
     body.addAll({"branchId": _branch});
-    _printRequestBody(body);
     _dio.options.headers = await _getHeader();
     try {
       var response =
           await _dio.post("$baseUrl$url", data: FormData.fromMap(body));
-      print("response ${response.statusCode} ${response.data}");
       if(showLoader)EasyLoading.dismiss();
       LoadingDialog.showToastNotification(response.data["msg"].toString());
       if (response.data["key"] == 1) return response.data;
@@ -85,7 +82,6 @@ class DioHelper {
   Future<dynamic> uploadFile({String url, Map<String, dynamic> body, BuildContext context, bool showLoader = true}) async {
     if(showLoader)LoadingDialog.showLoadingDialog();
     body.addAll({"branchId": _branch});
-    _printRequestBody(body);
     FormData formData = FormData.fromMap(body);
     body.forEach((key, value) async {
       if ((value) is File) {
@@ -120,7 +116,6 @@ class DioHelper {
 
     try {
       var response = await _dio.post("$baseUrl$url", data: formData);
-      print("response ${response.statusCode} ${response.data}");
       if(showLoader)EasyLoading.dismiss();
       LoadingDialog.showToastNotification(response.data["msg"].toString());
       if (response.data["key"] == 1) return response.data;
@@ -134,14 +129,6 @@ class DioHelper {
     }
 
     return null;
-  }
-
-  void _printRequestBody(Map<String, dynamic> body) {
-    print(
-        "-------------------------------------------------------------------");
-    print(body);
-    print(
-        "-------------------------------------------------------------------");
   }
 
   _getHeader() async {
