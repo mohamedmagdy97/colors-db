@@ -6,10 +6,10 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import 'general/MyApp.dart';
 
-// import 'main.mapper.g.dart' show initializeJsonMapper;
+import 'main.mapper.g.dart' show initializeJsonMapper;
 
 void main()async{
-  // initializeJsonMapper();
+  initializeJsonMapper();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
