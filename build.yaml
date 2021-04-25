@@ -1,13 +1,10 @@
 targets:
   $default:
     builders:
-      # This part configures dart_json_mapper builder
       dart_json_mapper:
-        options:
-          iterables: List, Set, HashSet, UnmodifiableListView
         generate_for:
-          - example/**.dart
-          - test/_test.dart
+          # here should be listed entry point files having 'void main()' function
+          - lib/main.dart
 
       # This part is needed to tell original reflectable builder to stay away
       # it overrides default options for reflectable builder to an **empty** set of files
