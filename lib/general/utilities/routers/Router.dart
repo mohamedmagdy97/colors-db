@@ -5,7 +5,7 @@ part of 'RouterImports.dart';
   routes: <AutoRoute>[
     //general routes
     AdaptiveRoute(page: Splash, initial: true,),
-    AdaptiveRoute(page: Login),
+    CustomRoute(page: Login,),
     AdaptiveRoute(page: ForgetPassword),
     AdaptiveRoute(page: ActiveAccount),
     AdaptiveRoute(page: ResetPassword),
@@ -17,7 +17,6 @@ part of 'RouterImports.dart';
     AdaptiveRoute(page: ConfirmPassword),
     AdaptiveRoute(page: ChangePassword),
     AdaptiveRoute(page: ImageZoom),
-
 
   ],
 )
