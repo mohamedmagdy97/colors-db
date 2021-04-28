@@ -7,7 +7,7 @@ class TermsData {
 
   void fetchData(BuildContext context)async {
     var data = await GeneralRepository(context).terms();
-    termsCubit.onUpdateData(data);
+    termsCubit.onUpdateData("$data");
   }
 
 }

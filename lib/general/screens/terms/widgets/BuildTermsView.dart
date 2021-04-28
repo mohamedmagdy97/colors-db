@@ -3,7 +3,7 @@ part of 'TermsWidgetsImports.dart';
 class BuildTermsView extends StatelessWidget {
   final String text;
 
-  const BuildTermsView({@required this.text});
+  const BuildTermsView({required this.text});
 
   @override
   Widget build(BuildContext context) {

@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AdaptivePicker{
 
-  static datePicker({@required BuildContext context, Function(DateTime date) onConfirm,DateTime initial,DateTime minDate}) async {
+  static datePicker({required BuildContext context,required Function(DateTime? date) onConfirm,DateTime? initial,DateTime? minDate}) async {
     if(Platform.isIOS){
       _iosDatePicker(context,onConfirm,initial: initial,minDate: minDate);
     }else{
@@ -19,7 +19,7 @@ class AdaptivePicker{
     }
   }
 
-  static _androidDatePicker(BuildContext context, Function(DateTime date) onConfirm,{DateTime initial,DateTime minDate}) {
+  static _androidDatePicker(BuildContext context, Function(DateTime? date) onConfirm,{DateTime? initial,DateTime? minDate}) {
     showRoundedDatePicker(
       context: context,
       initialDate: initial?? DateTime.now(),
@@ -37,7 +37,7 @@ class AdaptivePicker{
     ).then(onConfirm);
   }
 
-  static _iosDatePicker(BuildContext context, Function(DateTime date) onConfirm,{DateTime initial,DateTime minDate}) {
+  static _iosDatePicker(BuildContext context, Function(DateTime? date) onConfirm,{DateTime? initial,DateTime? minDate}) {
     DatePicker.showDatePicker(context,
       showTitleActions: true,
       onConfirm: onConfirm,
@@ -51,7 +51,7 @@ class AdaptivePicker{
   }
 
 
-  static timePicker({@required BuildContext context, Function(DateTime date) onConfirm})async{
+  static timePicker({required BuildContext context,required Function(DateTime date) onConfirm})async{
     if(Platform.isIOS){
       _iosTimePicker(context, onConfirm);
     }else{
@@ -64,7 +64,7 @@ class AdaptivePicker{
     showRoundedTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
-    ).then((time)=>onConfirm(DateTime(now.year, now.month, now.day, time.hour, time.minute)));
+    ).then((time)=>onConfirm(DateTime(now.year, now.month, now.day, time!.hour, time.minute)));
   }
 
   static _iosTimePicker(BuildContext context, Function(DateTime date) onConfirm){

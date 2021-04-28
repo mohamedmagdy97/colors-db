@@ -7,9 +7,9 @@ class AnimationContainer extends StatelessWidget{
   final bool vertical;
   final bool scale;
   final double distance;
-  final Duration duration;
+  final Duration? duration;
 
-  AnimationContainer({this.child,this.index,this.vertical=true,this.distance=100,this.scale=false,this.duration});
+  AnimationContainer({required this.child,required this.index,this.vertical=true,this.distance=100,this.scale=false,required this.duration});
 
   @override
   Widget build(BuildContext context) {

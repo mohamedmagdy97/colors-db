@@ -3,7 +3,7 @@ part of 'LoginWidgetsImports.dart';
 class BuildFormInputs extends StatelessWidget {
   final LoginData loginData;
 
-  const BuildFormInputs({this.loginData});
+  const BuildFormInputs({required this.loginData});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +18,12 @@ class BuildFormInputs extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 10),
             action: TextInputAction.next,
             type: TextInputType.emailAddress,
-            validate: (value) => value.validateEmpty(context),
+            validate: (value) => value!.validateEmpty(context),
           ),
           LabelTextField(
             label: tr(context,"password"),
             controller: loginData.password,
-            validate: (value) => value.validateEmpty(context),
+            validate: (value) => value!.validateEmpty(context),
             isPassword: true,
             action: TextInputAction.done,
             onSubmit: () => loginData.userLogin(context),

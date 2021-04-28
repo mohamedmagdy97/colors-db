@@ -13,10 +13,10 @@ class ResetPasswordData {
 
   void onResetPassword(BuildContext context, String userId) async {
     FocusScope.of(context).requestFocus(FocusNode());
-    if (formKey.currentState.validate()) {
-      btnKey.currentState.animateForward();
+    if (formKey.currentState!.validate()) {
+      btnKey.currentState!.animateForward();
       bool result = await GeneralRepository(context).resetUserPassword(userId, code.text, newPassword.text);
-      btnKey.currentState.animateReverse();
+      btnKey.currentState!.animateReverse();
       if (result) {
         // ExtendedNavigator.of(context).popUntilPath(Routes.login);
       }

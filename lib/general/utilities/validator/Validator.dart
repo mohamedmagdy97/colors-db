@@ -2,18 +2,18 @@ import 'package:base_flutter/general/utilities/localization/LocalizationMethods.
 import 'package:flutter/material.dart';
 
 extension Validator on String {
-  String noValidate() {
+  String? noValidate() {
     return null;
   }
 
-  String validateEmpty(BuildContext context,{String message}) {
+  String? validateEmpty(BuildContext context,{String? message}) {
     if (this.trim().isEmpty) {
       return message ?? tr(context,"fillField");
     }
     return null;
   }
 
-  String validatePassword(BuildContext context,{String message}) {
+  String? validatePassword(BuildContext context,{String? message}) {
     if (this.trim().isEmpty) {
       return message ?? tr(context,"fillField");
     } else if (this.length < 6) {
@@ -22,7 +22,7 @@ extension Validator on String {
     return null;
   }
 
-  String validateEmail(BuildContext context,{String message}) {
+  String? validateEmail(BuildContext context,{String? message}) {
     if (this.trim().isEmpty) {
       return message ?? tr(context,"fillField");
     } else if (!RegExp(
@@ -33,7 +33,7 @@ extension Validator on String {
     return null;
   }
 
-  String validateEmailORNull(BuildContext context,{String message}) {
+  String? validateEmailORNull(BuildContext context,{String? message}) {
     if (this.trim().isNotEmpty) {
       if (!RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
@@ -44,7 +44,7 @@ extension Validator on String {
     return null;
   }
 
-  String validatePhone(BuildContext context,{String message}) {
+  String? validatePhone(BuildContext context,{String? message}) {
     if (this.trim().isEmpty) {
       return message ?? tr(context,"fillField");
     } else if (!RegExp(
@@ -56,7 +56,7 @@ extension Validator on String {
     return null;
   }
 
-  String validatePasswordConfirm(BuildContext context,{@required String pass, String message}) {
+  String? validatePasswordConfirm(BuildContext context,{required String pass, String? message}) {
     if (this.trim().isEmpty) {
       return message ?? tr(context,"fillField");
     } else if (this != pass) {
@@ -67,7 +67,7 @@ extension Validator on String {
 }
 
 extension ValidatorDrop<DataType> on DataType {
-  String validateDropDown(BuildContext context,{String message}) {
+  String? validateDropDown(BuildContext context,{String? message}) {
     if (this == null) {
       return message ?? tr(context,"fillField");
     }

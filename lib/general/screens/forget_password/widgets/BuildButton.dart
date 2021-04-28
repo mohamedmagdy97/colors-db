@@ -3,7 +3,7 @@ part of 'ForgetPasswordWidgetsImports.dart';
 class BuildButton extends StatelessWidget {
   final ForgerPasswordData forgerPasswordData;
 
-  const BuildButton({@required this.forgerPasswordData});
+  const BuildButton({required this.forgerPasswordData});
 
   @override
   Widget build(BuildContext context) {

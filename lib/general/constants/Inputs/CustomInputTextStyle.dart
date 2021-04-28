@@ -7,11 +7,11 @@ class CustomInputTextStyle extends TextStyle{
 
   final String lang;
 
-  CustomInputTextStyle({this.lang});
+  CustomInputTextStyle({required this.lang});
 
 
   @override
-  String get fontFamily => lang =="ar"?GoogleFonts.cairo().fontFamily:GoogleFonts.roboto().fontFamily;
+  String get fontFamily => lang =="ar"?GoogleFonts.cairo().fontFamily!:GoogleFonts.roboto().fontFamily!;
 
   @override
   // TODO: implement fontSize

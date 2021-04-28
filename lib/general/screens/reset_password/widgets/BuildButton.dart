@@ -4,7 +4,7 @@ class BuildButton extends StatelessWidget {
   final ResetPasswordData resetPasswordData;
   final String userId;
 
-  const BuildButton({@required this.resetPasswordData, @required this.userId});
+  const BuildButton({required this.resetPasswordData, required this.userId});
 
   @override
   Widget build(BuildContext context) {

@@ -9,7 +9,7 @@ class DownBottomSheet {
   Function(String,String) onTab;
   BuildContext context;
   String title;
-  DownBottomSheet({this.data,this.onTab,this.context,this.title});
+  DownBottomSheet({required this.data,required this.onTab,required this.context,required this.title});
 
   show(){
     return  ModalHelper.showModal(

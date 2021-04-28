@@ -1,47 +1,62 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:base_flutter/general/constants/MyColors.dart';
-import 'package:base_flutter/general/widgets/MyText.dart';
 
 import '../CustomDropDown.dart';
 
+
 class SelectDialog<T> extends StatefulWidget {
-  final T selectedValue;
-  final List<T> items;
+  final T? selectedValue;
+  final List<T>? items;
   final bool showSearchBox;
   final bool isFilteredOnline;
-  final ValueChanged<T> onChanged;
-  final DropdownSearchOnFind<T> onFind;
-  final DropdownSearchPopupItemBuilder<T> itemBuilder;
-  final InputDecoration searchBoxDecoration;
-  final DropdownSearchItemAsString<T> itemAsString;
-  final DropdownSearchFilterFn<T> filterFn;
-  final String hintText;
-  final double maxHeight;
-  final double dialogMaxWidth;
-  final Widget popupTitle;
+  final ValueChanged<T>? onChanged;
+  final DropdownSearchOnFind<T>? onFind;
+  final DropdownSearchPopupItemBuilder<T>? itemBuilder;
+  final InputDecoration? searchBoxDecoration;
+  final DropdownSearchItemAsString<T>? itemAsString;
+  final DropdownSearchFilterFn<T>? filterFn;
+  final String? hintText;
+  final TextStyle? searchBoxStyle;
+  final double? maxHeight;
+  final double? dialogMaxWidth;
+  final Widget? popupTitle;
   final bool showSelectedItem;
-  final DropdownSearchCompareFn<T> compareFn;
-  final DropdownSearchPopupItemEnabled<T> itemDisabled;
+  final DropdownSearchCompareFn<T>? compareFn;
+  final DropdownSearchPopupItemEnabled<T>? itemDisabled;
 
   ///custom layout for empty results
-  final EmptyBuilder emptyBuilder;
+  final EmptyBuilder? emptyBuilder;
 
   ///custom layout for loading items
-  final LoadingBuilder loadingBuilder;
+  final LoadingBuilder? loadingBuilder;
 
   ///custom layout for error
-  final ErrorBuilder errorBuilder;
+  final ErrorBuilder? errorBuilder;
 
   ///the search box will be focused if true
   final bool autoFocusSearchBox;
 
   ///text controller to set default search word for example
-  final TextEditingController searchBoxController;
+  final TextEditingController? searchBoxController;
+
+  ///delay before searching
+  final Duration? searchDelay;
+
+  ///show or hide favorites items
+  final bool showFavoriteItems;
+
+  ///build favorites chips
+  final FavoriteItemsBuilder<T>? favoriteItemBuilder;
+
+  ///favorite items alignment
+  final MainAxisAlignment? favoriteItemsAlignment;
+
+  ///favorites item
+  final FavoriteItems<T>? favoriteItems;
 
   const SelectDialog({
-    Key key,
+    Key? key,
     this.popupTitle,
     this.items,
     this.maxHeight,
@@ -64,6 +79,12 @@ class SelectDialog<T> extends StatefulWidget {
     this.dialogMaxWidth,
     this.itemDisabled,
     this.searchBoxController,
+    this.searchDelay,
+    this.favoriteItemBuilder,
+    this.favoriteItems,
+    this.showFavoriteItems = false,
+    this.favoriteItemsAlignment = MainAxisAlignment.start,
+    this.searchBoxStyle,
   }) : super(key: key);
 
   @override
@@ -72,14 +93,17 @@ class SelectDialog<T> extends StatefulWidget {
 
 class _SelectDialogState<T> extends State<SelectDialog<T>> {
   final FocusNode focusNode = new FocusNode();
-  final StreamController<List<T>> _itemsStream = StreamController();
+  final StreamController<List<T>> _itemsStream =
+  StreamController<List<T>>.broadcast();
   final ValueNotifier<bool> _loadingNotifier = ValueNotifier(false);
-  final List<T> _items = List<T>();
-  final _debouncer = Debouncer();
+  final List<T> _items = <T>[];
+  late Debouncer _debouncer;
 
   @override
   void initState() {
     super.initState();
+    _debouncer = Debouncer(delay: widget.searchDelay);
+
     Future.delayed(
       Duration.zero,
           () => manageItemsByFilter(widget.searchBoxController?.text ?? '',
@@ -115,6 +139,7 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           _searchField(),
+          if (widget.showFavoriteItems == true) _favoriteItemsWidget(),
           Expanded(
             child: Stack(
               children: <Widget>[
@@ -122,24 +147,24 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
                   stream: _itemsStream.stream,
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return _errorWidget(snapshot?.error);
+                      return _errorWidget(snapshot.error);
                     } else if (!snapshot.hasData) {
                       return _loadingWidget();
-                    } else if (snapshot.data.isEmpty) {
+                    } else if (snapshot.data!.isEmpty) {
                       if (widget.emptyBuilder != null)
-                        return widget.emptyBuilder(
+                        return widget.emptyBuilder!(
                             context, widget.searchBoxController?.text);
                       else
                         return const Center(
-                          child: const Text("لايوجد بيانات"),
+                          child: const Text("No data found"),
                         );
                     }
                     return ListView.builder(
                       shrinkWrap: true,
                       padding: EdgeInsets.symmetric(vertical: 0),
-                      itemCount: snapshot.data.length,
+                      itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        var item = snapshot.data[index];
+                        var item = snapshot.data![index];
                         return _itemWidget(item);
                       },
                     );
@@ -155,7 +180,7 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
   }
 
   void _showErrorDialog(dynamic error) {
-    showDialog(
+    showDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
@@ -163,7 +188,7 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
           title: Text("Error while getting online items"),
           content: _errorWidget(error),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: new Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop(false);
@@ -177,7 +202,7 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
 
   Widget _errorWidget(dynamic error) {
     if (widget.errorBuilder != null)
-      return widget.errorBuilder(
+      return widget.errorBuilder!(
           context, widget.searchBoxController?.text, error);
     else
       return Padding(
@@ -194,7 +219,7 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
         builder: (context, bool isLoading, wid) {
           if (isLoading) {
             if (widget.loadingBuilder != null)
-              return widget.loadingBuilder(
+              return widget.loadingBuilder!(
                   context, widget.searchBoxController?.text);
             else
               return Padding(
@@ -221,41 +246,52 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
     List<T> applyFilter(String filter) {
       return _items.where((i) {
         if (widget.filterFn != null)
-          return (widget.filterFn(i, filter));
+          return (widget.filterFn!(i, filter));
         else if (i.toString().toLowerCase().contains(filter.toLowerCase()))
           return true;
         else if (widget.itemAsString != null) {
-          return (widget.itemAsString(i))
-              ?.toLowerCase()
-              ?.contains(filter.toLowerCase()) ??
-              false;
+          return (widget.itemAsString!(i))
+              .toLowerCase()
+              .contains(filter.toLowerCase());
         }
         return false;
       }).toList();
     }
 
     //load offline data for the first time
-    if (isFistLoad && widget.items != null) _items.addAll(widget.items);
+    if (isFistLoad && widget.items != null) _items.addAll(widget.items!);
 
     //manage offline items
     if (widget.onFind != null && (widget.isFilteredOnline || isFistLoad)) {
       try {
-        final List<T> onlineItems = List();
-        onlineItems.addAll(await widget.onFind(filter) ?? List());
+        final List<T> onlineItems = [];
+        onlineItems.addAll(await widget.onFind!(filter));
 
         //Remove all old data
         _items.clear();
         //add offline items
-        if (widget.items != null) _items.addAll(widget.items);
+        if (widget.items != null) {
+          _items.addAll(widget.items!);
+          //if filter online we filter only local list based on entered keyword (filter)
+          if (widget.isFilteredOnline == true) {
+            var filteredLocalList = applyFilter(filter);
+            _items.clear();
+            _items.addAll(filteredLocalList);
+          }
+        }
         //add new online items to list
         _items.addAll(onlineItems);
 
-        _addDataToStream(applyFilter(filter));
+        //don't filter data , they are already filtred online and local data are already filtered
+        if (widget.isFilteredOnline == true)
+          _addDataToStream(_items);
+        else
+          _addDataToStream(applyFilter(filter));
       } catch (e) {
         _addErrorToStream(e);
         //if offline items count > 0 , the error will be not visible for the user
         //As solution we show it in dialog
-        if (widget.items != null && widget.items.isNotEmpty) {
+        if (widget.items != null && widget.items!.isNotEmpty) {
           _showErrorDialog(e);
           _addDataToStream(applyFilter(filter));
         }
@@ -272,7 +308,7 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
     _itemsStream.add(data);
   }
 
-  void _addErrorToStream(Object error, [StackTrace stackTrace]) {
+  void _addErrorToStream(Object error, [StackTrace? stackTrace]) {
     if (_itemsStream.isClosed) return;
     _itemsStream.addError(error, stackTrace);
   }
@@ -280,47 +316,36 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
   Widget _itemWidget(T item) {
     if (widget.itemBuilder != null)
       return InkWell(
-        child: widget.itemBuilder(
+        child: widget.itemBuilder!(
           context,
           item,
           _manageSelectedItemVisibility(item),
         ),
-        onTap: widget.itemDisabled != null &&
-            (widget.itemDisabled(item) ?? false) == true
+        onTap:
+        widget.itemDisabled != null && (widget.itemDisabled!(item)) == true
             ? null
-            : () {
-          Navigator.pop(context, item);
-          if (widget.onChanged != null) widget.onChanged(item);
-        },
+            : () => _handleSelectItem(item),
       );
     else
       return ListTile(
-        title: MyText(
-          title: widget.itemAsString != null ? (widget.itemAsString(item) ?? "") : item.toString(),
-          size: 10,
-          color: MyColors.blackOpacity,
-
-        ),
+        title: Text(_selectedItemAsString(item)),
         selected: _manageSelectedItemVisibility(item),
-        onTap: widget.itemDisabled != null &&
-            (widget.itemDisabled(item) ?? false) == true
+        onTap:
+        widget.itemDisabled != null && (widget.itemDisabled!(item)) == true
             ? null
-            : () {
-          Navigator.pop(context, item);
-          if (widget.onChanged != null) widget.onChanged(item);
-        },
+            : () => _handleSelectItem(item),
       );
   }
 
   /// selected item will be highlighted only when [widget.showSelectedItem] is true,
   /// if our object is String [widget.compareFn] is not required , other wises it's required
-  bool _manageSelectedItemVisibility(T item) {
+  bool _manageSelectedItemVisibility(T? item) {
     if (!widget.showSelectedItem) return false;
 
-    if (T == String) {
+    if (item is String?) {
       return item == widget.selectedValue;
     } else {
-      return widget.compareFn(item, widget.selectedValue);
+      return widget.compareFn!(item, widget.selectedValue);
     }
   }
 
@@ -334,6 +359,7 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                style: widget.searchBoxStyle,
                 controller: widget.searchBoxController,
                 focusNode: focusNode,
                 onChanged: (f) => _debouncer(() {
@@ -350,16 +376,94 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
             )
         ]);
   }
+
+  Widget _favoriteItemsWidget() {
+    return StreamBuilder<List<T>>(
+        stream: _itemsStream.stream,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return _buildFavoriteItems(widget.favoriteItems!(snapshot.data!));
+          } else {
+            return Container();
+          }
+        });
+  }
+
+  Widget _buildFavoriteItems(List<T>? favoriteItems) {
+    if (favoriteItems != null) {
+      return Container(
+        padding: EdgeInsets.symmetric(horizontal: 8),
+        child: LayoutBuilder(builder: (context, constraints) {
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minWidth: constraints.maxWidth),
+              child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment:
+                  widget.favoriteItemsAlignment ?? MainAxisAlignment.start,
+                  children: favoriteItems
+                      .map(
+                        (f) => GestureDetector(
+                      onTap: () => _handleSelectItem(f),
+                      child: Container(
+                        margin: EdgeInsets.only(right: 4),
+                        child: widget.favoriteItemBuilder != null
+                            ? widget.favoriteItemBuilder!(context, f)
+                            : _favoriteItemDefaultWidget(f),
+                      ),
+                    ),
+                  )
+                      .toList()),
+            ),
+          );
+        }),
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  void _handleSelectItem(T selectedItem) {
+    Navigator.pop(context, selectedItem);
+    if (widget.onChanged != null) widget.onChanged!(selectedItem);
+  }
+
+  Widget _favoriteItemDefaultWidget(T? item) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Theme.of(context).primaryColorLight),
+      child: Text(
+        _selectedItemAsString(item),
+        textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.subtitle1,
+      ),
+    );
+  }
+
+  ///function that return the String value of an object
+  String _selectedItemAsString(T? data) {
+    if (data == null) {
+      return "";
+    } else if (widget.itemAsString != null) {
+      return widget.itemAsString!(data);
+    } else {
+      return data.toString();
+    }
+  }
 }
 
 class Debouncer {
-  final Duration delay;
-  Timer _timer;
+  final Duration? delay;
+  Timer? _timer;
 
-  Debouncer({this.delay = const Duration(milliseconds: 500)});
+  Debouncer({this.delay});
 
-  call(Function action) {
+  void call(Function action) {
     _timer?.cancel();
-    _timer = Timer(delay, action);
+    _timer = Timer(
+        delay ?? const Duration(milliseconds: 500), action as void Function());
   }
 }

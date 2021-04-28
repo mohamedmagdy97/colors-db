@@ -3,7 +3,7 @@ part of 'ChangePassWidgetsImports.dart';
 class BuildChangeForm extends StatelessWidget {
   final ChangePasswordData changePasswordData;
 
-  const BuildChangeForm({@required this.changePasswordData});
+  const BuildChangeForm({required this.changePasswordData});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class BuildChangeForm extends StatelessWidget {
             controller: changePasswordData.oldPassword,
             margin: const EdgeInsets.symmetric(vertical: 5),
             type: TextInputType.name,
-            validate: (value) => value.validateEmpty(context),
+            validate: (value) => value!.validateEmpty(context),
             isPassword: true,
             action: TextInputAction.next,
           ),
@@ -25,7 +25,7 @@ class BuildChangeForm extends StatelessWidget {
             controller: changePasswordData.newPassword,
             margin: const EdgeInsets.symmetric(vertical: 5),
             type: TextInputType.name,
-            validate: (value) => value.validatePassword(context),
+            validate: (value) => value!.validatePassword(context),
             isPassword: true,
             action: TextInputAction.next,
           ),
@@ -34,7 +34,7 @@ class BuildChangeForm extends StatelessWidget {
             controller: changePasswordData.confirmNewPassword,
             margin: const EdgeInsets.symmetric(vertical: 5),
             type: TextInputType.name,
-            validate: (value) => value.validatePasswordConfirm(context,
+            validate: (value) => value!.validatePasswordConfirm(context,
                 pass: changePasswordData.newPassword.text),
             isPassword: true,
             action: TextInputAction.done,

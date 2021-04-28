@@ -12,8 +12,8 @@ class GlobalNotification {
   static StreamController<Map<String, dynamic>> _onMessageStreamController =
   StreamController.broadcast();
 
-  FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
-  static GlobalKey<NavigatorState> navigatorKey;
+  late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+  static GlobalKey<NavigatorState> navigatorKey=new GlobalKey<NavigatorState>();
   static GlobalNotification instance = new GlobalNotification._();
 
   GlobalNotification._();
@@ -41,12 +41,12 @@ class GlobalNotification {
       // messaging.getInitialMessage().then((message) => _showLocalNotification(message));
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         print("_____________________Message data:${message.data}");
-        print("_____________________notification:${message.notification.title}");
+        print("_____________________notification:${message.notification?.title}");
         _showLocalNotification(message);
         _onMessageStreamController.add(message.data);
         if (int.parse(message.data["type"]) == -1) {
           Utils.clearSavedData();
-          navigatorKey.currentContext.router.push(LoginRoute());
+          navigatorKey.currentContext!.router.push(LoginRoute());
         }
       });
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
@@ -59,7 +59,7 @@ class GlobalNotification {
   }
 
   static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    print("Handling a background message: ${message..messageId}");
+    print("Handling a background message: ${message.messageId}");
     flutterNotificationClick(json.encode(message.data));
   }
 
@@ -67,12 +67,12 @@ class GlobalNotification {
     return _onMessageStreamController;
   }
 
-  _showLocalNotification(RemoteMessage message) async {
+  _showLocalNotification(RemoteMessage? message) async {
     if (message == null) return;
     var android = AndroidNotificationDetails(
       "${DateTime.now()}",
-      "${message.notification.title}",
-      "${message.notification.body}",
+      "${message.notification?.title}",
+      "${message.notification?.body}",
       priority: Priority.high,
       importance: Importance.max,
       playSound: true,
@@ -81,13 +81,13 @@ class GlobalNotification {
     var ios = IOSNotificationDetails();
     var _platform = NotificationDetails(android: android, iOS: ios);
     _flutterLocalNotificationsPlugin.show(
-        DateTime.now().microsecond, "${message.notification.title}", "${message.notification.body}", _platform,
+        DateTime.now().microsecond, "${message.notification?.title}", "${message.notification?.body}", _platform,
         payload: json.encode(message.data));
   }
 
-  static Future flutterNotificationClick(String payload) async {
+  static Future flutterNotificationClick(String? payload) async {
     print("tttttttttt $payload");
-    var _data = json.decode(payload);
+    var _data = json.decode("$payload");
 
     int _type = int.parse(_data["type"] ?? "4");
   }

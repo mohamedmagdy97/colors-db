@@ -3,7 +3,7 @@ part of 'LoginWidgetsImports.dart';
 class BuildLoginButton extends StatelessWidget {
   final LoginData loginData;
 
-  const BuildLoginButton({@required this.loginData});
+  const BuildLoginButton({required this.loginData});
 
   @override
   Widget build(BuildContext context) {

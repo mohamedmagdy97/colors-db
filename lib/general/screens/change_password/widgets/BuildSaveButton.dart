@@ -4,7 +4,7 @@ class BuildSaveButton extends StatelessWidget {
 
   final ChangePasswordData changePasswordData;
 
-  const BuildSaveButton({@required this.changePasswordData});
+  const BuildSaveButton({required this.changePasswordData});
 
   @override
   Widget build(BuildContext context) {

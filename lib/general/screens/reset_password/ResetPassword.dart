@@ -3,7 +3,7 @@ part of 'ResetPasswordImports.dart';
 class ResetPassword extends StatefulWidget {
   final String userId;
 
-  const ResetPassword({@required this.userId});
+  const ResetPassword({required this.userId});
 
   @override
   _ResetPasswordState createState() => _ResetPasswordState();

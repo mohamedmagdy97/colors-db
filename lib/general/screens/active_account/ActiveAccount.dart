@@ -3,7 +3,7 @@ part of 'ActiveAccountImports.dart';
 class ActiveAccount extends StatefulWidget {
   final String userId;
 
-  const ActiveAccount({this.userId});
+  const ActiveAccount({required this.userId});
 
   @override
   _ActiveAccountState createState() => _ActiveAccountState();

@@ -5,7 +5,7 @@ import 'package:photo_view/photo_view.dart';
 class ImageZoom extends StatefulWidget {
   final List images;
 
-  const ImageZoom({@required this.images});
+  const ImageZoom({required this.images});
   @override
   _ImageZoomState createState() => _ImageZoomState();
 }
@@ -14,7 +14,7 @@ class _ImageZoomState extends State<ImageZoom> {
 
   var _current;
   final ValueNotifier _notifier=new ValueNotifier<int>(0);
-  PageController _controller ;
+  late PageController _controller ;
 
 
   @override

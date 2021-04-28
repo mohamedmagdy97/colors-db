@@ -8,7 +8,7 @@ class AuthHeaderText extends StatelessWidget {
   final String title;
   final bool showBack;
 
-  const AuthHeaderText({@required this.title, this.showBack=true});
+  const AuthHeaderText({required this.title, this.showBack=true});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,7 +28,7 @@ class AuthHeaderText extends StatelessWidget {
                   color: MyColors.black,
                   size: 25,
                 ),
-                onPressed: ()=> ExtendedNavigator.of(context).pop(),
+                onPressed: ()=> AutoRouter.of(context).pop(),
             ),
           )
         ],

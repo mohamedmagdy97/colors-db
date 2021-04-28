@@ -8,24 +8,24 @@ import 'CustomInputTextStyle.dart';
 class InkWellTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
-  final EdgeInsets margin;
-  final TextInputType type;
-  final Widget icon;
-  final Function onTab;
-  final Widget prefix;
-  final Color borderColor;
-  final Function(String value) validate;
+  final EdgeInsets? margin;
+  final TextInputType? type;
+  final Widget? icon;
+  final Function() onTab;
+  final Widget? prefix;
+  final Color? borderColor;
+  final Function(String? value) validate;
 
   InkWellTextField(
-      {this.label,
-        this.controller,
+      {required this.label,
+        required this.controller,
         this.margin,
         this.type,
-        this.onTab,
+        required this.onTab,
         this.icon,
         this.prefix,
         this.borderColor,
-        this.validate});
+        required this.validate});
 
   @override
   Widget build(BuildContext context) {

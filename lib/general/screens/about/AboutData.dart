@@ -6,6 +6,6 @@ class AboutData{
 
   void fetchData(BuildContext context)async {
     var data = await GeneralRepository(context).aboutApp();
-    aboutCubit.onUpdateData(data);
+    aboutCubit.onUpdateData("$data");
   }
 }

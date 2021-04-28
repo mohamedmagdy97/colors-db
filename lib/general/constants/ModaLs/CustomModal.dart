@@ -8,7 +8,7 @@ class CustomModal extends StatelessWidget {
   final Widget content;
   final String title;
 
-  const CustomModal({Key key,@required this.content,@required this.title}) : super(key: key);
+  const CustomModal({Key? key,required this.content,required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

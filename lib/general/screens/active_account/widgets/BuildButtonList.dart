@@ -4,7 +4,7 @@ class BuildButtonList extends StatelessWidget {
   final ActiveAccountData activeAccountData;
   final String userId;
 
-  const BuildButtonList({@required this.activeAccountData, this.userId});
+  const BuildButtonList({required this.activeAccountData,required this.userId});
 
   @override
   Widget build(BuildContext context) {

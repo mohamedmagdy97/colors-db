@@ -1,11 +1,11 @@
 part of 'DioImports.dart';
 
 class DioHelper {
-  Dio _dio;
+  Dio? _dio;
   final baseUrl = "https://hiraj.ip4s.com";
   final String _branch = "6";
-  CacheStore cacheStore;
-  CacheOptions options;
+  late CacheStore cacheStore;
+  late CacheOptions options;
 
   Future<void> intiDio()async{
     if (_dio == null) {
@@ -35,11 +35,11 @@ class DioHelper {
     return options;
   }
 
-  Future<dynamic> get({String url, Map<String, dynamic> body, BuildContext context, bool refresh = true}) async {
+  Future<dynamic> get({required String url,required Map<String, dynamic> body,required BuildContext context, bool refresh = true}) async {
     body.addAll({"branchId": _branch});
-    _dio.options.headers = await _getHeader();
+    _dio!.options.headers = await _getHeader();
     try {
-      var response = await _dio.post("$baseUrl$url", data: FormData.fromMap(body),
+      var response = await _dio!.post("$baseUrl$url", data: FormData.fromMap(body),
           options: options.copyWith(policy: refresh? CachePolicy.refresh:CachePolicy.refresh).toOptions());
       var data = response.data;
       if (data["key"] == 1) {
@@ -48,7 +48,7 @@ class DioHelper {
         LoadingDialog.showToastNotification(data["msg"].toString());
       }
     } on DioError catch (e) {
-      if (e.response.statusCode == 401 || e.response.statusCode == 301|| e.response.statusCode == 302) {
+      if (e.response!.statusCode == 401 || e.response!.statusCode == 301|| e.response!.statusCode == 302) {
         logout(context);
       } else {
         LoadingDialog.showToastNotification(tr(context, "chickNet"));
@@ -57,19 +57,19 @@ class DioHelper {
     return null;
   }
 
-  Future<dynamic> post({String url, Map<String, dynamic> body, BuildContext context, bool showLoader = true}) async {
+  Future<dynamic> post({required String url,required Map<String, dynamic> body,required BuildContext context, bool showLoader = true}) async {
     if(showLoader)LoadingDialog.showLoadingDialog();
     body.addAll({"branchId": _branch});
-    _dio.options.headers = await _getHeader();
+    _dio!.options.headers = await _getHeader();
     try {
       var response =
-          await _dio.post("$baseUrl$url", data: FormData.fromMap(body));
+          await _dio!.post("$baseUrl$url", data: FormData.fromMap(body));
       if(showLoader)EasyLoading.dismiss();
       LoadingDialog.showToastNotification(response.data["msg"].toString());
       if (response.data["key"] == 1) return response.data;
     } on DioError catch (e) {
       if(showLoader)EasyLoading.dismiss();
-      if (e.response.statusCode == 401 || e.response.statusCode == 301|| e.response.statusCode == 302) {
+      if (e.response!.statusCode == 401 || e.response!.statusCode == 301|| e.response!.statusCode == 302) {
         logout(context);
       } else {
         LoadingDialog.showToastNotification(tr(context, "chickNet"));
@@ -79,7 +79,7 @@ class DioHelper {
     return null;
   }
 
-  Future<dynamic> uploadFile({String url, Map<String, dynamic> body, BuildContext context, bool showLoader = true}) async {
+  Future<dynamic> uploadFile({required String url,required Map<String, dynamic> body,required BuildContext context, bool showLoader = true}) async {
     if(showLoader)LoadingDialog.showLoadingDialog();
     body.addAll({"branchId": _branch});
     FormData formData = FormData.fromMap(body);
@@ -111,17 +111,17 @@ class DioHelper {
       }
     });
 
-    _dio.options.headers = await _getHeader();
+    _dio!.options.headers = await _getHeader();
     //create multipart request for POST or PATCH method
 
     try {
-      var response = await _dio.post("$baseUrl$url", data: formData);
+      var response = await _dio!.post("$baseUrl$url", data: formData);
       if(showLoader)EasyLoading.dismiss();
       LoadingDialog.showToastNotification(response.data["msg"].toString());
       if (response.data["key"] == 1) return response.data;
     } on DioError catch (e) {
       if(showLoader)EasyLoading.dismiss();
-      if (e.response.statusCode == 401 || e.response.statusCode == 301|| e.response.statusCode == 302) {
+      if (e.response!.statusCode == 401 || e.response!.statusCode == 301|| e.response!.statusCode == 302) {
         logout(context);
       } else {
         LoadingDialog.showToastNotification(tr(context, "chickNet"));

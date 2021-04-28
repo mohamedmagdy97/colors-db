@@ -5,7 +5,7 @@ class AuthScaffold extends StatelessWidget {
   final Widget child;
 
   AuthScaffold({
-    this.child,
+    required this.child,
   });
 
   @override

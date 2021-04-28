@@ -5,84 +5,100 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i1;
-import 'package:base_flutter/general/screens/about/AboutImports.dart' as _i9;
+import 'package:base_flutter/general/screens/about/AboutImports.dart' as _i10;
 import 'package:base_flutter/general/screens/active_account/ActiveAccountImports.dart'
-    as _i5;
-import 'package:base_flutter/general/screens/change_password/ChangePasswordImports.dart'
-    as _i13;
-import 'package:base_flutter/general/screens/confirm_password/ConfirmPasswordImports.dart'
-    as _i12;
-import 'package:base_flutter/general/screens/contact_us/ContactUsImports.dart'
-    as _i10;
-import 'package:base_flutter/general/screens/forget_password/ForgetPasswordImports.dart'
-    as _i4;
-import 'package:base_flutter/general/screens/image_zoom/ImageZoom.dart' as _i14;
-import 'package:base_flutter/general/screens/login/LoginImports.dart' as _i3;
-import 'package:base_flutter/general/screens/reset_password/ResetPasswordImports.dart'
     as _i6;
-import 'package:base_flutter/general/screens/select_lang/SelectLangImports.dart'
-    as _i7;
-import 'package:base_flutter/general/screens/select_user/SelectUserImports.dart'
+import 'package:base_flutter/general/screens/change_password/ChangePasswordImports.dart'
+    as _i14;
+import 'package:base_flutter/general/screens/confirm_password/ConfirmPasswordImports.dart'
+    as _i13;
+import 'package:base_flutter/general/screens/contact_us/ContactUsImports.dart'
     as _i11;
-import 'package:base_flutter/general/screens/splash/SplashImports.dart' as _i2;
-import 'package:base_flutter/general/screens/terms/TermsImports.dart' as _i8;
-import 'package:flutter/material.dart' as _i15;
+import 'package:base_flutter/general/screens/forget_password/ForgetPasswordImports.dart'
+    as _i5;
+import 'package:base_flutter/general/screens/image_zoom/ImageZoom.dart' as _i15;
+import 'package:base_flutter/general/screens/login/LoginImports.dart' as _i4;
+import 'package:base_flutter/general/screens/reset_password/ResetPasswordImports.dart'
+    as _i7;
+import 'package:base_flutter/general/screens/select_lang/SelectLangImports.dart'
+    as _i8;
+import 'package:base_flutter/general/screens/select_user/SelectUserImports.dart'
+    as _i12;
+import 'package:base_flutter/general/screens/splash/SplashImports.dart' as _i3;
+import 'package:base_flutter/general/screens/terms/TermsImports.dart' as _i9;
+import 'package:flutter/cupertino.dart' as _i16;
+import 'package:flutter/material.dart' as _i2;
 
 class AppRouter extends _i1.RootStackRouter {
-  AppRouter();
+  AppRouter([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, _i1.PageFactory> pagesMap = {
-    SplashRoute.name: (entry) {
-      var args = entry.routeData
-          .argsAs<SplashRouteArgs>(orElse: () => SplashRouteArgs());
-      return _i1.AdaptivePage(
-          entry: entry, child: _i2.Splash(navigatorKey: args.navigatorKey));
+    SplashRoute.name: (routeData) {
+      final args = routeData.argsAs<SplashRouteArgs>();
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData,
+          child: _i3.Splash(navigatorKey: args.navigatorKey));
     },
-    LoginRoute.name: (entry) {
-      return _i1.AdaptivePage(entry: entry, child: _i3.Login());
+    LoginRoute.name: (routeData) {
+      return _i1.CustomPage<dynamic>(
+          routeData: routeData,
+          child: _i4.Login(),
+          opaque: true,
+          barrierDismissible: false);
     },
-    ForgetPasswordRoute.name: (entry) {
-      return _i1.AdaptivePage(entry: entry, child: _i4.ForgetPassword());
+    ForgetPasswordRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i5.ForgetPassword());
     },
-    ActiveAccountRoute.name: (entry) {
-      var args = entry.routeData.argsAs<ActiveAccountRouteArgs>(
-          orElse: () => ActiveAccountRouteArgs());
-      return _i1.AdaptivePage(
-          entry: entry, child: _i5.ActiveAccount(userId: args.userId));
+    ActiveAccountRoute.name: (routeData) {
+      final args = routeData.argsAs<ActiveAccountRouteArgs>();
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i6.ActiveAccount(userId: args.userId));
     },
-    ResetPasswordRoute.name: (entry) {
-      var args = entry.routeData.argsAs<ResetPasswordRouteArgs>(
-          orElse: () => ResetPasswordRouteArgs());
-      return _i1.AdaptivePage(
-          entry: entry, child: _i6.ResetPassword(userId: args.userId));
+    ResetPasswordRoute.name: (routeData) {
+      final args = routeData.argsAs<ResetPasswordRouteArgs>();
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i7.ResetPassword(userId: args.userId));
     },
-    SelectLangRoute.name: (entry) {
-      return _i1.AdaptivePage(entry: entry, child: _i7.SelectLang());
+    SelectLangRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i8.SelectLang());
     },
-    TermsRoute.name: (entry) {
-      return _i1.AdaptivePage(entry: entry, child: _i8.Terms());
+    TermsRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i9.Terms());
     },
-    AboutRoute.name: (entry) {
-      return _i1.AdaptivePage(entry: entry, child: _i9.About());
+    AboutRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i10.About());
     },
-    ContactUsRoute.name: (entry) {
-      return _i1.AdaptivePage(entry: entry, child: _i10.ContactUs());
+    ContactUsRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i11.ContactUs());
     },
-    SelectUserRoute.name: (entry) {
-      return _i1.AdaptivePage(entry: entry, child: _i11.SelectUser());
+    SelectUserRoute.name: (routeData) {
+      return _i1.CustomPage<dynamic>(
+          routeData: routeData,
+          child: _i12.SelectUser(),
+          transitionsBuilder: _i1.TransitionsBuilders.fadeIn,
+          durationInMilliseconds: 1500,
+          opaque: true,
+          barrierDismissible: false);
     },
-    ConfirmPasswordRoute.name: (entry) {
-      return _i1.AdaptivePage(entry: entry, child: _i12.ConfirmPassword());
+    ConfirmPasswordRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i13.ConfirmPassword());
     },
-    ChangePasswordRoute.name: (entry) {
-      return _i1.AdaptivePage(entry: entry, child: _i13.ChangePassword());
+    ChangePasswordRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i14.ChangePassword());
     },
-    ImageZoomRoute.name: (entry) {
-      var args = entry.routeData
-          .argsAs<ImageZoomRouteArgs>(orElse: () => ImageZoomRouteArgs());
-      return _i1.AdaptivePage(
-          entry: entry, child: _i14.ImageZoom(images: args.images));
+    ImageZoomRoute.name: (routeData) {
+      final args = routeData.argsAs<ImageZoomRouteArgs>();
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i15.ImageZoom(images: args.images));
     }
   };
 
@@ -105,7 +121,7 @@ class AppRouter extends _i1.RootStackRouter {
 }
 
 class SplashRoute extends _i1.PageRouteInfo<SplashRouteArgs> {
-  SplashRoute({_i15.GlobalKey<_i15.NavigatorState> navigatorKey})
+  SplashRoute({required _i16.GlobalKey<_i16.NavigatorState> navigatorKey})
       : super(name,
             path: '/', args: SplashRouteArgs(navigatorKey: navigatorKey));
 
@@ -113,9 +129,9 @@ class SplashRoute extends _i1.PageRouteInfo<SplashRouteArgs> {
 }
 
 class SplashRouteArgs {
-  const SplashRouteArgs({this.navigatorKey});
+  const SplashRouteArgs({required this.navigatorKey});
 
-  final _i15.GlobalKey<_i15.NavigatorState> navigatorKey;
+  final _i16.GlobalKey<_i16.NavigatorState> navigatorKey;
 }
 
 class LoginRoute extends _i1.PageRouteInfo {
@@ -131,7 +147,7 @@ class ForgetPasswordRoute extends _i1.PageRouteInfo {
 }
 
 class ActiveAccountRoute extends _i1.PageRouteInfo<ActiveAccountRouteArgs> {
-  ActiveAccountRoute({String userId})
+  ActiveAccountRoute({required String userId})
       : super(name,
             path: '/active-account',
             args: ActiveAccountRouteArgs(userId: userId));
@@ -140,13 +156,13 @@ class ActiveAccountRoute extends _i1.PageRouteInfo<ActiveAccountRouteArgs> {
 }
 
 class ActiveAccountRouteArgs {
-  const ActiveAccountRouteArgs({this.userId});
+  const ActiveAccountRouteArgs({required this.userId});
 
   final String userId;
 }
 
 class ResetPasswordRoute extends _i1.PageRouteInfo<ResetPasswordRouteArgs> {
-  ResetPasswordRoute({String userId})
+  ResetPasswordRoute({required String userId})
       : super(name,
             path: '/reset-password',
             args: ResetPasswordRouteArgs(userId: userId));
@@ -155,7 +171,7 @@ class ResetPasswordRoute extends _i1.PageRouteInfo<ResetPasswordRouteArgs> {
 }
 
 class ResetPasswordRouteArgs {
-  const ResetPasswordRouteArgs({this.userId});
+  const ResetPasswordRouteArgs({required this.userId});
 
   final String userId;
 }
@@ -203,7 +219,7 @@ class ChangePasswordRoute extends _i1.PageRouteInfo {
 }
 
 class ImageZoomRoute extends _i1.PageRouteInfo<ImageZoomRouteArgs> {
-  ImageZoomRoute({List<dynamic> images})
+  ImageZoomRoute({required List<dynamic> images})
       : super(name,
             path: '/image-zoom', args: ImageZoomRouteArgs(images: images));
 
@@ -211,7 +227,7 @@ class ImageZoomRoute extends _i1.PageRouteInfo<ImageZoomRouteArgs> {
 }
 
 class ImageZoomRouteArgs {
-  const ImageZoomRouteArgs({this.images});
+  const ImageZoomRouteArgs({required this.images});
 
   final List<dynamic> images;
 }

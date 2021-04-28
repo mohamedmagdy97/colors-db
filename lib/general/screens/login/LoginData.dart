@@ -11,12 +11,12 @@ class LoginData {
 
   void userLogin(BuildContext context) async {
     FocusScope.of(context).requestFocus(FocusNode());
-    if (formKey.currentState.validate()) {
-      btnKey.currentState.animateForward();
+    if (formKey.currentState!.validate()) {
+      btnKey.currentState!.animateForward();
       String phoneEn = Utils.convertDigitsToLatin(email.text);
       String passEn = Utils.convertDigitsToLatin(password.text);
       await GeneralRepository(context).setUserLogin(phoneEn, passEn);
-      btnKey.currentState.animateReverse();
+      btnKey.currentState!.animateReverse();
     }
   }
 }

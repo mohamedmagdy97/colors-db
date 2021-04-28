@@ -21,17 +21,17 @@ class CachedImage extends StatelessWidget{
   final BoxShape boxShape;
   final bool haveRadius;
   CachedImage({
-    @required this.url,
+    required this.url,
     this.fit=BoxFit.fill,
-    @required this.width,
-    @required this.height,
-    this.borderRadius,
-    this.colorFilter,
-    this.alignment,
-    this.child,
-    this.boxShape,
-    this.borderColor,
-    this.bgColor,
+    required this.width,
+    required this.height,
+    required this.borderRadius,
+    required this.colorFilter,
+    required this.alignment,
+    required this.child,
+    required this.boxShape,
+    required this.borderColor,
+    required this.bgColor,
     this.haveRadius=true
   });
 

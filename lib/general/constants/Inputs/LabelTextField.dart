@@ -1,6 +1,4 @@
 import 'package:base_flutter/general/blocks/lang_cubit/lang_cubit.dart';
-import 'package:base_flutter/general/constants/MyColors.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,24 +8,24 @@ import 'CustomInputTextStyle.dart';
 class LabelTextField extends StatefulWidget {
   final TextEditingController controller;
   final String label;
-  final EdgeInsets margin;
+  final EdgeInsets? margin;
   final bool isPassword;
-  final TextInputType type;
-  final Function(String value) validate;
-  final Function() onSubmit;
-  final Function(String) onChange;
-  final TextInputAction action;
+  final TextInputType? type;
+  final Function(String? value) validate;
+  final Function()? onSubmit;
+  final Function(String)? onChange;
+  final TextInputAction? action;
 
   LabelTextField(
-      {this.label,
-        this.controller,
+      {required this.label,
+        required this.controller,
         this.onChange,
         this.margin,
         this.isPassword = false,
         this.action,
         this.onSubmit,
-        this.type = TextInputType.text,
-        this.validate});
+        this.type,
+        required this.validate});
 
   @override
   _LabelTextFieldState createState() => _LabelTextFieldState();

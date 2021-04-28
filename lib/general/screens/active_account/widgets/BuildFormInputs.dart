@@ -3,7 +3,7 @@ part of 'ActiveAccountWidgetsImports.dart';
 class BuildFormInputs extends StatelessWidget {
   final ActiveAccountData activeAccountData;
 
-  const BuildFormInputs({this.activeAccountData});
+  const BuildFormInputs({required this.activeAccountData});
 
   @override
   Widget build(BuildContext context) {

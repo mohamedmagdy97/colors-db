@@ -4,7 +4,7 @@ class BuildFormInputs extends StatelessWidget {
   final ResetPasswordData resetPasswordData;
   final String userId;
 
-  const BuildFormInputs({@required this.resetPasswordData,@required this.userId});
+  const BuildFormInputs({required this.resetPasswordData,required this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class BuildFormInputs extends StatelessWidget {
             controller: resetPasswordData.code,
             action: TextInputAction.next,
             type: TextInputType.number,
-            validate: (value) => value.validateEmpty(context),
+            validate: (value) => value!.validateEmpty(context),
             margin: const EdgeInsets.symmetric( vertical: 10),
           ),
           LabelTextField(
@@ -27,7 +27,7 @@ class BuildFormInputs extends StatelessWidget {
             action: TextInputAction.next,
             type: TextInputType.text,
             isPassword: true,
-            validate: (value) => value.validatePassword(context),
+            validate: (value) => value!.validatePassword(context),
             margin: const EdgeInsets.symmetric( vertical: 10),
           ),
           LabelTextField(
@@ -37,7 +37,7 @@ class BuildFormInputs extends StatelessWidget {
             type: TextInputType.text,
             isPassword: true,
             margin: const EdgeInsets.symmetric( vertical: 10),
-            validate: (value) => value.validatePasswordConfirm(context,
+            validate: (value) => value!.validatePasswordConfirm(context,
                 pass: resetPasswordData.newPassword.text),
             onSubmit: ()=> resetPasswordData.onResetPassword(context, userId),
           ),

@@ -8,53 +8,46 @@ class CustomButtonAnimation extends StatefulWidget {
   final double height;
   final double width;
   final double minWidth;
-  final Widget loader;
+  final Widget? loader;
   final Duration animationDuration;
   final Curve curve;
   final Curve reverseCurve;
   final Widget child;
-  final Function onTap;
-  final Color color;
-  final Color focusColor;
-  final Color hoverColor;
-  final Color highlightColor;
-  final Color splashColor;
-  final Brightness colorBrightness;
-  final double elevation;
-  final double focusElevation;
-  final double hoverElevation;
-  final double highlightElevation;
+  final Function() onTap;
+  final Color? color;
+  final Brightness? colorBrightness;
+  final double? elevation;
   final EdgeInsetsGeometry padding;
   final Clip clipBehavior;
-  final FocusNode focusNode;
-  final MaterialTapTargetSize materialTapTargetSize;
+  final FocusNode? focusNode;
+  final MaterialTapTargetSize? materialTapTargetSize;
   final bool roundLoadingShape;
   final double borderRadius;
   final BorderSide borderSide;
-  final double disabledElevation;
-  final Color disabledColor;
-  final Color disabledTextColor;
+  final double? disabledElevation;
+  final Color? disabledColor;
+  final Color? disabledTextColor;
 
   const CustomButtonAnimation(
-      {@required this.height,
-        @required this.width,
+      {required this.height,
+        required this.width,
         this.minWidth: 0,
         this.loader,
         this.animationDuration: const Duration(milliseconds: 450),
         this.curve: Curves.easeInOutCirc,
         this.reverseCurve: Curves.easeInOutCirc,
-        @required this.child,
-        this.onTap,
+        required this.child,
+        required this.onTap,
         this.color,
-        this.focusColor,
-        this.hoverColor,
-        this.highlightColor,
-        this.splashColor,
+        // this.focusColor,
+        // this.hoverColor,
+        // this.highlightColor,
+        // this.splashColor,
         this.colorBrightness,
         this.elevation,
-        this.focusElevation,
-        this.hoverElevation,
-        this.highlightElevation,
+        // this.focusElevation,
+        // this.hoverElevation,
+        // this.highlightElevation,
         this.padding: const EdgeInsets.all(0),
         this.borderRadius: 0.0,
         this.clipBehavior: Clip.none,
@@ -65,11 +58,8 @@ class CustomButtonAnimation extends StatefulWidget {
         this.disabledElevation,
         this.disabledColor,
         this.disabledTextColor,
-        Key key,
+        Key? key,
       }):assert(elevation == null || elevation >= 0.0),
-        assert(focusElevation == null || focusElevation >= 0.0),
-        assert(hoverElevation == null || hoverElevation >= 0.0),
-        assert(highlightElevation == null || highlightElevation >= 0.0),
         assert(disabledElevation == null || disabledElevation >= 0.0),
         assert(clipBehavior != null),super(key: key);
 
@@ -79,10 +69,10 @@ class CustomButtonAnimation extends StatefulWidget {
 
 class CustomButtonState extends State<CustomButtonAnimation>
     with TickerProviderStateMixin {
-  double loaderWidth;
+  double? loaderWidth;
 
-  Animation<double> _animation;
-  AnimationController _controller;
+  late Animation<double> _animation;
+  late AnimationController _controller;
   ButtonState btn = ButtonState.Idle;
 
   // GlobalKey _buttonKey = GlobalKey();
@@ -137,8 +127,10 @@ class CustomButtonState extends State<CustomButtonAnimation>
     }
   }
 
-  get minWidth => _minWidth;
-  set minWidth(double w) {
+
+  double get minWidth => _minWidth;
+
+   set minWidth(double w){
     if (widget.minWidth == 0) {
       _minWidth = w;
     } else {
@@ -166,28 +158,18 @@ class CustomButtonState extends State<CustomButtonAnimation>
           side: widget.borderSide,
           borderRadius: BorderRadius.circular(widget.roundLoadingShape
               ? lerpDouble(
-              widget.borderRadius, widget.height / 2, _animation.value)
+              widget.borderRadius, widget.height / 2, _animation.value)!
               : widget.borderRadius),
         ),
-        child: RaisedButton(
+        child: ElevatedButton(
             // key: _buttonKey,
-            color: widget.color,
-            focusColor: widget.focusColor,
-            hoverColor: widget.hoverColor,
-            highlightColor: widget.highlightColor,
-            splashColor: widget.splashColor,
-            colorBrightness: widget.colorBrightness,
+          style: ElevatedButton.styleFrom(
+            primary: widget.color,
             elevation: widget.elevation,
-            focusElevation: widget.focusElevation,
-            hoverElevation: widget.hoverElevation,
-            highlightElevation: widget.highlightElevation,
             padding: widget.padding,
+          ),
             clipBehavior: widget.clipBehavior,
             focusNode: widget.focusNode,
-            materialTapTargetSize: widget.materialTapTargetSize,
-            disabledElevation: widget.disabledElevation,
-            disabledColor: widget.disabledColor,
-            disabledTextColor: widget.disabledTextColor,
             onPressed: widget.onTap,
             child: btn == ButtonState.Idle ? widget.child : widget.loader),
       ),

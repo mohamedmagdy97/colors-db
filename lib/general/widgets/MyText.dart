@@ -6,15 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyText extends StatelessWidget {
   final String title;
-  final Color color;
-  final double size;
-  final TextAlign alien;
-  final TextDecoration decoration;
-  final TextOverflow overflow;
-  final bool isNumber;
-  final FontWeight fontWeight;
+  final Color? color;
+  final double? size;
+  final TextAlign? alien;
+  final TextDecoration? decoration;
+  final TextOverflow? overflow;
+  final FontWeight? fontWeight;
 
-  MyText({this.title, this.color, this.size, this.alien,this.decoration,this.overflow,this.isNumber=false,this.fontWeight=FontWeight.bold});
+  MyText({required this.title,required this.color,required this.size, this.alien,this.decoration,this.overflow,this.fontWeight=FontWeight.bold});
 
   @override
   Widget build(BuildContext context) {

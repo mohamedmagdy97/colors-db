@@ -37,9 +37,9 @@ class LoadingDialog {
   }
 
   static showConfirmDialog(
-      {@required BuildContext context,
-      @required String title,
-      @required Function confirm}) {
+      {required BuildContext context,
+      required String title,
+      required Function() confirm}) {
     return showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
@@ -48,7 +48,7 @@ class LoadingDialog {
     );
   }
 
-  static showAuthDialog({@required BuildContext context}) {
+  static showAuthDialog({required BuildContext context}) {
     return showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
@@ -62,7 +62,7 @@ class LoadingDialog {
   }
 
   static Widget _alertDialog(
-      String title, Function confirm, BuildContext context, String okText) {
+      String title, Function() confirm, BuildContext context, String okText) {
     return CupertinoAlertDialog(
       title: MyText(
         title: title,
@@ -92,7 +92,7 @@ class LoadingDialog {
   }
 
   static showToastNotification(msg,
-      {Color color, Color textColor, Alignment alignment}) {
+      {Color? color, Color? textColor, Alignment? alignment}) {
     BotToast.showSimpleNotification(
         title: msg,
         align: alignment ?? Alignment.bottomCenter,

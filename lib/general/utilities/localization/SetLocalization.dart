@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class SetLocalization {
-  final Locale locale;
+  late final Locale locale;
 
-  SetLocalization(this.locale);
+  SetLocalization(Locale locale){
+    this.locale=locale;
+  }
 
-  static SetLocalization of(BuildContext context) {
+  static SetLocalization? of(BuildContext context) {
     return Localizations.of<SetLocalization>(context, SetLocalization);
   }
 
   static const LocalizationsDelegate<SetLocalization> localizationsDelegate = _GetLocalizationDelegate();
 
-  Map<String, String> _localizedValues;
+  Map<String, String> _localizedValues={};
 
   Future load() async {
     String jsonStringValues = await rootBundle.loadString('assets/lang/${locale.languageCode}.json');
@@ -21,7 +23,7 @@ class SetLocalization {
     _localizedValues = mappedJson.map((key, value) => MapEntry(key, value.toString()));
   }
 
-  String getTranslateValue(String key) {
+  String? getTranslateValue(String key) {
     return _localizedValues[key];
   }
 }

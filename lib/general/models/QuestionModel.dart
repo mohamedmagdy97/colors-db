@@ -1,18 +1,23 @@
-import 'package:dart_json_mapper/dart_json_mapper.dart'
-    show JsonMapper, jsonSerializable, JsonProperty, enumConverterNumeric;
+import 'package:json_annotation/json_annotation.dart';
 
-@jsonSerializable
+part 'QuestionModel.g.dart';
+
+@JsonSerializable()
 class QuestionModel {
 
-  @JsonProperty(name: "question")
+  @JsonKey(name: "question")
   String question;
-  @JsonProperty(name: "answer")
+  @JsonKey(name: "answer")
   String answer;
-  @JsonProperty(defaultValue: true)
+  @JsonKey(defaultValue: true)
   bool closed;
 
-  QuestionModel({this.question, this.answer});
+  QuestionModel({required this.question,required this.answer,required this.closed});
 
-  factory QuestionModel.fromJson(Map<String, dynamic> json) => JsonMapper.fromMap<QuestionModel>(json);
-  Map<String, dynamic> toJson() => JsonMapper.toMap(this);
+
+
+
+  factory QuestionModel.fromJson(Map<String, dynamic> json) => _$QuestionModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$QuestionModelToJson(this);
 }

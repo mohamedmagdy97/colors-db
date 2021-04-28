@@ -8,21 +8,21 @@ import 'CustomInputTextStyle.dart';
 class IconTextFiled extends StatelessWidget {
   final TextEditingController controller;
   final String label;
-  final EdgeInsets margin;
-  final TextInputType type;
-  final Widget suffixIcon;
+  final EdgeInsets? margin;
+  final TextInputType? type;
+  final Widget? suffixIcon;
   final bool isPassword;
-  final Widget prefixIcon;
-  final String prefixText;
-  final Function(String value) validate;
-  final Color filledColor;
-  final TextInputAction action;
-  final Function(String value) submit;
-  final Function(String) onChange;
+  final Widget? prefixIcon;
+  final String? prefixText;
+  final Function(String? value) validate;
+  final Color? filledColor;
+  final TextInputAction? action;
+  final Function(String value)? submit;
+  final Function(String)? onChange;
 
   IconTextFiled(
-      {this.label,
-        this.controller,
+      {required this.label,
+        required this.controller,
         this.margin,
         this.type,
         this.action,
@@ -32,7 +32,7 @@ class IconTextFiled extends StatelessWidget {
         this.isPassword = false,
         this.prefixIcon,
         this.filledColor,
-        this.validate,
+        required this.validate,
         this.onChange});
 
   @override

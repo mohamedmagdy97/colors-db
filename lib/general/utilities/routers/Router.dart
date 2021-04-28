@@ -13,7 +13,7 @@ part of 'RouterImports.dart';
     AdaptiveRoute(page: Terms),
     AdaptiveRoute(page: About),
     AdaptiveRoute(page: ContactUs),
-    AdaptiveRoute(page: SelectUser),
+    CustomRoute(page: SelectUser,transitionsBuilder: TransitionsBuilders.fadeIn,durationInMilliseconds: 1500),
     AdaptiveRoute(page: ConfirmPassword),
     AdaptiveRoute(page: ChangePassword),
     AdaptiveRoute(page: ImageZoom),

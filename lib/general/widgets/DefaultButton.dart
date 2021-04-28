@@ -6,15 +6,15 @@ import 'package:base_flutter/general/widgets/MyText.dart';
 class DefaultButton extends StatelessWidget{
 
   final String title;
-  final Function onTap;
-  final Color textColor;
-  final Color color;
-  final Color borderColor;
-  final BorderRadius borderRadius;
-  final EdgeInsets margin;
-  final double width;
+  final Function() onTap;
+  final Color? textColor;
+  final Color? color;
+  final Color? borderColor;
+  final BorderRadius? borderRadius;
+  final EdgeInsets? margin;
+  final double? width;
 
-  DefaultButton({@required this.title,@required this.onTap,
+  DefaultButton({required this.title,required this.onTap,
     this.color,this.textColor,this.borderRadius,this.margin,this.borderColor,this.width});
 
   @override

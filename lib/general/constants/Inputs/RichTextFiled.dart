@@ -11,27 +11,22 @@ import 'CustomInputTextStyle.dart';
 class RichTextFiled extends StatelessWidget {
   final TextEditingController controller;
   final String label;
-  final String hint;
   final EdgeInsets margin;
   final TextInputType type;
-  final int min, max;
-  final double height;
-  final Function(String value) validate;
-  final Color fillColor;
+  final max;
+  final Function(String? value) validate;
+  final Color? fillColor;
   final bool readOnly;
-  final TextInputAction action;
-  final Function(String value) submit;
+  final TextInputAction? action;
+  final Function(String value)? submit;
 
   RichTextFiled(
-      {this.label,
-        this.hint,
-        this.controller,
+      { required this.label,
+        required this.controller,
         this.margin = const EdgeInsets.all(0),
         this.type = TextInputType.text,
-        this.max,
-        this.min,
-        this.height,
-        this.validate,
+        required this.max,
+        required this.validate,
         this.fillColor,
         this.readOnly = false,
         this.action,
@@ -41,14 +36,12 @@ class RichTextFiled extends StatelessWidget {
   Widget build(BuildContext context) {
     var lang = context.watch<LangCubit>().state.locale.languageCode;
     return Container(
-      height: height,
       margin: margin,
       child: TextFormField(
         controller: controller,
         keyboardType: type ?? TextInputType.multiline,
         textInputAction: action ?? TextInputAction.done,
         onFieldSubmitted: submit,
-        minLines: min,
         maxLines: max,
         readOnly: readOnly,
         validator: (value) => validate(value),

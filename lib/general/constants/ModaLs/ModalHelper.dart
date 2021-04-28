@@ -5,7 +5,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class ModalHelper{
 
-  static void showModal({@required BuildContext context,@required String title,@required Widget content,bool expand=false}){
+  static void showModal({required BuildContext context,required String title,required Widget content,bool expand=false}){
     showBarModalBottomSheet(
       expand: expand,
       context: context,

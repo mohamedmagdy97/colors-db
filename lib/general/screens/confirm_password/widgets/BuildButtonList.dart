@@ -4,7 +4,7 @@ class BuildButtonList extends StatelessWidget {
   final ConfirmPasswordData confirmPasswordData;
   final String userId;
 
-  const BuildButtonList({@required this.confirmPasswordData, this.userId});
+  const BuildButtonList({required this.confirmPasswordData,required this.userId});
 
   @override
   Widget build(BuildContext context) {

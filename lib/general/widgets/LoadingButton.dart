@@ -11,16 +11,15 @@ class LoadingButton extends StatelessWidget{
   final GlobalKey<CustomButtonState> btnKey;
   final String title;
   final Function() onTap;
-  final Color textColor;
-  final Color color;
-  final Color borderColor;
-  final double borderRadius;
-  final EdgeInsets margin;
-  final double width;
-  final GlobalKey buttonKey;
+  final Color? textColor;
+  final Color? color;
+  final Color? borderColor;
+  final double? borderRadius;
+  final EdgeInsets? margin;
+  final double? width;
 
-  LoadingButton({@required this.title,@required this.onTap,
-    this.color,this.textColor,this.borderRadius,this.margin,this.borderColor,this.width, this.buttonKey, this.btnKey});
+  LoadingButton({required this.title,required this.onTap,
+    this.color,this.textColor,this.borderRadius,this.margin,this.borderColor,this.width,required this.btnKey});
 
   @override
   Widget build(BuildContext context) {

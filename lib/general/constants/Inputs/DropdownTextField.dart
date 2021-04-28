@@ -9,21 +9,21 @@ import 'custom_dropDown/CustomDropDown.dart';
 
 class DropdownTextField<DataType> extends StatefulWidget {
 
-  final List<DataType> data;
-  final GlobalKey dropKey;
+  final dynamic data;
+  final GlobalKey? dropKey;
   final String label;
-  final DataType selectedItem;
+  final DataType? selectedItem;
   final bool showSelectedItem;
-  final EdgeInsets margin;
-  final double fontSize;
-  final double labelSize;
+  final EdgeInsets? margin;
+  final double? fontSize;
+  final double? labelSize;
   final dynamic  validate;
   final dynamic onChange;
-  final Function(String value) finData;
-  final EdgeInsets downIconPadding;
+  final dynamic finData;
+  final EdgeInsets? downIconPadding;
   final bool useName;
 
-   DropdownTextField({this.label,this.margin,this.validate,this.downIconPadding,this.useName= true,
+   DropdownTextField({required this.label,this.margin,this.validate,this.downIconPadding,this.useName= true,
     this.onChange,this.fontSize,this.labelSize, this.finData,this.dropKey,this.data,
     this.selectedItem,this.showSelectedItem=false});
   @override
@@ -37,11 +37,10 @@ class _DropdownTextFieldState<DataType> extends State<DropdownTextField> {
     var lang = context.watch<LangCubit>().state.locale.languageCode;
     return  Container(
       margin: widget.margin?? EdgeInsets.symmetric(vertical: 10),
-      child: CustomDropDown<DataType>(
+      child: DropdownSearch<DataType>(
         key: widget.dropKey,
         mode: Mode.BOTTOM_SHEET,
         isFilteredOnline: true,
-        iconPadding: widget.downIconPadding,
         maxHeight: 300,
         label: widget.label,
         items: widget.data,
@@ -76,7 +75,6 @@ class _DropdownTextFieldState<DataType> extends State<DropdownTextField> {
         dropdownSearchDecoration:  CustomInputDecoration(lang: lang,label:widget.label),
         // hintStyle: GoogleFonts.cairo(fontSize: 14,),
         // labelStyle: GoogleFonts.roboto(fontSize: 18),
-        inputStyle: CustomInputTextStyle(lang: lang),
 
     ),
     );

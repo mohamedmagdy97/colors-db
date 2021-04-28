@@ -10,18 +10,18 @@ import 'CustomInputTextStyle.dart';
 class ChatTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
-  final EdgeInsets margin;
-  final TextInputType type;
-  final Widget icon;
+  final EdgeInsets? margin;
+  final TextInputType? type;
+  final Widget? icon;
   final bool isPassword;
-  final Icon prefix;
-  final Color filledColor;
-  final TextInputAction action;
-  final Function() submit;
+  final Icon? prefix;
+  final Color? filledColor;
+  final TextInputAction? action;
+  final Function()? submit;
 
   ChatTextField({
-    this.label,
-    this.controller,
+    required this.label,
+    required this.controller,
     this.margin,
     this.type,
     this.action,

@@ -10,7 +10,7 @@ class ChangePasswordData {
   final TextEditingController confirmNewPassword = new TextEditingController();
 
   void setChangePassword(BuildContext context)async{
-    if(formKey.currentState.validate()){
+    if(formKey.currentState!.validate()){
       // btnKey.currentState.animateForward();
       // var result = await CustomerRepository(context).changePassword(newPass: newPassword.text,oldPass: oldPassword.text);
       // btnKey.currentState.animateReverse();

@@ -76,6 +76,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590499560296:android:dc0da606f867c4293674dd",
+        "android_client_info": {
+          "package_name": "sa.aait.aspbranch.nullbaseF"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590499560296-fe5ijjgktqdm8qhacp621e6t3btjqj0i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWWwNklL6kn2iGdgjYGKm3qGEfUMXpLNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590499560296-fe5ijjgktqdm8qhacp621e6t3btjqj0i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "590499560296-0gp7c8qda4idesf8vikvv45r2s3r3t7r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "sa.aait.aspbranch.basestruct"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

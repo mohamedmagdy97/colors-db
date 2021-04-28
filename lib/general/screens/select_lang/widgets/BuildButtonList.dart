@@ -4,7 +4,7 @@ part of 'SelectLangWidgetsImports.dart';
 class BuildButtonList extends StatelessWidget {
   final SelectLangData selectLangData;
 
-  const BuildButtonList({@required this.selectLangData});
+  const BuildButtonList({required this.selectLangData});
   @override
   Widget build(BuildContext context) {
     return Column(

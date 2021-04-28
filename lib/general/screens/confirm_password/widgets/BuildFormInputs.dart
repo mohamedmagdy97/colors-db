@@ -3,7 +3,7 @@ part of 'ConfirmPasswordWidgetsImports.dart';
 class BuildFormInputs extends StatelessWidget {
   final ConfirmPasswordData confirmPasswordData;
 
-  const BuildFormInputs({@required this.confirmPasswordData});
+  const BuildFormInputs({required this.confirmPasswordData});
 
   @override
   Widget build(BuildContext context) {

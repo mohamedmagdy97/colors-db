@@ -1,23 +1,28 @@
-import 'package:dart_json_mapper/dart_json_mapper.dart'
-    show JsonMapper, jsonSerializable, JsonProperty, enumConverterNumeric;
+import 'package:json_annotation/json_annotation.dart';
 
-@jsonSerializable
+part 'UserModel.g.dart';
+
+@JsonSerializable()
 class UserModel {
 
-  @JsonProperty(name: "userName")
+
+  @JsonKey(name: "userName")
   String userName;
-  @JsonProperty(name: "id")
+  @JsonKey(name: "id")
   String id;
-  @JsonProperty(name: "token")
+  @JsonKey(name: "token")
   String token;
-  @JsonProperty(name: "lang")
+  @JsonKey(name: "lang")
   String lang;
-  @JsonProperty(name: "type")
+  @JsonKey(name: "type")
   String type;
 
 
-  UserModel({this.userName, this.id, this.token, this.lang});
+  UserModel({required this.userName,required this.id,required this.token,required this.lang,required this.type});
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => JsonMapper.fromMap<UserModel>(json);
-  Map<String, dynamic> toJson() => JsonMapper.toMap(this);
+
+
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
 }

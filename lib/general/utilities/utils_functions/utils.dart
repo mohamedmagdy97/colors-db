@@ -9,7 +9,7 @@ class Utils {
 
     var strUser = prefs.get("user");
     if (strUser != null) {
-      UserModel data = UserModel.fromJson(json.decode(strUser));
+      UserModel data = UserModel.fromJson(json.decode("$strUser"));
       GlobalState.instance.set("token", data.token);
       changeLanguage(data.lang,context);
       setCurrentUserData(data,context);
@@ -34,11 +34,11 @@ class Utils {
     context.read<LangCubit>().onUpdateLanguage(lang);
   }
 
-  static UserModel getSavedUser({@required BuildContext context}){
+  static UserModel getSavedUser({required BuildContext context}){
     return context.read<UserCubit>().state.model;
   }
 
-  static Future<String> getDeviceId()async{
+  static Future<String?> getDeviceId()async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString("deviceId");
   }
@@ -95,7 +95,7 @@ class Utils {
   //   changeLanguage(lang,context);
   // }
 
-  static String getCurrentUserId({@required BuildContext context}){
+  static String getCurrentUserId({required BuildContext context}){
     var provider = context.watch<UserCubit>().state.model;
     return provider.id;
   }
@@ -106,7 +106,7 @@ class Utils {
   //   ExtendedNavigator(router: AppRouter(), name: Routes.login);
   // }
 
-  static void launchURL({String url}) async {
+  static void launchURL({required String url}) async {
     if (!url.toString().startsWith("https")) {
       url = "https://" + url;
     }
@@ -131,7 +131,7 @@ class Utils {
     }
   }
 
-  static void launchYoutube({@required String url}) async {
+  static void launchYoutube({required String url}) async {
     if (Platform.isIOS) {
       if (await canLaunch('$url')) {
         await launch('$url', forceSafariVC: false);
@@ -166,14 +166,14 @@ class Utils {
     });
   }
 
-  static Future<File> getImage() async {
-    FilePickerResult result = await FilePicker.platform.pickFiles(
+  static Future<File?> getImage() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
         allowMultiple: false,
         type: FileType.image
     );
 
     if(result != null) {
-      List<File> files = result.paths.map((path) => File(path)).toList();
+      List<File> files = result.paths.map((path) => File("$path")).toList();
       return files.first;
     } else {
       return null;
@@ -181,34 +181,34 @@ class Utils {
   }
 
   static Future<List<File>> getImages()async{
-    FilePickerResult result = await FilePicker.platform.pickFiles(
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
         allowMultiple: true,
         type: FileType.image
     );
 
     if(result != null) {
-      List<File> files = result.paths.map((path) => File(path)).toList();
+      List<File> files = result.paths.map((path) => File("$path")).toList();
       return files;
     } else {
       return [];
     }
   }
 
-  static Future<File> getVideo() async {
-    FilePickerResult result = await FilePicker.platform.pickFiles(
+  static Future<File?> getVideo() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
         allowMultiple: false,
         type: FileType.video
     );
 
     if(result != null) {
-      List<File> files = result.paths.map((path) => File(path)).toList();
+      List<File> files = result.paths.map((path) => File("$path")).toList();
       return files.first;
     } else {
       return null;
     }
   }
 
-  static void copToClipboard({String text, GlobalKey<ScaffoldState> scaffold}){
+  static void copToClipboard({required String text,required GlobalKey<ScaffoldState> scaffold}){
     if(text.trim().isEmpty){
       LoadingDialog.showToastNotification("لا يوجد بيانات للنسخ");
       return;
@@ -236,21 +236,21 @@ class Utils {
   static Future<LocationData> getCurrentLocation()async{
     final location = new Location();
     bool permission =await askForPermission(location);
-    LocationData current;
+    LocationData? current;
     if(permission){
       current = await location.getLocation();
     }
-     return current;
+     return current??LocationData.fromMap({"latitude":0,"longitude":0});
 
   }
 
-  static void navigateToMapWithDirection({String lat, String lng, String title})async{
+  static void navigateToMapWithDirection({required String lat,required String lng,required String title})async{
     final availableMaps = await MapLauncher.installedMaps;
     LocationData loc = await getCurrentLocation();
     if (availableMaps.length>0) {
       await availableMaps.first.showDirections(
         destinationTitle: title,
-        origin: Coords(loc.latitude, loc.longitude),
+        origin: Coords(loc.latitude!, loc.longitude!),
         destination: Coords(double.parse(lat), double.parse(lng)),
       );
     }
