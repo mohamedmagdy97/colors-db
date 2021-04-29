@@ -10,15 +10,10 @@ class MainData {
     focusColor: MyColors.primary,
     accentColor: MyColors.primary,
     primaryColor: MyColors.primary,
-    platform: TargetPlatform.android,
     fontFamily: GoogleFonts.cairo().fontFamily,
     textTheme: TextTheme(
       subtitle1:GoogleFonts.cairo(fontSize: 14,),
     ),
-    pageTransitionsTheme: PageTransitionsTheme(builders: {
-      TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-    }),
   );
 
   static List<BlocProvider>  providers(BuildContext context)=>[
