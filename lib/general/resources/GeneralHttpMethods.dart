@@ -32,6 +32,7 @@ class GeneralHttpMethods {
     };
     var _data =
         await dioHelper.post(url: "/api/v1/login",body: body,context: context,showLoader: false);
+
     if (_data != null) {
       int status = _data["status"];
       if (status == 1) {

@@ -29,7 +29,7 @@ class MyText extends StatelessWidget {
           decoration: decoration??TextDecoration.none,
           fontWeight: fontWeight
       ):
-      GoogleFonts.abel(
+      GoogleFonts.roboto(
           color: color??Colors.black,
           fontSize: size??16,
           decoration: decoration??TextDecoration.none,

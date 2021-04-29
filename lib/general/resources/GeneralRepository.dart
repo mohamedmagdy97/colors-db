@@ -12,8 +12,7 @@ class GeneralRepository {
     _generalHttpMethods = new GeneralHttpMethods(context: _context);
   }
 
-  Future<bool> setUserLogin(String phone, String pass) =>
-      _generalHttpMethods.userLogin(phone, pass);
+  Future<bool> setUserLogin(String phone, String pass)=> _generalHttpMethods.userLogin(phone, pass);
 
   Future<void> getHomeConstData()=>_generalHttpMethods.getHomeConstData();
 
