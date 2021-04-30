@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:base_flutter/general/constants/MyColors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'src/popupMenu.dart';
 import 'src/selectDialog.dart';
@@ -63,6 +65,8 @@ class DropdownSearch<T> extends StatefulWidget {
 
   ///to customize list of items UI
   final DropdownSearchBuilder<T>? dropdownBuilder;
+
+  final TextStyle style;
 
   ///to customize selected item
   final DropdownSearchPopupItemBuilder<T>? popupItemBuilder;
@@ -186,6 +190,7 @@ class DropdownSearch<T> extends StatefulWidget {
     Key? key,
     this.onSaved,
     this.validator,
+    required this.style,
     this.autoValidateMode = AutovalidateMode.disabled,
     this.onChanged,
     this.mode = Mode.DIALOG,
@@ -280,14 +285,14 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Expanded(
-          child: widget.dropdownBuilder != null
-              ? widget.dropdownBuilder!(
-            context,
-            data,
-            _selectedItemAsString(data),
-          )
-              : Text(_selectedItemAsString(data),
-              style: Theme.of(context).textTheme.subtitle1),
+            child: widget.dropdownBuilder != null
+                ? widget.dropdownBuilder!(
+              context,
+              data,
+              _selectedItemAsString(data),
+            )
+                : Text(_selectedItemAsString(data),
+              style: widget.style,)
         ),
         if (!widget.showAsSuffixIcons) _manageTrailingIcons(data),
       ],
@@ -327,7 +332,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
   InputDecoration _manageDropdownDecoration(FormFieldState state, T? data) {
     return (widget.dropdownSearchDecoration ??
         InputDecoration(
-            contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
+            contentPadding: EdgeInsets.zero,
             border: OutlineInputBorder()))
         .applyDefaults(Theme.of(state.context).inputDecorationTheme)
         .copyWith(
@@ -365,19 +370,20 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
             onTap: clearButtonPressed,
             child: widget.clearButtonBuilder!(context),
           )
-              : IconButton(
-            icon: widget.clearButton ?? const Icon(Icons.clear, size: 24),
-            onPressed: clearButtonPressed,
+              : InkWell(
+            child: widget.clearButton ?? const Icon(Icons.clear, size: 25),
+            onTap: clearButtonPressed,
           ),
+        SizedBox(width: 10,),
         widget.dropdownButtonBuilder != null
             ? GestureDetector(
           onTap: dropdownButtonPressed,
           child: widget.dropdownButtonBuilder!(context),
         )
-            : IconButton(
-          icon: widget.dropDownButton ??
-              const Icon(Icons.arrow_drop_down, size: 24),
-          onPressed: dropdownButtonPressed,
+            : InkWell(
+          child: widget.dropDownButton ??
+              const Icon(Icons.arrow_drop_down, size: 25),
+          onTap: dropdownButtonPressed,
         ),
       ],
     );
@@ -462,6 +468,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       filterFn: widget.filterFn,
       items: widget.items,
       onFind: widget.onFind,
+      style: widget.style,
       showSearchBox: widget.showSearchBox,
       itemBuilder: widget.popupItemBuilder,
       selectedValue: data,

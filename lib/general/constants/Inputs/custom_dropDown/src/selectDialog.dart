@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:base_flutter/general/constants/MyColors.dart';
 import 'package:flutter/material.dart';
 
 import '../CustomDropDown.dart';
@@ -15,6 +16,7 @@ class SelectDialog<T> extends StatefulWidget {
   final DropdownSearchPopupItemBuilder<T>? itemBuilder;
   final InputDecoration? searchBoxDecoration;
   final DropdownSearchItemAsString<T>? itemAsString;
+  final TextStyle style;
   final DropdownSearchFilterFn<T>? filterFn;
   final String? hintText;
   final TextStyle? searchBoxStyle;
@@ -58,6 +60,7 @@ class SelectDialog<T> extends StatefulWidget {
   const SelectDialog({
     Key? key,
     this.popupTitle,
+    required this.style,
     this.items,
     this.maxHeight,
     this.showSearchBox = false,
@@ -159,13 +162,16 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
                           child: const Text("No data found"),
                         );
                     }
-                    return ListView.builder(
+                    return ListView.separated(
                       shrinkWrap: true,
-                      padding: EdgeInsets.symmetric(vertical: 0),
+                      padding: EdgeInsets.zero,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         var item = snapshot.data![index];
                         return _itemWidget(item);
+                      },
+                      separatorBuilder: (_,inndex){
+                        return Divider(color: MyColors.grey,thickness: .8,);
                       },
                     );
                   },
@@ -328,7 +334,8 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
       );
     else
       return ListTile(
-        title: Text(_selectedItemAsString(item)),
+        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+        title: Text(_selectedItemAsString(item),style: widget.style,),
         selected: _manageSelectedItemVisibility(item),
         onTap:
         widget.itemDisabled != null && (widget.itemDisabled!(item)) == true
@@ -438,7 +445,7 @@ class _SelectDialogState<T> extends State<SelectDialog<T>> {
       child: Text(
         _selectedItemAsString(item),
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.subtitle1,
+        style: widget.style,
       ),
     );
   }
