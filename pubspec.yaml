@@ -30,8 +30,8 @@ dependencies:
   bloc: ^7.0.0
   flutter_bloc: ^7.0.0
   equatable:
-  auto_route: ^2.0.0
-  flutter_local_notifications: ^5.0.0+1
+  auto_route: ^2.0.2
+  flutter_local_notifications: ^5.0.0+3
   shared_preferences: ^2.0.5
   flutter_launcher_icons: ^0.9.0
   url_launcher: ^6.0.3
@@ -56,7 +56,6 @@ dependencies:
   file_picker: ^3.0.1
   share: ^2.0.1
   flutter_rounded_date_picker: ^2.0.1
-  flutter_datetime_picker: ^1.5.1
   material_design_icons_flutter: ^4.0.5955
   map_launcher: ^2.0.0
   json_serializable: ^4.1.1
