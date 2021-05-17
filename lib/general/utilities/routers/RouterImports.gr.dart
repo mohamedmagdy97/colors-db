@@ -35,71 +35,81 @@ class AppRouter extends _i1.RootStackRouter {
 
   @override
   final Map<String, _i1.PageFactory> pagesMap = {
-    SplashRoute.name: (routeData) {
-      final args = routeData.argsAs<SplashRouteArgs>();
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: _i3.Splash(navigatorKey: args.navigatorKey));
-    },
-    LoginRoute.name: (routeData) {
-      return _i1.CustomPage<dynamic>(
-          routeData: routeData,
-          child: _i4.Login(),
-          opaque: true,
-          barrierDismissible: false);
-    },
-    ForgetPasswordRoute.name: (routeData) {
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i5.ForgetPassword());
-    },
-    ActiveAccountRoute.name: (routeData) {
-      final args = routeData.argsAs<ActiveAccountRouteArgs>();
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i6.ActiveAccount(userId: args.userId));
-    },
-    ResetPasswordRoute.name: (routeData) {
-      final args = routeData.argsAs<ResetPasswordRouteArgs>();
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i7.ResetPassword(userId: args.userId));
-    },
-    SelectLangRoute.name: (routeData) {
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i8.SelectLang());
-    },
-    TermsRoute.name: (routeData) {
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i9.Terms());
-    },
-    AboutRoute.name: (routeData) {
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i10.About());
-    },
-    ContactUsRoute.name: (routeData) {
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i11.ContactUs());
-    },
-    SelectUserRoute.name: (routeData) {
-      return _i1.CustomPage<dynamic>(
-          routeData: routeData,
-          child: _i12.SelectUser(),
-          transitionsBuilder: _i1.TransitionsBuilders.fadeIn,
-          durationInMilliseconds: 1500,
-          opaque: true,
-          barrierDismissible: false);
-    },
-    ConfirmPasswordRoute.name: (routeData) {
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i13.ConfirmPassword());
-    },
-    ChangePasswordRoute.name: (routeData) {
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i14.ChangePassword());
-    },
-    ImageZoomRoute.name: (routeData) {
-      final args = routeData.argsAs<ImageZoomRouteArgs>();
-      return _i1.AdaptivePage<dynamic>(
-          routeData: routeData, child: _i15.ImageZoom(images: args.images));
-    }
+    SplashRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<SplashRouteArgs>();
+          return _i3.Splash(navigatorKey: args.navigatorKey);
+        }),
+    LoginRoute.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i4.Login();
+        },
+        opaque: true,
+        barrierDismissible: false),
+    ForgetPasswordRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i5.ForgetPassword();
+        }),
+    ActiveAccountRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<ActiveAccountRouteArgs>();
+          return _i6.ActiveAccount(userId: args.userId);
+        }),
+    ResetPasswordRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<ResetPasswordRouteArgs>();
+          return _i7.ResetPassword(userId: args.userId);
+        }),
+    SelectLangRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i8.SelectLang();
+        }),
+    TermsRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i9.Terms();
+        }),
+    AboutRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i10.About();
+        }),
+    ContactUsRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i11.ContactUs();
+        }),
+    SelectUserRoute.name: (routeData) => _i1.CustomPage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i12.SelectUser();
+        },
+        transitionsBuilder: _i1.TransitionsBuilders.fadeIn,
+        durationInMilliseconds: 1500,
+        opaque: true,
+        barrierDismissible: false),
+    ConfirmPasswordRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i13.ConfirmPassword();
+        }),
+    ChangePasswordRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i14.ChangePassword();
+        }),
+    ImageZoomRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
+        routeData: routeData,
+        builder: (data) {
+          final args = data.argsAs<ImageZoomRouteArgs>();
+          return _i15.ImageZoom(images: args.images);
+        })
   };
 
   @override
