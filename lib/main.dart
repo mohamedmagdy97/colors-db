@@ -7,14 +7,13 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 import 'general/MyApp.dart';
 
-
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(
     BlocProvider(
       create: (BuildContext context) => LangCubit(),
-      child:  Phoenix(child: MyApp()),
+      child:  Phoenix(child: MyApp(),),
     )
   );
 }

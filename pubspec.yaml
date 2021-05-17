@@ -64,8 +64,6 @@ dependencies:
   pretty_dio_logger: ^1.1.1
   flutter_html: ^2.0.0
   pin_code_fields: ^7.1.0
-  firebase_messaging_web: ^1.0.7
-
 
 
 
