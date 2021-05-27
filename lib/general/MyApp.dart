@@ -24,36 +24,33 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final botToastBuilder = BotToastInit();
-    return RepositoryProvider(
-      create: (context) => DioHelper(),
-      child: MultiBlocProvider(
-        providers: MainData.providers(context),
-        child: MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            theme: MainData.defaultThem,
-            title: "Base Flutter",
-            supportedLocales: [
-              Locale('en', 'US'),
-              Locale('ar', 'EG')
-            ],
-            localizationsDelegates: [
-              SetLocalization.localizationsDelegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            locale: context.watch<LangCubit>().state.locale,
-            routerDelegate: _appRouter.delegate(
-              navigatorObservers: ()=>[BotToastNavigatorObserver()],
-              initialRoutes: [SplashRoute(navigatorKey: navigatorKey)]
-            ),
-            routeInformationParser: _appRouter.defaultRouteParser(),
-            builder: (ctx, child) {
-              child = FlutterEasyLoading(child: child);  //do something
-              child = botToastBuilder(context,child);
-              return child;
-            }
-        ),
+    return MultiBlocProvider(
+      providers: MainData.providers(context),
+      child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: MainData.defaultThem,
+          title: "Base Flutter",
+          supportedLocales: [
+            Locale('en', 'US'),
+            Locale('ar', 'EG')
+          ],
+          localizationsDelegates: [
+            SetLocalization.localizationsDelegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          locale: context.watch<LangCubit>().state.locale,
+          routerDelegate: _appRouter.delegate(
+            navigatorObservers: ()=>[BotToastNavigatorObserver()],
+            initialRoutes: [SplashRoute(navigatorKey: navigatorKey)]
+          ),
+          routeInformationParser: _appRouter.defaultRouteParser(),
+          builder: (ctx, child) {
+            child = FlutterEasyLoading(child: child);  //do something
+            child = botToastBuilder(context,child);
+            return child;
+          }
       ),
     );
   }

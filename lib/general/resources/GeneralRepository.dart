@@ -9,7 +9,7 @@ class GeneralRepository {
   late GeneralHttpMethods _generalHttpMethods;
   GeneralRepository(BuildContext context) {
     _context = context;
-    _generalHttpMethods = new GeneralHttpMethods(context: _context);
+    _generalHttpMethods = new GeneralHttpMethods(_context);
   }
 
   Future<bool> setUserLogin(String phone, String pass)=> _generalHttpMethods.userLogin(phone, pass);
