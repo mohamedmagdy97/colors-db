@@ -1,12 +1,9 @@
-
-import 'package:base_flutter/general/utilities/dio_helper/DioImports.dart';
 import 'package:base_flutter/general/utilities/routers/RouterImports.gr.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:auto_route/auto_route.dart';
 import 'blocks/lang_cubit/lang_cubit.dart';
 import 'utilities/localization/SetLocalization.dart';
 import 'utilities/main_data/MainDataImports.dart';
@@ -26,31 +23,35 @@ class _MyAppState extends State<MyApp> {
     final botToastBuilder = BotToastInit();
     return MultiBlocProvider(
       providers: MainData.providers(context),
-      child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          theme: MainData.defaultThem,
-          title: "Base Flutter",
-          supportedLocales: [
-            Locale('en', 'US'),
-            Locale('ar', 'EG')
-          ],
-          localizationsDelegates: [
-            SetLocalization.localizationsDelegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          locale: context.watch<LangCubit>().state.locale,
-          routerDelegate: _appRouter.delegate(
-            navigatorObservers: ()=>[BotToastNavigatorObserver()],
-            initialRoutes: [SplashRoute(navigatorKey: navigatorKey)]
-          ),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-          builder: (ctx, child) {
-            child = FlutterEasyLoading(child: child);  //do something
-            child = botToastBuilder(context,child);
-            return child;
-          }
+      child: BlocBuilder<LangCubit, LangState>(
+        builder: (context, state) {
+          return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              theme: MainData.defaultThem,
+              title: "Base Flutter",
+              supportedLocales: [
+                Locale('en', 'US'),
+                Locale('ar', 'EG')
+              ],
+              localizationsDelegates: [
+                SetLocalization.localizationsDelegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              locale: state.locale,
+              routerDelegate: _appRouter.delegate(
+                  navigatorObservers: () => [BotToastNavigatorObserver()],
+                  initialRoutes: [SplashRoute(navigatorKey: navigatorKey)]
+              ),
+              routeInformationParser: _appRouter.defaultRouteParser(),
+              builder: (ctx, child) {
+                child = FlutterEasyLoading(child: child); //do something
+                child = botToastBuilder(context, child);
+                return child;
+              }
+          );
+        },
       ),
     );
   }

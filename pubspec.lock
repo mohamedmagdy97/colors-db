@@ -490,27 +490,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  geolocator:
+  geocoder:
     dependency: "direct main"
     description:
-      name: geolocator
+      name: geocoder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.0.3"
-  geolocator_platform_interface:
-    dependency: transitive
-    description:
-      name: geolocator_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.2"
-  geolocator_web:
-    dependency: transitive
-    description:
-      name: geolocator_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
+    version: "0.2.1"
   glob:
     dependency: transitive
     description:
