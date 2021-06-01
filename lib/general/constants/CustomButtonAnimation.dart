@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'dart:ui' show lerpDouble;
 
@@ -60,8 +59,7 @@ class CustomButtonAnimation extends StatefulWidget {
         this.disabledTextColor,
         Key? key,
       }):assert(elevation == null || elevation >= 0.0),
-        assert(disabledElevation == null || disabledElevation >= 0.0),
-        assert(clipBehavior != null),super(key: key);
+        assert(disabledElevation == null || disabledElevation >= 0.0),super(key: key);
 
   @override
   CustomButtonState createState() => CustomButtonState();
@@ -167,6 +165,13 @@ class CustomButtonState extends State<CustomButtonAnimation>
             primary: widget.color,
             elevation: widget.elevation,
             padding: widget.padding,
+            shape: RoundedRectangleBorder(
+              side: widget.borderSide,
+              borderRadius: BorderRadius.circular(widget.roundLoadingShape
+                  ? lerpDouble(
+                  widget.borderRadius, widget.height / 2, _animation.value)!
+                  : widget.borderRadius),
+            ),
           ),
             clipBehavior: widget.clipBehavior,
             focusNode: widget.focusNode,
