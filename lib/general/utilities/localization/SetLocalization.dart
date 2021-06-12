@@ -23,8 +23,8 @@ class SetLocalization {
     _localizedValues = mappedJson.map((key, value) => MapEntry(key, value.toString()));
   }
 
-  String? getTranslateValue(String key) {
-    return _localizedValues[key];
+  String getTranslateValue(String key) {
+    return _localizedValues[key]??"";
   }
 }
 
