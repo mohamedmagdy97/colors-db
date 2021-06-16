@@ -15,9 +15,9 @@
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+<!--    android:name=".Application"-->
 
     <application
-        android:name=".Application"
         android:icon="@mipmap/launcher_icon"
         android:label="base_flutter">
         <meta-data
