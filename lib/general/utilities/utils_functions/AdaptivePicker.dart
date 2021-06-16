@@ -48,20 +48,21 @@ class AdaptivePicker {
     );
   }
 
-  static Widget cupertinoDatePicker(BuildContext context,Function(DateTime? date) onConfirm,String title,
+  static Widget cupertinoDatePicker(BuildContext context,
+      Function(DateTime? date) onConfirm,String title,
       {DateTime? initial, DateTime? minDate}) {
     DateTime _date=DateTime.now();
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MyText(title: title, color: MyColors.blackOpacity, size: 14,fontWeight: FontWeight.w500,),
-              SizedBox(
-                height: 20,
-                child: ElevatedButton(
+    return Container(
+      height: 260,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MyText(title: title, color: MyColors.blackOpacity, size: 14,fontWeight: FontWeight.w500,),
+                ElevatedButton(
                   onPressed: (){
                     onConfirm(_date);
                     Navigator.of(context).pop();
@@ -72,22 +73,21 @@ class AdaptivePicker {
                       primary: MyColors.white
                   ),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 280,
-          child: CupertinoDatePicker(
-            initialDateTime: initial ?? DateTime.now(),
-            onDateTimeChanged: (date){
-              _date=date;
-            },
-            minimumDate: minDate ?? DateTime.now().add(Duration(days: -1)),
-            mode: CupertinoDatePickerMode.date,
+          Flexible(
+            child: CupertinoDatePicker(
+              initialDateTime: initial ?? DateTime.now(),
+              onDateTimeChanged: (date){
+                _date=date;
+              },
+              minimumDate: minDate ?? DateTime.now().add(Duration(days: -1)),
+              mode: CupertinoDatePickerMode.date,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
