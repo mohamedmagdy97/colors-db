@@ -18,7 +18,7 @@ class _TermsState extends State<Terms> with TermsData {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DefaultAppBar(title: 'الشروط والاحكام'),
-      body: BlocBuilder<GenericCubit<String>,GenericState<String>>(
+      body: BlocBuilder<GenericBloc<String>,GenericState<String>>(
         bloc: termsCubit,
         builder: (_,state){
           if(state is GenericUpdateState){

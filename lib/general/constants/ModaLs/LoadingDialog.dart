@@ -30,9 +30,11 @@ class LoadingDialog {
   }
 
   static showLoadingView() {
-    return SpinKitCubeGrid(
-      color: MyColors.primary,
-      size: 40.0,
+    return Center(
+      child: SpinKitCubeGrid(
+        color: MyColors.primary,
+        size: 40.0,
+      ),
     );
   }
 

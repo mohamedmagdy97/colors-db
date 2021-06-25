@@ -19,7 +19,7 @@ class _AboutState extends State<About> with AboutData {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DefaultAppBar(title: 'عن التطبيق'),
-      body: BlocBuilder<GenericCubit<String>,GenericState<String>>(
+      body: BlocBuilder<GenericBloc<String>,GenericState<String>>(
         bloc: aboutCubit,
         builder: (_,state){
           if(state is GenericUpdateState){
