@@ -22,6 +22,7 @@ class GenericListView<T> extends StatelessWidget {
   final Color? dividerColor;
   final String? emptyStr;
   final Color? refreshBg;
+  final Color? loadingColor;
   final EdgeInsets padding;
 
   const GenericListView({
@@ -35,13 +36,14 @@ class GenericListView<T> extends StatelessWidget {
     this.emptyStr,
     this.refreshBg,
     this.padding = EdgeInsets.zero,
+    this.loadingColor,
   });
 
   @override
   Widget build(BuildContext context) {
     switch (type) {
       case ListViewType.normal:
-        return _NormalListView(children: children,padding: padding);
+        return _NormalListView(children: children, padding: padding);
       case ListViewType.separated:
         return _SeparatedListView(
           onRefresh: onRefresh!,
@@ -92,6 +94,7 @@ class _SeparatedListView<T> extends StatefulWidget {
   final Color? dividerColor;
   final String? emptyStr;
   final Color? refreshBg;
+  final Color? loadingColor;
   final EdgeInsets padding;
 
   const _SeparatedListView(
@@ -102,7 +105,8 @@ class _SeparatedListView<T> extends StatefulWidget {
         this.dividerColor,
         this.emptyStr,
         this.refreshBg,
-        required this.padding});
+        required this.padding,
+        this.loadingColor});
 
   @override
   _SeparatedListViewState createState() => _SeparatedListViewState<T>();
@@ -153,7 +157,7 @@ class _SeparatedListViewState<T> extends State<_SeparatedListView> {
                 size: 12),
           );
         }
-        return LoadingDialog.showLoadingView();
+        return LoadingDialog.showLoadingView(color: widget.loadingColor);
       },
     );
   }
@@ -166,6 +170,7 @@ class _ApiListView<T> extends StatefulWidget {
   final GenericBuilder itemBuilder;
   final String? emptyStr;
   final Color? refreshBg;
+  final Color? loadingColor;
   final EdgeInsets padding;
 
   const _ApiListView(
@@ -175,7 +180,8 @@ class _ApiListView<T> extends StatefulWidget {
         required this.itemBuilder,
         this.emptyStr,
         this.refreshBg,
-        required this.padding});
+        required this.padding,
+        this.loadingColor});
 
   @override
   _ApiListViewState createState() => _ApiListViewState<T>();
@@ -221,7 +227,7 @@ class _ApiListViewState<T> extends State<_ApiListView> {
                 size: 12),
           );
         }
-        return LoadingDialog.showLoadingView();
+        return LoadingDialog.showLoadingView(color: widget.loadingColor);
       },
     );
   }
