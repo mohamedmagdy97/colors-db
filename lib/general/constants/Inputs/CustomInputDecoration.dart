@@ -28,7 +28,7 @@ class CustomInputDecoration extends InputDecoration {
   @override
   // TODO: implement enabledBorder
   InputBorder get enabledBorder => OutlineInputBorder(
-    borderSide: BorderSide(color: enableColor ?? MyColors.white, width: .5),
+    borderSide: BorderSide(color: enableColor ?? MyColors.greyWhite, width: .5),
     borderRadius: BorderRadius.circular(borderRaduis??10),
   );
 
@@ -36,12 +36,12 @@ class CustomInputDecoration extends InputDecoration {
   // TODO: implement focusedBorder
   InputBorder get focusedBorder => OutlineInputBorder(
       borderRadius: BorderRadius.circular(borderRaduis??10),
-      borderSide: BorderSide(color: focusColor ?? MyColors.white, width: 1));
+      borderSide: BorderSide(color: focusColor ?? MyColors.primary, width: 1));
 
   @override
   // TODO: implement errorBorder
   InputBorder get errorBorder => OutlineInputBorder(
-      borderSide: BorderSide(color: enableColor ?? MyColors.white, width: .5),
+      borderSide: BorderSide(color: enableColor ?? Colors.red, width: .5),
       borderRadius: BorderRadius.circular(borderRaduis??10));
 
   @override

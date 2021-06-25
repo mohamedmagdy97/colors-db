@@ -16,6 +16,10 @@ class _SplashState extends State<Splash> {
   }
 
   _checkingData() async {
+    Future.delayed(Duration(seconds: 2),(){
+      AutoRouter.of(context).push(LoginRoute());
+    });
+    return;
     GlobalNotification.instance.setupNotification(context);
     Future.delayed(Duration(seconds: 2),(){
       Utils.manipulateSplashData(context);

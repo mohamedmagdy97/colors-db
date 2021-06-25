@@ -63,12 +63,13 @@ class _DropdownTextFieldState<DataType> extends State<DropdownTextField> {
         showSearchBox: true,
         showClearButton: true,
         selectedItem: widget.selectedItem,
-        itemAsString: (dynamic u) => widget.useName ? u.name : u,
+        // itemAsString: (dynamic u) => widget.useName ? u.name : u,
         showSelectedItem: widget.showSelectedItem,
         style: CustomInputTextStyle(lang: lang),
+        searchBoxStyle: CustomInputTextStyle(lang: lang),
         searchBoxDecoration: CustomInputDecoration(
             lang: lang,
-            hint: "search",
+            hint: "بحث",
             enableColor: Colors.black,
             focusColor: MyColors.primary,
             borderRaduis: 5,
@@ -78,10 +79,6 @@ class _DropdownTextFieldState<DataType> extends State<DropdownTextField> {
           height: 50,
           decoration: BoxDecoration(
             color: MyColors.primary,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
           ),
           child: Center(
             child: MyText(
@@ -91,19 +88,13 @@ class _DropdownTextFieldState<DataType> extends State<DropdownTextField> {
             ),
           ),
         ),
-        popupShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(24),
-            topRight: Radius.circular(24),
-          ),
-        ),
         dropdownSearchDecoration: CustomInputDecoration(
             lang: lang,
             hint: widget.hint,
             enableColor: Colors.black,
             focusColor: MyColors.primary,
             borderRaduis: 2,
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 17)
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5)
         ),
       ),
     );

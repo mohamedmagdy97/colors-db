@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import './popup_safearea.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -426,6 +429,8 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
     this.showMenuContext,
     this.captureInheritedThemes,
     this.barrierColor,
+    this.popupSafeArea = const PopupSafeArea(),
+    this.popupBarrierDismissible = true,
   }) : itemSizes = List<Size?>.filled(items.length, null, growable: false);
 
   final RelativeRect? position;
@@ -441,6 +446,8 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
   final BuildContext? showMenuContext;
   final bool? captureInheritedThemes;
   final Color? barrierColor;
+  final PopupSafeArea popupSafeArea;
+  final bool popupBarrierDismissible;
 
   @override
   Animation<double> createAnimation() {
@@ -455,7 +462,7 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
   Duration get transitionDuration => _kMenuDuration;
 
   @override
-  bool get barrierDismissible => true;
+  bool get barrierDismissible => popupBarrierDismissible;
 
   @override
   final String? barrierLabel;
@@ -482,12 +489,11 @@ class _PopupMenuRoute<T> extends PopupRoute<T> {
       if (theme != null) menu = Theme(data: theme!, child: menu);
     }
 
-    return MediaQuery.removePadding(
-      context: context,
-      removeTop: true,
-      removeBottom: true,
-      removeLeft: true,
-      removeRight: true,
+    return SafeArea(
+      top: popupSafeArea.top,
+      bottom: popupSafeArea.bottom,
+      left: popupSafeArea.left,
+      right: popupSafeArea.right,
       child: Builder(
         builder: (BuildContext context) {
           return CustomSingleChildLayout(
@@ -572,6 +578,8 @@ Future<T?> customShowMenu<T>({
   Color? color,
   bool captureInheritedThemes = true,
   bool useRootNavigator = false,
+  PopupSafeArea popupSafeArea = const PopupSafeArea(),
+  bool barrierDismissible = true,
 }) {
   assert(items.isNotEmpty);
   assert(debugCheckHasMaterialLocalizations(context));
@@ -604,6 +612,7 @@ Future<T?> customShowMenu<T>({
       color: color,
       showMenuContext: context,
       captureInheritedThemes: captureInheritedThemes,
+      popupSafeArea: popupSafeArea,
     ),
   );
 }

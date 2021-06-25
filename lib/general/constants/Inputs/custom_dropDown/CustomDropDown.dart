@@ -1,13 +1,20 @@
 import 'dart:async';
 
-import 'package:base_flutter/general/constants/MyColors.dart';
+import 'package:base_flutter/general/blocks/lang_cubit/lang_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'src/popupMenu.dart';
+import 'src/popup_safearea.dart';
+import 'src/scrollbar_props.dart';
 import 'src/selectDialog.dart';
+import 'src/text_field_props.dart';
+
+export 'src/popup_safearea.dart';
+export 'src/scrollbar_props.dart';
+export 'src/text_field_props.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 typedef Future<List<T>> DropdownSearchOnFind<T>(String text);
 typedef String DropdownSearchItemAsString<T>(T item);
@@ -66,12 +73,11 @@ class DropdownSearch<T> extends StatefulWidget {
   ///to customize list of items UI
   final DropdownSearchBuilder<T>? dropdownBuilder;
 
-  final TextStyle style;
-
   ///to customize selected item
   final DropdownSearchPopupItemBuilder<T>? popupItemBuilder;
 
   ///decoration for search box
+  @Deprecated('Use `searchFieldProps` instead')
   final InputDecoration? searchBoxDecoration;
 
   ///the title for dialog/menu/bottomSheet
@@ -107,6 +113,15 @@ class DropdownSearch<T> extends StatefulWidget {
   ///dropdownSearch input decoration
   final InputDecoration? dropdownSearchDecoration;
 
+  /// style on which to base the label
+  final TextStyle? dropdownSearchBaseStyle;
+
+  /// How the text in the decoration should be aligned horizontally.
+  final TextAlign? dropdownSearchTextAlign;
+
+  /// How the text should be aligned vertically.
+  final TextAlignVertical? dropdownSearchTextAlignVertical;
+
   ///custom layout for empty results
   final EmptyBuilder? emptyBuilder;
 
@@ -117,6 +132,7 @@ class DropdownSearch<T> extends StatefulWidget {
   final ErrorBuilder? errorBuilder;
 
   ///the search box will be focused if true
+  @Deprecated('Use `searchFieldProps` instead')
   final bool autoFocusSearchBox;
 
   ///custom shape for the popup
@@ -137,14 +153,23 @@ class DropdownSearch<T> extends StatefulWidget {
   ///custom clear button widget builder
   final IconButtonBuilder? clearButtonBuilder;
 
+  ///custom splash radius for the clear button
+  ///If null, default splash radius of [icon_button] is used.
+  final double? clearButtonSplashRadius;
+
   ///custom dropdown icon button widget
   final Widget? dropDownButton;
 
   //custom style of the searchBox
+  @Deprecated('Use `searchFieldProps` instead')
   final TextStyle? searchBoxStyle;
 
   ///custom dropdown button widget builder
   final IconButtonBuilder? dropdownButtonBuilder;
+
+  ///custom splash radius for the dropdown button
+  ///If null, default splash radius of [icon_button] is used.
+  final double? dropdownButtonSplashRadius;
 
   ///whether to manage the clear and dropdown icons via InputDecoration suffixIcon
   final bool showAsSuffixIcons;
@@ -161,6 +186,7 @@ class DropdownSearch<T> extends StatefulWidget {
   final Color? popupBarrierColor;
 
   ///text controller to set default search word for example
+  @Deprecated('Use `searchFieldProps` instead')
   final TextEditingController? searchBoxController;
 
   ///called when popup is dismissed
@@ -186,15 +212,29 @@ class DropdownSearch<T> extends StatefulWidget {
   ///favorite items alignment
   final MainAxisAlignment? favoriteItemsAlignment;
 
+  ///set properties of popup safe area
+  final PopupSafeArea popupSafeArea;
+
+  /// object that passes all props to search field
+  final TextFieldProps? searchFieldProps;
+
+  /// scrollbar properties
+  final ScrollbarProps? scrollbarProps;
+
+  final TextStyle style;
+
+  /// whether modal can be dismissed by tapping the modal barrier
+  final bool popupBarrierDismissible;
+
   DropdownSearch({
     Key? key,
     this.onSaved,
     this.validator,
-    required this.style,
     this.autoValidateMode = AutovalidateMode.disabled,
     this.onChanged,
     this.mode = Mode.DIALOG,
     this.label,
+    required this.style,
     this.hint,
     this.isFilteredOnline = false,
     this.popupTitle,
@@ -221,8 +261,10 @@ class DropdownSearch<T> extends StatefulWidget {
     this.dialogMaxWidth,
     this.clearButton,
     this.clearButtonBuilder,
+    this.clearButtonSplashRadius,
     this.dropDownButton,
     this.dropdownButtonBuilder,
+    this.dropdownButtonSplashRadius,
     this.showAsSuffixIcons = false,
     this.dropdownBuilderSupportsNullItem = false,
     this.popupShape,
@@ -237,6 +279,13 @@ class DropdownSearch<T> extends StatefulWidget {
     this.showFavoriteItems = false,
     this.favoriteItemsAlignment = MainAxisAlignment.start,
     this.searchBoxStyle,
+    this.popupSafeArea = const PopupSafeArea(),
+    this.searchFieldProps,
+    this.scrollbarProps,
+    this.popupBarrierDismissible = true,
+    this.dropdownSearchBaseStyle,
+    this.dropdownSearchTextAlign,
+    this.dropdownSearchTextAlignVertical,
   })  : assert(!showSelectedItem || T == String || compareFn != null),
         super(key: key);
 
@@ -271,7 +320,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       builder: (context, data, wt) {
         return IgnorePointer(
           ignoring: !widget.enabled,
-          child: GestureDetector(
+          child: InkWell(
             onTap: () => _selectSearchMode(data),
             child: _formField(data),
           ),
@@ -285,14 +334,14 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Expanded(
-            child: widget.dropdownBuilder != null
-                ? widget.dropdownBuilder!(
-              context,
-              data,
-              _selectedItemAsString(data),
-            )
-                : Text(_selectedItemAsString(data),
-              style: widget.style,)
+          child: widget.dropdownBuilder != null
+              ? widget.dropdownBuilder!(
+            context,
+            data,
+            _selectedItemAsString(data),
+          )
+              : Text(_selectedItemAsString(data),
+              style: widget.style),
         ),
         if (!widget.showAsSuffixIcons) _manageTrailingIcons(data),
       ],
@@ -316,6 +365,9 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
             valueListenable: _isFocused,
             builder: (context, isFocused, w) {
               return InputDecorator(
+                baseStyle: widget.dropdownSearchBaseStyle,
+                textAlign: widget.dropdownSearchTextAlign,
+                textAlignVertical: widget.dropdownSearchTextAlignVertical,
                 isEmpty: value == null &&
                     (widget.dropdownBuilder == null ||
                         widget.dropdownBuilderSupportsNullItem),
@@ -332,7 +384,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
   InputDecoration _manageDropdownDecoration(FormFieldState state, T? data) {
     return (widget.dropdownSearchDecoration ??
         InputDecoration(
-            contentPadding: EdgeInsets.zero,
+            contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
             border: OutlineInputBorder()))
         .applyDefaults(Theme.of(state.context).inputDecorationTheme)
         .copyWith(
@@ -366,24 +418,25 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       children: <Widget>[
         if (data != null && widget.showClearButton == true)
           widget.clearButtonBuilder != null
-              ? GestureDetector(
+              ? InkWell(
             onTap: clearButtonPressed,
             child: widget.clearButtonBuilder!(context),
           )
-              : InkWell(
-            child: widget.clearButton ?? const Icon(Icons.clear, size: 25),
-            onTap: clearButtonPressed,
+              : IconButton(
+            icon: widget.clearButton ?? const Icon(Icons.clear, size: 24),
+            onPressed: clearButtonPressed,
+            splashRadius: widget.clearButtonSplashRadius ?? null,
           ),
-        SizedBox(width: 10,),
         widget.dropdownButtonBuilder != null
-            ? GestureDetector(
+            ? InkWell(
           onTap: dropdownButtonPressed,
           child: widget.dropdownButtonBuilder!(context),
         )
-            : InkWell(
-          child: widget.dropDownButton ??
-              const Icon(Icons.arrow_drop_down, size: 25),
-          onTap: dropdownButtonPressed,
+            : IconButton(
+          icon: widget.dropDownButton ??
+              const Icon(Icons.arrow_drop_down, size: 24),
+          onPressed: dropdownButtonPressed,
+          splashRadius: widget.dropdownButtonSplashRadius ?? null,
         ),
       ],
     );
@@ -392,17 +445,23 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
   ///open dialog
   Future<T?> _openSelectDialog(T? data) {
     return showGeneralDialog(
-      barrierDismissible: true,
+      barrierDismissible: widget.popupBarrierDismissible,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       transitionDuration: const Duration(milliseconds: 400),
       barrierColor: widget.popupBarrierColor ?? const Color(0x80000000),
       context: context,
       pageBuilder: (context, animation, secondaryAnimation) {
-        return AlertDialog(
-          contentPadding: EdgeInsets.all(0),
-          shape: widget.popupShape,
-          backgroundColor: widget.popupBackgroundColor,
-          content: _selectDialogInstance(data),
+        return SafeArea(
+          top: widget.popupSafeArea.top,
+          bottom: widget.popupSafeArea.bottom,
+          left: widget.popupSafeArea.left,
+          right: widget.popupSafeArea.right,
+          child: AlertDialog(
+            contentPadding: EdgeInsets.all(0),
+            shape: widget.popupShape,
+            backgroundColor: widget.popupBackgroundColor,
+            content: _selectDialogInstance(data),
+          ),
         );
       },
     );
@@ -412,12 +471,23 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
   Future<T?> _openBottomSheet(T? data) {
     return showModalBottomSheet<T>(
         barrierColor: widget.popupBarrierColor,
-        backgroundColor: widget.popupBackgroundColor,
+        backgroundColor: Colors.transparent,
+        isDismissible: widget.popupBarrierDismissible,
         isScrollControlled: true,
         shape: widget.popupShape,
         context: context,
         builder: (ctx) {
-          return _selectDialogInstance(data, defaultHeight: 350);
+          return Container(
+            color:
+            widget.popupBackgroundColor ?? Theme.of(ctx).canvasColor,
+            child: AnimatedPadding(
+              duration: Duration(milliseconds: 300),
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(ctx).viewInsets.bottom,
+              ),
+              child: _selectDialogInstance(data, defaultHeight: 350),
+            ),
+          );
         });
   }
 
@@ -441,12 +511,14 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       Size(overlay.size.width, overlay.size.height),
     );
     return customShowMenu<T>(
+        popupSafeArea: widget.popupSafeArea,
         barrierColor: widget.popupBarrierColor,
         shape: widget.popupShape,
         color: widget.popupBackgroundColor,
         context: context,
         position: position,
         elevation: 8,
+        barrierDismissible: widget.popupBarrierDismissible,
         items: [
           CustomPopupMenuItem(
             enabled: false,
@@ -468,7 +540,6 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       filterFn: widget.filterFn,
       items: widget.items,
       onFind: widget.onFind,
-      style: widget.style,
       showSearchBox: widget.showSearchBox,
       itemBuilder: widget.popupItemBuilder,
       selectedValue: data,
@@ -489,6 +560,8 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
       favoriteItems: widget.favoriteItems,
       favoriteItemBuilder: widget.favoriteItemBuilder,
       favoriteItemsAlignment: widget.favoriteItemsAlignment,
+      searchFieldProps: widget.searchFieldProps,
+      scrollbarProps: widget.scrollbarProps,
     );
   }
 
