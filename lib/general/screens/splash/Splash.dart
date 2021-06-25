@@ -16,7 +16,7 @@ class _SplashState extends State<Splash> {
   }
 
   _checkingData() async {
-    GlobalNotification.instance.setupNotification(widget.navigatorKey);
+    GlobalNotification.instance.setupNotification(context);
     Future.delayed(Duration(seconds: 2),(){
       Utils.manipulateSplashData(context);
     });

@@ -13,15 +13,15 @@ class GlobalNotification {
   StreamController.broadcast();
 
   late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
-  static GlobalKey<NavigatorState> navigatorKey=new GlobalKey<NavigatorState>();
+  static late BuildContext context;
   static GlobalNotification instance = new GlobalNotification._();
 
   GlobalNotification._();
 
   GlobalNotification();
 
-  setupNotification(GlobalKey<NavigatorState> navKey)async{
-    navigatorKey = navKey;
+  setupNotification(BuildContext cxt)async{
+    context = cxt;
     _flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
     var android = new AndroidInitializationSettings("@mipmap/launcher_icon");
     var ios = new IOSInitializationSettings();
@@ -46,7 +46,7 @@ class GlobalNotification {
         _onMessageStreamController.add(message.data);
         if (int.parse(message.data["type"]) == -1) {
           Utils.clearSavedData();
-          navigatorKey.currentContext!.router.push(LoginRoute());
+          AutoRouter.of(context).push(LoginRoute());
         }
       });
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
