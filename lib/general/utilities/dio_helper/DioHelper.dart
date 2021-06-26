@@ -5,13 +5,12 @@ class DioHelper {
   late DioCacheManager _manager;
   BuildContext context;
   final bool forceRefresh;
-  final baseUrl = "https://hiraj.ip4s.com";
   final String _branch = "6";
 
   DioHelper({this.forceRefresh = true,required this.context}){
     _dio = Dio(
       BaseOptions(
-          baseUrl: baseUrl,
+          baseUrl: ApiNames.baseUrl,
           contentType: "application/x-www-form-urlencoded; charset=utf-8"),
     )
       ..interceptors.add(_getCacheManager().interceptor)
@@ -20,7 +19,7 @@ class DioHelper {
 
   DioCacheManager _getCacheManager() {
     _manager = DioCacheManager(
-        CacheConfig(baseUrl: baseUrl, defaultRequestMethod: "POST"));
+        CacheConfig(baseUrl: ApiNames.baseUrl, defaultRequestMethod: "POST"));
     return _manager;
   }
 
@@ -39,7 +38,7 @@ class DioHelper {
     _printRequestBody(body);
     _dio.options.headers = await _getHeader();
     try {
-      var response = await _dio.post("$baseUrl$url",
+      var response = await _dio.post("$url",
           data: FormData.fromMap(body), options: _buildCacheOptions(body));
       print("response ${response.statusCode}");
       var data = response.data;
@@ -65,7 +64,7 @@ class DioHelper {
     _dio.options.headers = await _getHeader();
     try {
       var response =
-          await _dio.post("$baseUrl$url", data: FormData.fromMap(body));
+          await _dio.post("$url", data: FormData.fromMap(body));
       print("response ${response.statusCode}");
       if (showLoader) EasyLoading.dismiss();
       LoadingDialog.showToastNotification(response.data["msg"].toString());
@@ -120,7 +119,7 @@ class DioHelper {
     //create multipart request for POST or PATCH method
 
     try {
-      var response = await _dio.post("$baseUrl$url", data: formData);
+      var response = await _dio.post("url", data: formData);
       print("response ${response.statusCode}");
       if (showLoader) EasyLoading.dismiss();
       LoadingDialog.showToastNotification(response.data["msg"].toString());
@@ -174,7 +173,7 @@ class DioHelper {
     //create multipart request for POST or PATCH method
 
     try {
-      var response = await _dio.post("$baseUrl$url",
+      var response = await _dio.post("$url",
           data: formData, options: _buildCacheOptions(body, subKey: false));
       print("response ${response.statusCode}");
       if (showLoader) EasyLoading.dismiss();

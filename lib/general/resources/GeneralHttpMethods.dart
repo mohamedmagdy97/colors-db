@@ -1,18 +1,14 @@
 import 'dart:io';
-import 'package:base_flutter/general/blocks/lang_cubit/lang_cubit.dart';
-import 'package:base_flutter/general/blocks/user_cubit/user_cubit.dart';
-import 'package:base_flutter/general/constants/GlobalState.dart';
 import 'package:base_flutter/general/models/QuestionModel.dart';
-import 'package:base_flutter/general/models/UserModel.dart';
-import 'package:base_flutter/general/utilities/dio_helper/DioImports.dart';
+import 'package:base_flutter/general/resources/ApiNames.dart';
 import 'package:base_flutter/general/utilities/utils_functions/UtilsImports.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'GenericHttp.dart';
 
 class GeneralHttpMethods {
   final BuildContext context;
-
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
@@ -20,186 +16,128 @@ class GeneralHttpMethods {
 
   Future<bool> userLogin(String phone, String pass) async {
     String? _token = await messaging.getToken();
-    String _lang = context.read<LangCubit>().state.locale.languageCode;
     Map<String, dynamic> body = {
       "phone": "$phone",
       "password": "$pass",
-      "lang": "$_lang",
       "deviceId": "$_token",
       "deviceType": Platform.isIOS ? "ios" : "android",
     };
-    var _data = await DioHelper(context: context).post(url: "/api/v1/login",body: body,showLoader: false);
+    dynamic data = await GenericHttp<dynamic>(context).callApi(
+      name: ApiNames.login,
+      json: body,
+      returnType: ReturnType.Type,
+      methodType: MethodType.Post,
+      showLoader: false,
+    );
 
-    if (_data != null) {
-      int status = _data["status"];
-      if (status == 1) {
-        await Utils.setDeviceId("$_token");
-        UserModel user = UserModel.fromJson(_data["data"]);
-        int type = _data["data"]["type"];
-        user.type = type == 1 ? "user" : "company";
-        user.token = _data["token"];
-        user.lang = _lang;
-        GlobalState.instance.set("token", user.token);
-        await Utils.saveUserData(user);
-        Utils.setCurrentUserData(user, context);
-      } else if (status == 2) {
-        // ExtendedNavigator.of(context).push(Routes.activeAccount,
-        //     arguments: ActiveAccountArguments(userId: _data["data"]["id"]));
-      }
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  Future<void> getHomeConstData()async{
-    Map<String,dynamic> body={
-      "lang":context.read<LangCubit>().state.locale.languageCode,
-    };
-    var _data= await DioHelper(context: context,forceRefresh: false).get(url: "/api/v1/ListAllCat",body: body,);
-    if(_data!=null){
-      return _data;
-    }
-    return null;
+    return Utils.manipulateLoginData(context, data, _token ?? "");
   }
 
   Future<bool> sendCode(String code, String userId) async {
-    String lang = context.read<LangCubit>().state.locale.languageCode;
-    Map<String, dynamic> body = {"lang": lang, "code": code, "userId": userId};
-    var _data = await DioHelper(context: context)
-        .post(url: "/api/v1/ConfirmCodeRegister", body: body, showLoader: false);
-    if (_data != null) {
-      return true;
-    } else {
-      return false;
-    }
+    Map<String, dynamic> body = {"code": code, "userId": userId};
+    dynamic data = await GenericHttp<dynamic>(context).callApi(
+        name: ApiNames.sendCode,
+        json: body,
+        returnType: ReturnType.Type,
+        showLoader: false,
+        methodType: MethodType.Post,
+    );
+    return (data != null);
   }
 
   Future<bool> resendCode(String userId) async {
-    String lang = context.read<LangCubit>().state.locale.languageCode;
-    Map<String, dynamic> body = {"lang": lang, "userId": userId};
-    var _data = await DioHelper(context: context).post(url: "/api/v1/ResendCode", body:body);
-    return (_data != null);
+    Map<String, dynamic> body = {"userId": userId};
+    dynamic data = await GenericHttp<dynamic>(context).callApi(
+      name: ApiNames.resendCode,
+      json: body,
+      returnType: ReturnType.Type,
+      showLoader: false,
+      methodType: MethodType.Post,
+    );
+    return (data != null);
   }
 
   Future<String?> aboutApp() async {
-    Map<String, dynamic> body = {
-      "lang": context.read<LangCubit>().state.locale.languageCode,
-    };
-    var _data =
-    await DioHelper(context: context).get(url: "/api/v1/AboutApp", body:body);
-    if (_data != null) {
-      return _data["data"]["about_app"];
-    } else {
-      return null;
-    }
+    return await GenericHttp<String>(context).callApi(
+      name: ApiNames.aboutApp,
+      returnType: ReturnType.Type,
+      showLoader: false,
+      methodType: MethodType.Get,
+    );
   }
 
   Future<String?> terms() async {
-    Map<String, dynamic> body = {
-      "lang": context.read<LangCubit>().state.locale.languageCode,
-    };
-    var _data =
-    await DioHelper(context: context).get(url: "/api/v1/AboutApp", body:body);
-    if (_data != null) {
-      return _data["data"]["condetions"];
-    } else {
-      return null;
-    }
+    return await GenericHttp<String>(context).callApi(
+      name: ApiNames.terms,
+      returnType: ReturnType.Type,
+      showLoader: false,
+      methodType: MethodType.Get,
+    );
   }
 
   Future<List<QuestionModel>> frequentQuestions() async {
-    Map<String, dynamic> body = {
-      "lang": context.read<LangCubit>().state.locale.languageCode,
-    };
-    var _data = await DioHelper(context: context).get(url: "/api/v1/FrequentlyAskedQuestions", body:body);
-    if (_data != null) {
-      return List<QuestionModel>.from(
-          _data["data"].map((e) => QuestionModel.fromJson(e)));
-    } else {
-      return [];
-    }
+    return await GenericHttp<QuestionModel>(context).callApi(
+      name: ApiNames.repeatedQuestions,
+      returnType: ReturnType.List,
+      showLoader: false,
+      methodType: MethodType.Get,
+    ) as List<QuestionModel>;
   }
 
   Future<bool> switchNotify() async {
-    Map<String, dynamic> body = {
-      "lang": context.read<LangCubit>().state.locale.languageCode,
-    };
-    var _data = await DioHelper(context: context).post(url : "Client/SwitchNotify", body:body);
-    if (_data != null) {
-      return true;
-    } else {
-      return false;
-    }
+    dynamic data = await GenericHttp<dynamic>(context).callApi(
+      name: ApiNames.switchNotify,
+      returnType: ReturnType.Type,
+      showLoader: false,
+      methodType: MethodType.Post,
+    );
+    return (data != null);
   }
 
   Future<bool> forgetPassword(String phone) async {
-    String lang = context.read<LangCubit>().state.locale.languageCode;
     Map<String, dynamic> body = {
       "phone": "$phone",
-      "lang": lang,
     };
-    var _data = await DioHelper(context: context)
-        .post(url : "/api/v1/ForgetPassword", body:body , showLoader: false);
-    if (_data != null) {
-      // ExtendedNavigator.of(context).push(Routes.resetPassword,
-      //     arguments: ResetPasswordArguments(userId: _data["code"]["user_id"]));
-      return true;
-    } else {
-      return false;
-    }
+    dynamic data = await GenericHttp<dynamic>(context).callApi(
+      name: ApiNames.forgetPassword,
+      returnType: ReturnType.Type,
+      json: body,
+      showLoader: false,
+      methodType: MethodType.Post,
+    );
+    return (data != null);
   }
 
-  Future<bool> resetUserPassword(
-      String userId, String code, String pass) async {
-    String lang = context.read<LangCubit>().state.locale.languageCode;
+  Future<bool> resetUserPassword(String userId, String code, String pass) async {
     Map<String, dynamic> body = {
       "userId": "$userId",
       "code": "$code",
       "newPassword": "$pass",
-      "lang": lang,
     };
-    var _data = await DioHelper(context: context).get(url: "/api/v1/ChangePasswordByCode", body:body);
-    if (_data != null) {
-      return true;
-    } else {
-      return false;
-    }
+    dynamic data = await GenericHttp<dynamic>(context).callApi(
+      name: ApiNames.resetPassword,
+      returnType: ReturnType.Type,
+      json: body,
+      showLoader: false,
+      methodType: MethodType.Post,
+    );
+    return (data != null);
   }
 
   Future<bool> sendMessage(String? name, String? mail, String? message) async {
-    String lang = context.read<LangCubit>().state.locale.languageCode;
     Map<String, dynamic> body = {
-      "lang": "$lang",
       "name": "$name",
       "email": "$mail",
       "comment": "$message",
     };
-    var _data =
-    await DioHelper(context: context).post(url : "/api/v1/ContactUs", body:body, showLoader: false);
-    if (_data != null) {
-      return true;
-    } else {
-      return false;
-    }
+    dynamic data = await GenericHttp<dynamic>(context).callApi(
+      name: ApiNames.contactUs,
+      returnType: ReturnType.Type,
+      json: body,
+      showLoader: false,
+      methodType: MethodType.Post,
+    );
+    return (data != null);
   }
 
-  Future<UserModel?> checkActive(String phone) async {
-    Map<String, dynamic> body = {
-      "phone": "$phone",
-    };
-    var _data = await DioHelper(context: context).get(url: "/api/v1/CheckActive", body:body);
-    print("data is $_data");
-    if (_data != null) {
-      final userCubit = context.read<UserCubit>().state.model;
-      UserModel user = UserModel.fromJson(_data["data"]);
-      int type = _data["userData"]["type"];
-      user.type = type == 1 ? "user" : "company";
-      user.token = userCubit.token;
-      user.lang = userCubit.lang;
-      return user;
-    } else {
-      return null;
-    }
-  }
 }

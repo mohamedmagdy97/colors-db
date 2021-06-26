@@ -14,8 +14,6 @@ class GeneralRepository {
 
   Future<bool> setUserLogin(String phone, String pass)=> _generalHttpMethods.userLogin(phone, pass);
 
-  Future<void> getHomeConstData()=>_generalHttpMethods.getHomeConstData();
-
   Future<bool> sendCode(String code, String userId) =>
       _generalHttpMethods.sendCode(code, userId);
 
@@ -40,6 +38,4 @@ class GeneralRepository {
   Future<bool> sendMessage({ String? name, String? mail, String? message}) =>
       _generalHttpMethods.sendMessage(name, mail, message);
 
-  Future<UserModel?> checkActive(String phone) =>
-      _generalHttpMethods.checkActive(phone);
 }

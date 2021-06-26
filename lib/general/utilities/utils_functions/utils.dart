@@ -20,6 +20,28 @@ class Utils {
 
   }
 
+
+  static Future<bool> manipulateLoginData(BuildContext context,dynamic data,String token)async{
+    if (data != null) {
+      int status = data["status"];
+      if (status == 1) {
+        await Utils.setDeviceId("$token");
+        UserModel user = UserModel.fromJson(data["data"]);
+        int type = data["data"]["type"];
+        user.type = type == 1 ? "user" : "company";
+        user.token = data["token"];
+        user.lang = context.read<LangCubit>().state.locale.languageCode;
+        GlobalState.instance.set("token", user.token);
+        await Utils.saveUserData(user);
+        Utils.setCurrentUserData(user, context);
+      } else if (status == 2) {
+        AutoRouter.of(context).push(ActiveAccountRoute(userId: data["data"]["id"]));
+      }
+      return true;
+    }
+    return false;
+  }
+
   static void  setCurrentUserData(UserModel model,BuildContext context)async{
     // context.read<UserCubit>().onUpdateUserData(model);
     // ExtendedNavigator.of(context).push(Routes.home,arguments: HomeArguments(parentCount: parentCount));
