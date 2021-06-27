@@ -1,8 +1,5 @@
-import 'package:base_flutter/general/models/QuestionModel.dart';
-import 'package:base_flutter/general/models/UserModel.dart';
-import 'package:flutter/material.dart';
+part of 'GeneralRepoImports.dart';
 
-import 'GeneralHttpMethods.dart';
 
 class GeneralRepository {
   late BuildContext _context;

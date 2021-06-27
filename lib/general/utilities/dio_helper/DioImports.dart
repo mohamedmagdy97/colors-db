@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:base_flutter/general/constants/GlobalState.dart';
 import 'package:base_flutter/general/constants/ModaLs/LoadingDialog.dart';
-import 'package:base_flutter/general/resources/ApiNames.dart';
+import 'package:base_flutter/general/http/ApiNames.dart';
 import 'package:base_flutter/general/utilities/dio_helper/cahce_lib/manager_dio.dart';
 import 'package:base_flutter/general/utilities/localization/LocalizationMethods.dart';
 import 'package:base_flutter/general/utilities/routers/RouterImports.gr.dart';
