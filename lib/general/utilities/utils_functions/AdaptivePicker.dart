@@ -121,41 +121,43 @@ class AdaptivePicker {
 
   static Widget cupertinoTimePicker(BuildContext context,String title,Function(DateTime? date) onConfirm) {
     DateTime _date=DateTime.now();
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MyText(title: title, color: MyColors.blackOpacity, size: 14,fontWeight: FontWeight.w500,),
-              SizedBox(
-                height: 20,
-                child: ElevatedButton(
-                  onPressed: (){
-                    onConfirm(_date);
-                    Navigator.of(context).pop();
-                  },
-                  child: MyText(title: "Done",size: 14,color: MyColors.primary,),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      primary: MyColors.white
+    return Container(
+      height: 260,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MyText(title: title, color: MyColors.blackOpacity, size: 14,fontWeight: FontWeight.w500,),
+                SizedBox(
+                  height: 20,
+                  child: ElevatedButton(
+                    onPressed: (){
+                      onConfirm(_date);
+                      Navigator.of(context).pop();
+                    },
+                    child: MyText(title: "Done",size: 14,color: MyColors.primary,),
+                    style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        primary: MyColors.white
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-            height: 280,
-            child: CupertinoDatePicker(
-              onDateTimeChanged: (date){
-                _date=date;
-              },
-              mode: CupertinoDatePickerMode.time,
-            )
-        ),
-      ],
+          Flexible(
+              child: CupertinoDatePicker(
+                onDateTimeChanged: (date){
+                  _date=date;
+                },
+                mode: CupertinoDatePickerMode.time,
+              )
+          ),
+        ],
+      ),
     );
   }
 
