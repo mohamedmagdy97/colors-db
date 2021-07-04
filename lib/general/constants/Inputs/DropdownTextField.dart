@@ -53,7 +53,7 @@ class _DropdownTextFieldState<DataType> extends State<DropdownTextField> {
       child: DropdownSearch<DataType>(
         key: widget.dropKey,
         mode: Mode.BOTTOM_SHEET,
-        isFilteredOnline: true,
+        isFilteredOnline: false,
         maxHeight: 300,
         label: widget.label,
         items: widget.data,
