@@ -37,7 +37,7 @@ class GlobalNotification {
       messaging.getToken().then((token) {
         print(token);
       });
-      messaging.setForegroundNotificationPresentationOptions(alert: true,badge: true,sound: true);
+      messaging.setForegroundNotificationPresentationOptions(alert: false,badge: false,sound: false);
       // messaging.getInitialMessage().then((message) => _showLocalNotification(message));
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         print("_____________________Message data:${message.data}");
