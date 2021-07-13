@@ -9,7 +9,8 @@ class BuildFormInputs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       key: forgerPasswordData.formKey,
-      child: LabelTextField(
+      child: GenericTextField(
+        fieldTypes: FieldTypes.normal,
         label: tr(context,"phone"),
         controller: forgerPasswordData.phone,
         action: TextInputAction.done,

@@ -11,32 +11,32 @@ class BuildChangeForm extends StatelessWidget {
       key: changePasswordData.formKey,
       child: Column(
         children: [
-          LabelTextField(
+          GenericTextField(
+            fieldTypes: FieldTypes.password,
             label: 'كلمة المرور القديمة',
             controller: changePasswordData.oldPassword,
             margin: const EdgeInsets.symmetric(vertical: 5),
             type: TextInputType.name,
             validate: (value) => value!.validateEmpty(context),
-            isPassword: true,
             action: TextInputAction.next,
           ),
-          LabelTextField(
+          GenericTextField(
+            fieldTypes: FieldTypes.password,
             label: 'كلمة المرور الجديدة',
             controller: changePasswordData.newPassword,
             margin: const EdgeInsets.symmetric(vertical: 5),
             type: TextInputType.name,
             validate: (value) => value!.validatePassword(context),
-            isPassword: true,
             action: TextInputAction.next,
           ),
-          LabelTextField(
+          GenericTextField(
+            fieldTypes: FieldTypes.password,
             label: 'تأكيد كلمة المرور الجديدة',
             controller: changePasswordData.confirmNewPassword,
             margin: const EdgeInsets.symmetric(vertical: 5),
             type: TextInputType.name,
             validate: (value) => value!.validatePasswordConfirm(context,
                 pass: changePasswordData.newPassword.text),
-            isPassword: true,
             action: TextInputAction.done,
             onSubmit: ()=> changePasswordData.setChangePassword(context),
           ),

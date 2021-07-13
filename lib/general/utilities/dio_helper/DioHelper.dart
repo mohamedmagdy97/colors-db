@@ -119,7 +119,7 @@ class DioHelper {
     //create multipart request for POST or PATCH method
 
     try {
-      var response = await _dio.post("url", data: formData);
+      var response = await _dio.post("$url", data: formData);
       print("response ${response.statusCode}");
       if (showLoader) EasyLoading.dismiss();
       LoadingDialog.showToastNotification(response.data["msg"].toString());

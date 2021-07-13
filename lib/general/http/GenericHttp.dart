@@ -102,12 +102,15 @@ class GenericHttp<T> {
   ) async {
     switch (returnType) {
       case ReturnType.Type:
-        return data[dataKey ?? "data"];
+        return dataKey == null ? data : data[dataKey];
       case ReturnType.Model:
         return Function.apply(toJsonFunc, [data[dataKey ?? "data"]]);
       case ReturnType.List:
-        return List<T>.from(data[dataKey ?? "data"]
-            .map((e) => Function.apply(toJsonFunc, [e])));
+        return List<T>.from(
+          data[dataKey ?? "data"].map(
+            (e) => Function.apply(toJsonFunc, [e]),
+          ),
+        );
     }
   }
 }

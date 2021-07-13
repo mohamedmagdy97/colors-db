@@ -28,7 +28,7 @@ class CustomInputDecoration extends InputDecoration {
   @override
   // TODO: implement enabledBorder
   InputBorder get enabledBorder => OutlineInputBorder(
-    borderSide: BorderSide(color: enableColor ?? MyColors.greyWhite, width: .5),
+    borderSide: BorderSide(color: enableColor ?? MyColors.greyWhite, width: .7),
     borderRadius: BorderRadius.circular(borderRaduis??10),
   );
 
@@ -41,7 +41,7 @@ class CustomInputDecoration extends InputDecoration {
   @override
   // TODO: implement errorBorder
   InputBorder get errorBorder => OutlineInputBorder(
-      borderSide: BorderSide(color: enableColor ?? Colors.red, width: .5),
+      borderSide: BorderSide(color: Colors.red, width: .5),
       borderRadius: BorderRadius.circular(borderRaduis??10));
 
   @override
@@ -79,7 +79,7 @@ class CustomInputDecoration extends InputDecoration {
   @override
   // TODO: implement contentPadding
   EdgeInsetsGeometry get contentPadding =>
-      padding?? EdgeInsets.symmetric(horizontal: 10, vertical: 18);
+      padding?? EdgeInsets.symmetric(horizontal: 10, vertical: 14);
 
   @override
   // TODO: implement filled

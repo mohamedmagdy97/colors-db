@@ -13,7 +13,8 @@ class BuildFormInputs extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          LabelTextField(
+          GenericTextField(
+            fieldTypes: FieldTypes.normal,
             label: tr(context,"code"),
             controller: resetPasswordData.code,
             action: TextInputAction.next,
@@ -21,21 +22,21 @@ class BuildFormInputs extends StatelessWidget {
             validate: (value) => value!.validateEmpty(context),
             margin: const EdgeInsets.symmetric( vertical: 10),
           ),
-          LabelTextField(
+          GenericTextField(
+            fieldTypes: FieldTypes.password,
             label: tr(context,"newPass"),
             controller: resetPasswordData.newPassword,
             action: TextInputAction.next,
             type: TextInputType.text,
-            isPassword: true,
             validate: (value) => value!.validatePassword(context),
             margin: const EdgeInsets.symmetric( vertical: 10),
           ),
-          LabelTextField(
+          GenericTextField(
+            fieldTypes: FieldTypes.password,
             label: tr(context,"confirmPassword"),
             controller: resetPasswordData.confirmNewPassword,
             action: TextInputAction.done,
             type: TextInputType.text,
-            isPassword: true,
             margin: const EdgeInsets.symmetric( vertical: 10),
             validate: (value) => value!.validatePasswordConfirm(context,
                 pass: resetPasswordData.newPassword.text),
