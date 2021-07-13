@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
-enum ListViewType { normal, api, separated }
+enum ListViewType { normal, api, separated, grid }
 
 typedef GenericBuilder = Widget Function(
     BuildContext context, int index, dynamic item);
@@ -24,6 +24,8 @@ class GenericListView<T> extends StatelessWidget {
   final Color? refreshBg;
   final Color? loadingColor;
   final EdgeInsets padding;
+  final double spacing;
+  final double runSpacing;
 
   const GenericListView({
     this.onRefresh,
@@ -37,6 +39,8 @@ class GenericListView<T> extends StatelessWidget {
     this.refreshBg,
     this.padding = EdgeInsets.zero,
     this.loadingColor,
+    this.spacing = 10,
+    this.runSpacing = 10,
   });
 
   @override
@@ -64,6 +68,18 @@ class GenericListView<T> extends StatelessWidget {
           emptyStr: emptyStr,
           refreshBg: refreshBg,
           padding: padding,
+        );
+      case ListViewType.grid:
+        return _GridView(
+          onRefresh: onRefresh!,
+          cubit: cubit!,
+          itemBuilder: itemBuilder!,
+          params: params,
+          emptyStr: emptyStr,
+          refreshBg: refreshBg,
+          padding: padding,
+          spacing: spacing,
+          runSpacing: runSpacing,
         );
     }
   }
@@ -216,6 +232,83 @@ class _ApiListViewState<T> extends State<_ApiListView> {
                     return widget.itemBuilder(
                         context, index, state.data[index]);
                   },
+                ),
+              ),
+            );
+          }
+          return Center(
+            child: MyText(
+                title: widget.emptyStr ?? "لايوجد بيانات",
+                color: MyColors.black,
+                size: 12),
+          );
+        }
+        return LoadingDialog.showLoadingView(color: widget.loadingColor);
+      },
+    );
+  }
+}
+
+class _GridView<T> extends StatefulWidget {
+  final dynamic onRefresh;
+  final List<dynamic>? params;
+  final GenericBloc<List<T>> cubit;
+  final GenericBuilder itemBuilder;
+  final String? emptyStr;
+  final Color? refreshBg;
+  final Color? loadingColor;
+  final EdgeInsets padding;
+  final double spacing;
+  final double runSpacing;
+
+  const _GridView(
+      {required this.onRefresh,
+        this.params,
+        required this.cubit,
+        required this.itemBuilder,
+        this.emptyStr,
+        this.refreshBg,
+        required this.spacing,
+        required this.runSpacing,
+        required this.padding,
+        this.loadingColor});
+
+  @override
+  _GridViewState createState() => _GridViewState<T>();
+}
+
+class _GridViewState<T> extends State<_GridView> {
+  @override
+  void initState() {
+    Function.apply(widget.onRefresh, widget.params, {#refresh: false});
+    Function.apply(widget.onRefresh, widget.params);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<GenericBloc<List<T>>, GenericState<List<T>>>(
+      bloc: widget.cubit as GenericBloc<List<T>>,
+      builder: (context, state) {
+        if (state is GenericUpdateState) {
+          if (state.data.length > 0) {
+            return Expanded(
+              child: LiquidPullToRefresh(
+                onRefresh: () => Function.apply(widget.onRefresh, widget.params),
+                backgroundColor: MyColors.white,
+                color: widget.refreshBg ?? Colors.blueAccent,
+                showChildOpacityTransition: false,
+                springAnimationDurationInMilliseconds: 500,
+                child: CupertinoScrollbar(
+                  child: SingleChildScrollView(
+                    child: Wrap(
+                      spacing: widget.spacing,
+                      runSpacing: widget.runSpacing,
+                      children: List.generate(state.data.length, (index) {
+                            return widget.itemBuilder(context, index, state.data[index]);
+                      }),
+                    ),
+                  ),
                 ),
               ),
             );
