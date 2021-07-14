@@ -12,11 +12,11 @@ class GenericHttp<T> {
   GenericHttp(this.context);
 
   Future<dynamic> callApi(
-      {required String name,
-      Map<String, dynamic> json = const {},
-      required ReturnType returnType,
+      {required ReturnType returnType,
       required MethodType methodType,
-      String? dataKey,
+      required String name,
+      Function(dynamic data)? returnDataFun,
+      Map<String, dynamic> json = const {},
       bool? showLoader,
       Function(dynamic data)? toJsonFunc,
       bool refresh = true}) async {
@@ -29,7 +29,7 @@ class GenericHttp<T> {
             returnType: returnType,
             json: json,
             refresh: refresh,
-            dataKey: dataKey,
+            dataKeyFun: returnDataFun,
             toJsonFunc: toJsonFunc);
       case MethodType.Post:
         return _postData(
@@ -37,7 +37,7 @@ class GenericHttp<T> {
             returnType: returnType,
             json: json,
             showLoader: showLoader,
-            dataKey: dataKey,
+            dataKeyFun: returnDataFun,
             toJsonFunc: toJsonFunc);
       case MethodType.UploadFile:
         return _uploadData(
@@ -45,30 +45,30 @@ class GenericHttp<T> {
             returnType: returnType,
             json: json,
             showLoader: showLoader,
-            dataKey: dataKey,
+            dataKeyFun: returnDataFun,
             toJsonFunc: toJsonFunc);
     }
   }
 
   Future<dynamic> _getData({
-    required String name,
-    Map<String, dynamic> json = const {},
     required ReturnType returnType,
-    String? dataKey,
+    required String name,
+    Function(dynamic data)? dataKeyFun,
+    Map<String, dynamic> json = const {},
     bool refresh = true,
     Function(dynamic data)? toJsonFunc,
   }) async {
     var data = await DioHelper(context: context, forceRefresh: refresh)
         .get(url: name, body: json);
     return _returnDataFromType(
-        data, returnType, dataKey, toJsonFunc ?? (val) {});
+        data, returnType, toJsonFunc ?? (val) {},dataKeyFun);
   }
 
   Future<dynamic> _postData({
-    required String name,
-    Map<String, dynamic> json = const {},
     required ReturnType returnType,
-    String? dataKey,
+    required String name,
+    Function(dynamic data)? dataKeyFun,
+    Map<String, dynamic> json = const {},
     bool? showLoader,
     Function(dynamic data)? toJsonFunc,
   }) async {
@@ -76,14 +76,14 @@ class GenericHttp<T> {
       context: context,
     ).post(url: name, body: json, showLoader: showLoader ?? true);
     return _returnDataFromType(
-        data, returnType, dataKey, toJsonFunc ?? (val) {});
+        data, returnType, toJsonFunc ?? (val) {},dataKeyFun);
   }
 
   Future<dynamic> _uploadData({
-    required String name,
-    Map<String, dynamic> json = const {},
     required ReturnType returnType,
-    String? dataKey,
+    required String name,
+    Function(dynamic data)?  dataKeyFun,
+    Map<String, dynamic> json = const {},
     bool? showLoader,
     Function(dynamic data)? toJsonFunc,
   }) async {
@@ -91,23 +91,25 @@ class GenericHttp<T> {
       context: context,
     ).uploadFile(url: name, body: json, showLoader: showLoader ?? true);
     return _returnDataFromType(
-        data, returnType, dataKey, toJsonFunc ?? (val) {});
+        data, returnType, toJsonFunc ?? (val) {},dataKeyFun);
   }
 
   dynamic _returnDataFromType(
     dynamic data,
     ReturnType returnType,
-    String? dataKey,
     Function(dynamic data) toJsonFunc,
+    Function(dynamic data)? dataKeyFun,
   ) async {
     switch (returnType) {
       case ReturnType.Type:
-        return dataKey == null ? data : data[dataKey];
+        return dataKeyFun==null?data : Function.apply(dataKeyFun, [data]);
       case ReturnType.Model:
-        return Function.apply(toJsonFunc, [data[dataKey ?? "data"]]);
+        return Function.apply(toJsonFunc, [dataKeyFun==null?data:
+          Function.apply(dataKeyFun, [data])
+        ]);
       case ReturnType.List:
         return List<T>.from(
-          data[dataKey ?? "data"].map(
+          dataKeyFun==null?data: Function.apply(dataKeyFun, [data]).map(
             (e) => Function.apply(toJsonFunc, [e]),
           ),
         );
