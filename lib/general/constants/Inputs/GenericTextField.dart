@@ -2,8 +2,8 @@ import 'package:base_flutter/general/blocks/lang_cubit/lang_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'CustomInputDecoration.dart';
-import 'CustomInputTextStyle.dart';
+import 'text_field_style/CustomInputDecoration.dart';
+import 'text_field_style/CustomInputTextStyle.dart';
 
 class GenericTextField extends StatelessWidget {
   final TextEditingController? controller;
