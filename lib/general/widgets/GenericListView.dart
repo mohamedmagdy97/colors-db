@@ -13,11 +13,11 @@ typedef GenericBuilder = Widget Function(
     BuildContext context, int index, dynamic item);
 
 class GenericListView<T> extends StatelessWidget {
-  final dynamic onRefresh;
   final ListViewType type;
+  final dynamic onRefresh;
   final GenericBloc<List<T>>? cubit;
-  final GenericBuilder? itemBuilder;
   final List<dynamic>? params;
+  final GenericBuilder? itemBuilder;
   final List<Widget> children;
   final Color? dividerColor;
   final String? emptyStr;

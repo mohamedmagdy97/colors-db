@@ -15,7 +15,7 @@ class GlobalNotification {
   late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
   static late BuildContext context;
   static GlobalNotification instance = new GlobalNotification._();
-
+  static FirebaseMessaging messaging = FirebaseMessaging.instance;
   GlobalNotification._();
 
   GlobalNotification();
@@ -30,7 +30,6 @@ class GlobalNotification {
       initSettings,
       onSelectNotification: flutterNotificationClick,
     );
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
     NotificationSettings settings = await messaging.requestPermission(provisional: true);
     print('User granted permission: ${settings.authorizationStatus}');
     if(settings.authorizationStatus==AuthorizationStatus.authorized){

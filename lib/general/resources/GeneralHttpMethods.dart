@@ -15,6 +15,7 @@ class GeneralHttpMethods {
       "deviceId": "$_token",
       "deviceType": Platform.isIOS ? "ios" : "android",
     };
+
     dynamic data = await GenericHttp<dynamic>(context).callApi(
       name: ApiNames.login,
       json: body,
