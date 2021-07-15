@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 enum ReturnType { Model, List, Type }
 enum MethodType { Get, Post, UploadFile }
 
-class GenericHttp<T> {
+class GenericHttp<T>{
   final BuildContext context;
 
   GenericHttp(this.context);
@@ -104,9 +104,11 @@ class GenericHttp<T> {
       case ReturnType.Type:
         return dataKeyFun==null?data : Function.apply(dataKeyFun, [data]);
       case ReturnType.Model:
-        return Function.apply(toJsonFunc, [dataKeyFun==null?data:
-          Function.apply(dataKeyFun, [data])
+        return  Function.apply(toJsonFunc, [dataKeyFun==null?data:
+          Function.apply(dataKeyFun, [data]) as T
         ]);
+      case ReturnType.Model:
+        return ;
       case ReturnType.List:
         return List<T>.from(
           dataKeyFun==null?data: Function.apply(dataKeyFun, [data]).map(
