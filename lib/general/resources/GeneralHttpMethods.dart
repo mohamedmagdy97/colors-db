@@ -16,12 +16,15 @@ class GeneralHttpMethods {
       "deviceType": Platform.isIOS ? "ios" : "android",
     };
 
-    dynamic data = await GenericHttp<dynamic>(context).callApi(
+    var data = await GenericHttp<dynamic>(context).callApi(
       name: ApiNames.login,
       json: body,
-      returnType: ReturnType.Type,
+      returnType: ReturnType.List,
       methodType: MethodType.Post,
+      returnDataFun: (data)=>data["userData"],
+      toJsonFunc: (json)=>UserModel.fromJson(json),
       showLoader: false,
+
     );
 
     return Utils.manipulateLoginData(context, data, _token ?? "");

@@ -16,18 +16,19 @@ class GenericHttp<T>{
       required MethodType methodType,
       required String name,
       Function(dynamic data)? returnDataFun,
-      Map<String, dynamic> json = const {},
+      Map<String, dynamic>? json,
       bool? showLoader,
       Function(dynamic data)? toJsonFunc,
       bool refresh = true}) async {
-    json.addAll({"lang": context.read<LangCubit>().state.locale.languageCode});
+    var dataJson = json??{};
+    dataJson.addAll({"lang": context.read<LangCubit>().state.locale.languageCode});
 
     switch (methodType) {
       case MethodType.Get:
         return _getData(
             name: name,
             returnType: returnType,
-            json: json,
+            json: dataJson,
             refresh: refresh,
             dataKeyFun: returnDataFun,
             toJsonFunc: toJsonFunc);
@@ -35,7 +36,7 @@ class GenericHttp<T>{
         return _postData(
             name: name,
             returnType: returnType,
-            json: json,
+            json: dataJson,
             showLoader: showLoader,
             dataKeyFun: returnDataFun,
             toJsonFunc: toJsonFunc);
@@ -43,7 +44,7 @@ class GenericHttp<T>{
         return _uploadData(
             name: name,
             returnType: returnType,
-            json: json,
+            json: dataJson,
             showLoader: showLoader,
             dataKeyFun: returnDataFun,
             toJsonFunc: toJsonFunc);

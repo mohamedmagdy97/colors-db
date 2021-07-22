@@ -14,7 +14,7 @@ class DioHelper {
           contentType: "application/x-www-form-urlencoded; charset=utf-8"),
     )
       ..interceptors.add(_getCacheManager().interceptor)
-      ..interceptors.add(LogInterceptor(responseBody: true,requestBody: true));
+      ..interceptors.add(LogInterceptor(responseBody: true,requestBody: true,logPrint: (data)=>log(data.toString())));
   }
 
   DioCacheManager _getCacheManager() {
@@ -193,7 +193,7 @@ class DioHelper {
   void _printRequestBody(Map<String, dynamic> body) {
     print(
         "-------------------------------------------------------------------");
-    print(body);
+    log("$body");
     print(
         "-------------------------------------------------------------------");
   }
