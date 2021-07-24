@@ -75,58 +75,10 @@ class Utils {
     prefs.clear();
   }
 
-
-  // static CustomerModel getCustomerData({@required BuildContext context}){
-  //   var provider = Provider.of<UserStore>(context,listen: false);
-  //   return provider.model.customer;
-  // }
-
-  // static DelegateModel getDelegateData({@required BuildContext context}){
-  //   var provider = Provider.of<UserProvider>(context,listen: false);
-  //   return provider.model.delegate;
-  // }
-
-  // static int getCurrentUserType({@required BuildContext context}){
-  //   var provider = Provider.of<UserStore>(context,listen: false);
-  //   return provider.model.type;
-  // }
-  //
-  // static String getCurrentUserLang({@required BuildContext context}){
-  //   var provider = Provider.of<UserStore>(context,listen: false);
-  //   return provider.model.lang;
-  // }
-  //
-  // static String getCurrentUserToken({@required BuildContext context}){
-  //   var provider = Provider.of<UserStore>(context,listen: false);
-  //   return provider.model.token;
-  // }
-  //
-  // static void setCurrentUserType({@required BuildContext context,@required int type}){
-  //   var provider = Provider.of<UserStore>(context,listen: false);
-  //   SavedDataModel model=provider.model;
-  //   model.type=type;
-  //   provider.setUserModel(model);
-  // }
-
-  // static void setCurrentUserLang({@required BuildContext context,@required String lang}){
-  //   var provider =Provider.of<UserStore>(context,listen: false);
-  //   SavedDataModel model=provider.model;
-  //   model.lang=lang;
-  //   provider.setUserModel(model);
-  //   saveUserData(provider.model);
-  //   changeLanguage(lang,context);
-  // }
-
   static String getCurrentUserId({required BuildContext context}){
     var provider = context.watch<UserCubit>().state.model;
     return provider.id;
   }
-
-
-  // static void setSelectUser({@required int type, @required BuildContext context}) async {
-  //   setCurrentUserType(context: context,type: type);
-  //   ExtendedNavigator(router: AppRouter(), name: Routes.login);
-  // }
 
   static void launchURL({required String url}) async {
     if (!url.toString().startsWith("https")) {
