@@ -106,7 +106,7 @@ class GenericHttp<T>{
         return dataKeyFun==null?data : Function.apply(dataKeyFun, [data]);
       case ReturnType.Model:
         return  Function.apply(toJsonFunc, [dataKeyFun==null?data:
-          Function.apply(dataKeyFun, [data]) as T
+          Function.apply(dataKeyFun, [data])
         ]);
       case ReturnType.Model:
         return ;
