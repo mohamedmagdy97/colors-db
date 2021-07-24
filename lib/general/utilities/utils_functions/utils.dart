@@ -189,27 +189,20 @@ class Utils {
   }
 
   static Future<File?> getImage() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        type: FileType.image
-    );
-
-    if(result != null) {
-      List<File> files = result.paths.map((path) => File("$path")).toList();
-      return files.first;
-    } else {
-      return null;
+    final ImagePicker _picker = ImagePicker();
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image!=null) {
+      File imageFile = File(image.path);
+      return imageFile;
     }
+    return null;
   }
 
   static Future<List<File>> getImages()async{
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: true,
-        type: FileType.image
-    );
-
+    final ImagePicker _picker = ImagePicker();
+    final List<XFile>? result = await _picker.pickMultiImage();
     if(result != null) {
-      List<File> files = result.paths.map((path) => File("$path")).toList();
+      List<File> files = result.map((e) => File(e.path)).toList();
       return files;
     } else {
       return [];
@@ -217,17 +210,13 @@ class Utils {
   }
 
   static Future<File?> getVideo() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        type: FileType.video
-    );
-
-    if(result != null) {
-      List<File> files = result.paths.map((path) => File("$path")).toList();
-      return files.first;
-    } else {
-      return null;
+    final ImagePicker _picker = ImagePicker();
+    final XFile? video = await _picker.pickVideo(source: ImageSource.gallery);
+    if (video!=null) {
+      File imageFile = File(video.path);
+      return imageFile;
     }
+    return null;
   }
 
   static void copToClipboard({required String text,required GlobalKey<ScaffoldState> scaffold}){
