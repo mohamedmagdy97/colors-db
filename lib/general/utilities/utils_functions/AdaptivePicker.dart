@@ -106,6 +106,12 @@ class AdaptivePicker {
     var now = DateTime.now();
     showRoundedTimePicker(
       context: context,
+      theme: ThemeData(
+        primaryColor: MyColors.primary,
+        accentColor: MyColors.black,
+        backgroundColor: MyColors.white,
+        buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+      ),
       initialTime: TimeOfDay.now(),
     ).then((time) => onConfirm(
         DateTime(now.year, now.month, now.day, time!.hour, time.minute)));
