@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tf_validator/localization/SetLocalization.dart';
 import 'blocks/lang_cubit/lang_cubit.dart';
-import 'utilities/localization/SetLocalization.dart';
 import 'utilities/main_data/MainDataImports.dart';
 
 class MyApp extends StatefulWidget {

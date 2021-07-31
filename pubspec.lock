@@ -1055,6 +1055,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.1"
+  tf_validator:
+    dependency: "direct main"
+    description:
+      name: tf_validator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   timezone:
     dependency: transitive
     description:

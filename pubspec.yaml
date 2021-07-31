@@ -30,6 +30,7 @@ dependencies:
 
   dio_helper: ^0.0.1
   tf_custom_widgets: ^0.0.1
+  tf_validator: ^0.0.2
   auto_route: ^2.2.0
   flutter_local_notifications: ^8.0.0
   shared_preferences: ^2.0.6
