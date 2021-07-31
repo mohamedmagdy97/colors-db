@@ -87,7 +87,7 @@ class Utils {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      LoadingDialog.showToastNotification("من فضلك تآكد من الرابط");
+      CustomToast.showToastNotification("من فضلك تآكد من الرابط");
     }
   }
 
@@ -173,11 +173,11 @@ class Utils {
 
   static void copToClipboard({required String text,required GlobalKey<ScaffoldState> scaffold}){
     if(text.trim().isEmpty){
-      LoadingDialog.showToastNotification("لا يوجد بيانات للنسخ");
+      CustomToast.showToastNotification("لا يوجد بيانات للنسخ");
       return;
     }else{
       Clipboard.setData(ClipboardData(text: "$text")).then((value) {
-        LoadingDialog.showToastNotification("تم النسخ بنجاح");
+        CustomToast.showToastNotification("تم النسخ بنجاح");
       });
     }
   }
@@ -218,7 +218,7 @@ class Utils {
       );
     }
     else{
-      LoadingDialog.showSimpleToast("قم بتحميل خريطة جوجل");
+      CustomToast.showSimpleToast(msg: "قم بتحميل خريطة جوجل");
     }
   }
 

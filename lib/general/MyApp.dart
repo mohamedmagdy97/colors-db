@@ -1,5 +1,4 @@
 import 'package:base_flutter/general/utilities/routers/RouterImports.gr.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -20,7 +19,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final botToastBuilder = BotToastInit();
     return MultiBlocProvider(
       providers: MainData.providers(context),
       child: BlocBuilder<LangCubit, LangState>(
@@ -41,13 +39,11 @@ class _MyAppState extends State<MyApp> {
               ],
               locale: state.locale,
               routerDelegate: _appRouter.delegate(
-                  navigatorObservers: () => [BotToastNavigatorObserver()],
                   initialRoutes: [SplashRoute(navigatorKey: navigatorKey)]
               ),
               routeInformationParser: _appRouter.defaultRouteParser(),
               builder: (ctx, child) {
                 child = FlutterEasyLoading(child: child); //do something
-                child = botToastBuilder(context, child);
                 return child;
               }
           );
