@@ -5,7 +5,7 @@ import 'package:base_flutter/general/blocks/user_cubit/user_cubit.dart';
 import 'package:base_flutter/general/constants/MyColors.dart';
 import 'package:base_flutter/general/constants/input_field_style/CustomInputDecoration.dart';
 import 'package:base_flutter/general/constants/input_field_style/CustomInputTextStyle.dart';
-import 'package:base_flutter/general/http/ApiNames.dart';
+import 'package:base_flutter/general/utilities/utils_functions/ApiNames.dart';
 import 'package:tf_custom_widgets/tf_custom_widgets.dart';
 import 'package:dio_helper/Modals/LoadingDialog.dart';
 import 'package:dio_helper/utils/DioUtils.dart';
