@@ -51,7 +51,7 @@ packages:
     source: hosted
     version: "2.1.0"
   bloc:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: bloc
       url: "https://pub.dartlang.org"
@@ -121,7 +121,7 @@ packages:
     source: hosted
     version: "8.0.4"
   cached_network_image:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: cached_network_image
       url: "https://pub.dartlang.org"
@@ -256,11 +256,9 @@ packages:
   dio_helper:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "3b13a3de49576bbec991bf0a914e32eadc7b91a5"
-      url: "https://gitlab.com/tarekfouda/dio_helper.git"
-    source: git
+      name: dio_helper
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.1"
   dio_http_cache:
     dependency: transitive
@@ -270,12 +268,12 @@ packages:
     source: hosted
     version: "0.3.0"
   equatable:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: equatable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.3"
   fake_async:
     dependency: transitive
     description:
@@ -352,7 +350,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_bloc:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
@@ -371,7 +369,7 @@ packages:
       name: flutter_cache_manager
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.1.2"
   flutter_easyloading:
     dependency: "direct main"
     description:
@@ -469,7 +467,7 @@ packages:
     source: hosted
     version: "5.0.0"
   flutter_staggered_animations:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_staggered_animations
       url: "https://pub.dartlang.org"
@@ -528,7 +526,7 @@ packages:
     source: hosted
     version: "2.0.0"
   google_fonts:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: google_fonts
       url: "https://pub.dartlang.org"
@@ -633,21 +631,21 @@ packages:
     source: hosted
     version: "0.6.3"
   json_annotation:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: json_annotation
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.1"
   json_serializable:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: json_serializable
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.1.4"
   liquid_pull_to_refresh:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: liquid_pull_to_refresh
       url: "https://pub.dartlang.org"
@@ -724,7 +722,7 @@ packages:
     source: hosted
     version: "2.0.0"
   multi_select_flutter:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: multi_select_flutter
       url: "https://pub.dartlang.org"
@@ -750,7 +748,7 @@ packages:
       name: octo_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.0+1"
   package_config:
     dependency: transitive
     description:
@@ -911,7 +909,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.26.0"
+    version: "0.27.1"
   share:
     dependency: "direct main"
     description:
@@ -1057,6 +1055,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
+  tf_custom_widgets:
+    dependency: "direct main"
+    description:
+      name: tf_custom_widgets
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   timezone:
     dependency: transitive
     description:
@@ -1140,7 +1145,7 @@ packages:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "3.0.4"
   vector_math:
     dependency: transitive
     description:

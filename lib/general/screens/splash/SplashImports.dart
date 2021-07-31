@@ -1,16 +1,7 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:base_flutter/general/blocks/lang_cubit/lang_cubit.dart';
 import 'package:base_flutter/general/constants/GlobalNotification.dart';
-import 'package:base_flutter/general/constants/Inputs/text_field_style/CustomInputTextStyle.dart';
-import 'package:base_flutter/general/constants/ModaLs/LoadingDialog.dart';
 import 'package:base_flutter/general/constants/MyColors.dart';
-import 'package:base_flutter/general/http/ApiNames.dart';
-import 'package:base_flutter/general/utilities/routers/RouterImports.gr.dart';
 import 'package:base_flutter/general/utilities/utils_functions/UtilsImports.dart';
-import 'package:base_flutter/general/widgets/AnimationContainer.dart';
-import 'package:dio_helper/utils/DioUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:base_flutter/res.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:tf_custom_widgets/tf_custom_widgets.dart';
 part 'Splash.dart';

@@ -30,14 +30,6 @@ class BuildFormInputs extends StatelessWidget {
             action: TextInputAction.done,
             onSubmit: () => loginData.userLogin(context),
           ),
-          MultiDropDownField<String>(
-            label: tr(context,"password"),
-            data: ["kjae","dlmkasvm","evfckjs"],
-            onItemClick: (String model){},
-            onConfirm: (List<String> data){},
-            selectedItems: ["kjae"],
-            title: tr(context,"password"),
-          ),
         ],
       ),
     );

@@ -17,24 +17,8 @@ class _SplashState extends State<Splash> {
   }
 
   _checkingData() async {
-    String lang = context.read<LangCubit>().state.locale.languageCode;
-    DioUtils.init(
-      baseUrl: ApiNames.baseUrl,
-      style: CustomInputTextStyle(lang: lang),
-      primary: MyColors.primary,
-      authLink: LoginRoute.name,
-      language: lang,
-      dismissFunc: EasyLoading.dismiss,
-      showLoadingFunc: LoadingDialog.showLoadingDialog,
-    );
-    Future.delayed(Duration(seconds: 2), () {
-      AutoRouter.of(context).push(LoginRoute());
-    });
-    return;
     GlobalNotification.instance.setupNotification(context);
-    Future.delayed(Duration(seconds: 2), () {
-      Utils.manipulateSplashData(context);
-    });
+    Utils.manipulateSplashData(context);
   }
 
   @override

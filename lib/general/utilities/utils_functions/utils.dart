@@ -5,6 +5,8 @@ class Utils {
 
   static Future<void> manipulateSplashData( BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    initDio(lang: "ar");
+    initCustomWidgets(language: "ar");
     // await GeneralRepository(context).getHomeConstData();
 
     var strUser = prefs.get("user");
@@ -18,6 +20,41 @@ class Utils {
       AutoRouter.of(context).push(SelectUserRoute());
     }
 
+  }
+
+  static initDio({required String lang}){
+    DioUtils.init(
+      baseUrl: ApiNames.baseUrl,
+      style: CustomInputTextStyle(lang: lang),
+      primary: MyColors.primary,
+      authLink: LoginRoute.name,
+      language: lang,
+      dismissFunc: EasyLoading.dismiss,
+      showLoadingFunc: LoadingDialog.showLoadingDialog,
+    );
+  }
+
+  static initCustomWidgets({required String language}){
+    WidgetUtils.init(
+      style: CustomInputTextStyle(lang: language),
+      primary: MyColors.primary,
+      language: language,
+      inputStyle: ({
+        String? label,
+        String? hint,
+        Widget? prefixIcon,
+        Widget? suffixIcon,
+        EdgeInsets? padding,
+        Color? enableColor})=>CustomInputDecoration(
+        lang:language,
+        label: label,
+        hint: hint,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        enableColor: enableColor,
+        padding: padding
+      )
+    );
   }
 
 
@@ -53,6 +90,8 @@ class Utils {
   }
 
   static void changeLanguage(String lang,BuildContext context){
+    DioUtils.lang=lang;
+    WidgetUtils.lang=lang;
     context.read<LangCubit>().onUpdateLanguage(lang);
   }
 

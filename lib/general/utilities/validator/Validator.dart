@@ -2,6 +2,7 @@ import 'package:base_flutter/general/utilities/localization/LocalizationMethods.
 import 'package:flutter/material.dart';
 
 extension Validator on String {
+
   String? noValidate() {
     return null;
   }

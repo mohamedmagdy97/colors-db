@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:base_flutter/general/constants/MyColors.dart';
-import 'package:base_flutter/general/widgets/MyText.dart';
+import 'package:tf_custom_widgets/widgets/MyText.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
