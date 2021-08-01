@@ -221,45 +221,76 @@ class Utils {
     }
   }
 
-  static Future<bool> askForPermission(Location location)async{
-    var permission = await location.hasPermission();
-    if (permission == PermissionStatus.deniedForever) {
-      return false;
-    } else if (permission == PermissionStatus.denied) {
-      permission = await location.requestPermission();
-      if (permission == PermissionStatus.denied ||
-          permission == PermissionStatus.deniedForever) {
-        return false;
+  static Future<Position?> getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      CustomToast.showSimpleToast(msg: 'Location services are disabled');
+      return null;
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        CustomToast.showSimpleToast(msg: 'Location permissions are denied');
+        return null;
       }
     }
-    return true;
-  }
 
-  static Future<LocationData> getCurrentLocation()async{
-    final location = new Location();
-    bool permission =await askForPermission(location);
-    LocationData? current;
-    if(permission){
-      current = await location.getLocation();
+    if (permission == LocationPermission.deniedForever) {
+      CustomToast.showSimpleToast(msg: 'Location permissions are permanently denied, we cannot request permissions');
+      return null;
     }
-     return current??LocationData.fromMap({"latitude":0,"longitude":0});
 
+    return await Geolocator.getCurrentPosition();
   }
 
-  static void navigateToMapWithDirection({required String lat,required String lng,required String title})async{
-    final availableMaps = await MapLauncher.installedMaps;
-    LocationData loc = await getCurrentLocation();
-    if (availableMaps.length>0) {
-      await availableMaps.first.showDirections(
-        destinationTitle: title,
-        origin: Coords(loc.latitude!, loc.longitude!),
-        destination: Coords(double.parse(lat), double.parse(lng)),
+  static void navigateToMapWithDirection(
+      {required String lat,
+        required String lng,
+        required BuildContext context}) async {
+    if (lat == "0") return;
+    try {
+      final coords = Coords(double.parse(lat), double.parse(lng));
+      final title = "Destination";
+      final availableMaps = await MapLauncher.installedMaps;
+
+      showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return SafeArea(
+            child: SingleChildScrollView(
+              child: Container(
+                child: Wrap(
+                  children: <Widget>[
+                    for (var map in availableMaps)
+                      ListTile(
+                        onTap: () => map.showMarker(
+                          coords: coords,
+                          title: title,
+                        ),
+                        title: Text(map.mapName),
+                        leading: SvgPicture.asset(
+                          map.icon,
+                          height: 30.0,
+                          width: 30.0,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       );
-    }
-    else{
-      CustomToast.showSimpleToast(msg: "قم بتحميل خريطة جوجل");
+    } catch (e) {
+      CustomToast.showSimpleToast(msg: "$e");
     }
   }
+
 
   static String convertDigitsToLatin(String s) {
     var sb = new StringBuffer();
