@@ -10,6 +10,8 @@ class CustomInputDecoration extends InputDecoration {
   final Widget? suffixIcon;
   final Color? enableColor;
   final Color? focusColor;
+  final Color? hintColor;
+  final Color? customFillColor;
   final double? borderRaduis;
   final EdgeInsets? padding;
 
@@ -19,6 +21,8 @@ class CustomInputDecoration extends InputDecoration {
     this.label,
     this.prefixIcon,
     this.suffixIcon,
+    this.hintColor,
+    this.customFillColor,
     this.enableColor,
     this.focusColor,
     this.borderRaduis,
@@ -67,14 +71,14 @@ class CustomInputDecoration extends InputDecoration {
   @override
   // TODO: implement labelStyle
   TextStyle get labelStyle => lang != "ar"
-      ? GoogleFonts.roboto(fontSize: 16)
-      : GoogleFonts.cairo(fontSize: 14);
+      ? GoogleFonts.roboto(fontSize: 16,color: hintColor??Colors.black54)
+      : GoogleFonts.cairo(fontSize: 14,color: hintColor??Colors.black54);
 
   @override
   // TODO: implement hintStyle
   TextStyle? get hintStyle => lang != "ar"
-      ? GoogleFonts.roboto(fontSize: 16)
-      : GoogleFonts.cairo(fontSize: 14);
+      ? GoogleFonts.roboto(fontSize: 16,color: hintColor??Colors.black54)
+      : GoogleFonts.cairo(fontSize: 14,color: hintColor??Colors.black54);
 
   @override
   // TODO: implement contentPadding
@@ -87,7 +91,7 @@ class CustomInputDecoration extends InputDecoration {
 
   @override
   // TODO: implement fillColor
-  Color get fillColor => MyColors.white;
+  Color get fillColor => customFillColor??Colors.transparent;
 
   @override
   // TODO: implement alignLabelWithHint

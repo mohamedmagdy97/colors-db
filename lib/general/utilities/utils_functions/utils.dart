@@ -44,6 +44,8 @@ class Utils {
         String? hint,
         Widget? prefixIcon,
         Widget? suffixIcon,
+        Color? hintColor,
+        Color? fillColor,
         EdgeInsets? padding,
         Color? enableColor})=>CustomInputDecoration(
         lang:language,
