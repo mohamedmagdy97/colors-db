@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:base_flutter/general/constants/MyColors.dart';
 import 'package:tf_custom_widgets/tf_custom_widgets.dart';
 
-class DefaultAppBar extends PreferredSize {
+class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Widget? leading;
   final List<Widget> actions;
-  final Size preferredSize ;
+  final double? size ;
 
   DefaultAppBar({
     required this.title,
     this.actions = const [],
     this.leading,
-    this.preferredSize = const Size.fromHeight(kToolbarHeight + 5),
-  }) : super(child: Container(),preferredSize: preferredSize);
+    this.size
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,4 +38,8 @@ class DefaultAppBar extends PreferredSize {
       actions: actions,
     );
   }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => Size.fromHeight(size??65);
 }
