@@ -227,6 +227,7 @@ class Utils {
     bool serviceEnabled;
     LocationPermission permission;
     // Test if location services are enabled.
+    await Geolocator.requestPermission();
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
       CustomToast.showSimpleToast(msg: 'Location services are disabled');
@@ -292,6 +293,20 @@ class Utils {
       CustomToast.showSimpleToast(msg: "$e");
     }
   }
+
+  static Future<String> getAddress(LatLng latLng, BuildContext context) async {
+    final coordinates = new Coordinates(latLng.latitude, latLng.longitude);
+    try {
+      List<Address>? addresses =
+      await Geocoder.local.findAddressesFromCoordinates(coordinates);
+      var first = addresses.first;
+      print("${first.featureName} : ${first.addressLine}");
+      return first.addressLine;
+    } catch (e) {
+      return "";
+    }
+  }
+
 
 
   static String convertDigitsToLatin(String s) {

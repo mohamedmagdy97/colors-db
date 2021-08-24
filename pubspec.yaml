@@ -94,6 +94,7 @@ flutter:
     - assets/images/icon.png
     - assets/images/logo.png
     - assets/images/logoWhite.png
+    - assets/images/marker.png
     - assets/images/nodata.png
     - assets/images/placeholder.png
     - assets/images/plus.png
