@@ -61,7 +61,7 @@ class BuildGoogleMapView extends StatelessWidget {
             ),
             ImageIcon(
               AssetImage(Res.marker),
-              size: 80,
+              size: 50,
               color: MyColors.secondary,
             ),
           ],

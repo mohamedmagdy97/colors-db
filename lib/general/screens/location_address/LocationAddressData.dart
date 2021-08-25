@@ -28,11 +28,11 @@ class LocationAddressData {
   }
 
   void changeLocation(BuildContext context) async {
-    if (locationModel==null) {
+    if (locationModel.address.isEmpty) {
       CustomToast.showToastNotification(tr(context,"selectLocationOnMap"));
       return;
     }
-    context.read<LocationCubit>().onLocationUpdated(locationModel!,change: true);
+    context.read<LocationCubit>().onLocationUpdated(locationModel,change: true);
     Navigator.pop(context);
   }
 
