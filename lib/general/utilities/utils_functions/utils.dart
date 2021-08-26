@@ -54,6 +54,7 @@ class Utils {
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         enableColor: enableColor,
+        customFillColor: fillColor,
         padding: padding
       )
     );
