@@ -30,6 +30,18 @@ class GeneralHttpMethods {
     return Utils.manipulateLoginData(context, data, _token ?? "");
   }
 
+
+  Future<List<QuestionModel>> frequentQuestions() async {
+    return await GenericHttp<QuestionModel>(context).callApi(
+        name: ApiNames.repeatedQuestions,
+        returnType: ReturnType.List,
+        showLoader: false,
+        methodType: MethodType.Get,
+        returnDataFun: (data)=> data["data"],
+        toJsonFunc: (json)=> QuestionModel.fromJson(json)
+    ) as List<QuestionModel>;
+  }
+
   Future<bool> sendCode(String code, String userId) async {
     Map<String, dynamic> body = {"code": code, "userId": userId};
     dynamic data = await GenericHttp<dynamic>(context).callApi(
@@ -72,14 +84,6 @@ class GeneralHttpMethods {
     );
   }
 
-  Future<List<QuestionModel>> frequentQuestions() async {
-    return await GenericHttp<QuestionModel>(context).callApi(
-      name: ApiNames.repeatedQuestions,
-      returnType: ReturnType.List,
-      showLoader: false,
-      methodType: MethodType.Get,
-    ) as List<QuestionModel>;
-  }
 
   Future<bool> switchNotify() async {
     dynamic data = await GenericHttp<dynamic>(context).callApi(
