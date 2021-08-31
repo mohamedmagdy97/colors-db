@@ -4,18 +4,10 @@ class LoginData {
   GlobalKey<ScaffoldState> scaffold = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = new GlobalKey<FormState>();
   final GlobalKey<CustomButtonState> btnKey = new GlobalKey<CustomButtonState>();
-  final LocationCubit locationCubit =new LocationCubit();
 
   final TextEditingController password = new TextEditingController();
   final TextEditingController phone = new TextEditingController();
-  final TextEditingController address = new TextEditingController();
 
-  onLocationClick(BuildContext context){
-    Navigator.of(context).push(CupertinoPageRoute(builder: (cxt)=> BlocProvider.value(
-      value: locationCubit,
-      child: LocationAddress(),
-    )));
-  }
 
   void userLogin(BuildContext context) async {
     FocusScope.of(context).requestFocus(FocusNode());

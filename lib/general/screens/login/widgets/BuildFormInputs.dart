@@ -30,24 +30,6 @@ class BuildFormInputs extends StatelessWidget {
             action: TextInputAction.done,
             onSubmit: () => loginData.userLogin(context),
           ),
-          BlocConsumer<LocationCubit, LocationState>(
-            bloc: loginData.locationCubit,
-            listener: (context, state) {
-              loginData.address.text=state.model?.address??"";
-            },
-            builder: (context, state) {
-              return GenericTextField(
-                fieldTypes: FieldTypes.clickable,
-                label: "location",
-                controller: loginData.address,
-                validate: (value) => value!.validateEmpty(context),
-                type: TextInputType.text,
-                action: TextInputAction.done,
-                onTab: () => loginData.onLocationClick(context),
-                // onSubmit: () => loginData.userLogin(context),
-              );
-            },
-          ),
         ],
       ),
     );
