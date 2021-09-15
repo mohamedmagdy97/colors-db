@@ -11,6 +11,8 @@ class LoginData {
 
   void userLogin(BuildContext context) async {
     FocusScope.of(context).requestFocus(FocusNode());
+    Navigator.of(context).push(CupertinoPageRoute(builder: (cxt)=> HomeScreen()));
+    return;
     if (formKey.currentState!.validate()) {
       btnKey.currentState!.animateForward();
       String phoneEn = Utils.convertDigitsToLatin(phone.text);
