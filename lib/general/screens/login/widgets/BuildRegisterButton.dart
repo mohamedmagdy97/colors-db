@@ -5,7 +5,7 @@ class BuildRegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultButton(
       title:tr(context,"register"),
-      onTap: () {},
+      onTap: () => AutoRouter.of(context).push(ContactUsRoute()),
       color: MyColors.white,
       borderColor: MyColors.primary,
       textColor: MyColors.primary,

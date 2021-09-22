@@ -15,7 +15,6 @@ class LocationAddressData {
   }
 
 
-
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
     ui.Codec codec = await ui.instantiateImageCodec(
@@ -32,7 +31,7 @@ class LocationAddressData {
       CustomToast.showToastNotification(tr(context,"selectLocationOnMap"));
       return;
     }
-    context.read<LocationCubit>().onLocationUpdated(locationModel,change: true);
+    context.read<LocationCubit>().onLocationUpdated(locationModel);
     Navigator.pop(context);
   }
 

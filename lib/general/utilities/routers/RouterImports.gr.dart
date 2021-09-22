@@ -35,81 +35,71 @@ class AppRouter extends _i1.RootStackRouter {
 
   @override
   final Map<String, _i1.PageFactory> pagesMap = {
-    SplashRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (data) {
-          final args = data.argsAs<SplashRouteArgs>();
-          return _i3.Splash(navigatorKey: args.navigatorKey);
-        }),
-    LoginRoute.name: (routeData) => _i1.CustomPage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return _i4.Login();
-        },
-        opaque: true,
-        barrierDismissible: false),
-    ForgetPasswordRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return _i5.ForgetPassword();
-        }),
-    ActiveAccountRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (data) {
-          final args = data.argsAs<ActiveAccountRouteArgs>();
-          return _i6.ActiveAccount(userId: args.userId);
-        }),
-    ResetPasswordRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (data) {
-          final args = data.argsAs<ResetPasswordRouteArgs>();
-          return _i7.ResetPassword(userId: args.userId);
-        }),
-    SelectLangRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return _i8.SelectLang();
-        }),
-    TermsRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return _i9.Terms();
-        }),
-    AboutRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return _i10.About();
-        }),
-    ContactUsRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return _i11.ContactUs();
-        }),
-    SelectUserRoute.name: (routeData) => _i1.CustomPage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return _i12.SelectUser();
-        },
-        transitionsBuilder: _i1.TransitionsBuilders.fadeIn,
-        durationInMilliseconds: 1500,
-        opaque: true,
-        barrierDismissible: false),
-    ConfirmPasswordRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return _i13.ConfirmPassword();
-        }),
-    ChangePasswordRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (_) {
-          return _i14.ChangePassword();
-        }),
-    ImageZoomRoute.name: (routeData) => _i1.AdaptivePage<dynamic>(
-        routeData: routeData,
-        builder: (data) {
-          final args = data.argsAs<ImageZoomRouteArgs>();
-          return _i15.ImageZoom(images: args.images);
-        })
+    SplashRoute.name: (routeData) {
+      final args = routeData.argsAs<SplashRouteArgs>();
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData,
+          child: _i3.Splash(navigatorKey: args.navigatorKey));
+    },
+    LoginRoute.name: (routeData) {
+      return _i1.CustomPage<dynamic>(
+          routeData: routeData,
+          child: _i4.Login(),
+          opaque: true,
+          barrierDismissible: false);
+    },
+    ForgetPasswordRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i5.ForgetPassword());
+    },
+    ActiveAccountRoute.name: (routeData) {
+      final args = routeData.argsAs<ActiveAccountRouteArgs>();
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i6.ActiveAccount(userId: args.userId));
+    },
+    ResetPasswordRoute.name: (routeData) {
+      final args = routeData.argsAs<ResetPasswordRouteArgs>();
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i7.ResetPassword(userId: args.userId));
+    },
+    SelectLangRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i8.SelectLang());
+    },
+    TermsRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i9.Terms());
+    },
+    AboutRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i10.About());
+    },
+    ContactUsRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i11.ContactUs());
+    },
+    SelectUserRoute.name: (routeData) {
+      return _i1.CustomPage<dynamic>(
+          routeData: routeData,
+          child: _i12.SelectUser(),
+          transitionsBuilder: _i1.TransitionsBuilders.fadeIn,
+          durationInMilliseconds: 1500,
+          opaque: true,
+          barrierDismissible: false);
+    },
+    ConfirmPasswordRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i13.ConfirmPassword());
+    },
+    ChangePasswordRoute.name: (routeData) {
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i14.ChangePassword());
+    },
+    ImageZoomRoute.name: (routeData) {
+      final args = routeData.argsAs<ImageZoomRouteArgs>();
+      return _i1.AdaptivePage<dynamic>(
+          routeData: routeData, child: _i15.ImageZoom(images: args.images));
+    }
   };
 
   @override
@@ -144,13 +134,13 @@ class SplashRouteArgs {
   final _i16.GlobalKey<_i16.NavigatorState> navigatorKey;
 }
 
-class LoginRoute extends _i1.PageRouteInfo {
+class LoginRoute extends _i1.PageRouteInfo<void> {
   const LoginRoute() : super(name, path: '/Login');
 
   static const String name = 'LoginRoute';
 }
 
-class ForgetPasswordRoute extends _i1.PageRouteInfo {
+class ForgetPasswordRoute extends _i1.PageRouteInfo<void> {
   const ForgetPasswordRoute() : super(name, path: '/forget-password');
 
   static const String name = 'ForgetPasswordRoute';
@@ -186,43 +176,43 @@ class ResetPasswordRouteArgs {
   final String userId;
 }
 
-class SelectLangRoute extends _i1.PageRouteInfo {
+class SelectLangRoute extends _i1.PageRouteInfo<void> {
   const SelectLangRoute() : super(name, path: '/select-lang');
 
   static const String name = 'SelectLangRoute';
 }
 
-class TermsRoute extends _i1.PageRouteInfo {
+class TermsRoute extends _i1.PageRouteInfo<void> {
   const TermsRoute() : super(name, path: '/Terms');
 
   static const String name = 'TermsRoute';
 }
 
-class AboutRoute extends _i1.PageRouteInfo {
+class AboutRoute extends _i1.PageRouteInfo<void> {
   const AboutRoute() : super(name, path: '/About');
 
   static const String name = 'AboutRoute';
 }
 
-class ContactUsRoute extends _i1.PageRouteInfo {
+class ContactUsRoute extends _i1.PageRouteInfo<void> {
   const ContactUsRoute() : super(name, path: '/contact-us');
 
   static const String name = 'ContactUsRoute';
 }
 
-class SelectUserRoute extends _i1.PageRouteInfo {
+class SelectUserRoute extends _i1.PageRouteInfo<void> {
   const SelectUserRoute() : super(name, path: '/select-user');
 
   static const String name = 'SelectUserRoute';
 }
 
-class ConfirmPasswordRoute extends _i1.PageRouteInfo {
+class ConfirmPasswordRoute extends _i1.PageRouteInfo<void> {
   const ConfirmPasswordRoute() : super(name, path: '/confirm-password');
 
   static const String name = 'ConfirmPasswordRoute';
 }
 
-class ChangePasswordRoute extends _i1.PageRouteInfo {
+class ChangePasswordRoute extends _i1.PageRouteInfo<void> {
   const ChangePasswordRoute() : super(name, path: '/change-password');
 
   static const String name = 'ChangePasswordRoute';

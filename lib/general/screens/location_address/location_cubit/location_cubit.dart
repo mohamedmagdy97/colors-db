@@ -7,8 +7,8 @@ part 'location_state.dart';
 class LocationCubit extends Cubit<LocationState> {
   LocationCubit() : super(LocationInitial());
 
-  onLocationUpdated(LocationModel model,{bool? change}){
-    emit(LocationUpdated(model, change));
+  onLocationUpdated(LocationModel model){
+    emit(LocationUpdated(model, state.changed));
   }
 
 }

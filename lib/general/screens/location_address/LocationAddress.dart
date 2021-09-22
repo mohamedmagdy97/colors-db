@@ -12,8 +12,8 @@ class _LocationAddress extends State<LocationAddress> {
   @override
   void initState() {
     var loc = context.read<LocationCubit>().state.model;
-    double lat = loc?.lat??0;
-    double lng = loc?.lng??0;
+    double lat = loc?.lat??	24.774265;
+    double lng = loc?.lng??	46.738586;
     locationAddressData.locationModel=LocationModel(lat: lat, lng: lng);
     locationAddressData.getLocationAddress(context);
     super.initState();

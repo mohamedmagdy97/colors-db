@@ -1,28 +1,27 @@
 part of 'UtilsImports.dart';
 
 class Utils {
+  static Location location = new Location();
 
-
-  static Future<void> manipulateSplashData( BuildContext context) async {
+  static Future<void> manipulateSplashData(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     initDio(lang: "ar");
     initCustomWidgets(language: "ar");
     // await GeneralRepository(context).getHomeConstData();
-
+    await location.requestPermission();
     var strUser = prefs.get("user");
     if (strUser != null) {
       UserModel data = UserModel.fromJson(json.decode("$strUser"));
       GlobalState.instance.set("token", data.token);
-      changeLanguage(data.lang,context);
-      setCurrentUserData(data,context);
+      changeLanguage(data.lang, context);
+      setCurrentUserData(data, context);
     } else {
-      changeLanguage("ar",context);
+      changeLanguage("ar", context);
       AutoRouter.of(context).push(SelectUserRoute());
     }
-
   }
 
-  static initDio({required String lang}){
+  static initDio({required String lang}) {
     DioUtils.init(
       baseUrl: ApiNames.baseUrl,
       style: CustomInputTextStyle(lang: lang),
@@ -34,34 +33,33 @@ class Utils {
     );
   }
 
-  static initCustomWidgets({required String language}){
+  static initCustomWidgets({required String language}) {
     WidgetUtils.init(
-      style: CustomInputTextStyle(lang: language),
-      primary: MyColors.primary,
-      language: language,
-      inputStyle: ({
-        String? label,
-        String? hint,
-        Widget? prefixIcon,
-        Widget? suffixIcon,
-        Color? hintColor,
-        Color? fillColor,
-        EdgeInsets? padding,
-        Color? enableColor})=>CustomInputDecoration(
-        lang:language,
-        label: label,
-        hint: hint,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        enableColor: enableColor,
-        customFillColor: fillColor,
-        padding: padding
-      )
-    );
+        style: CustomInputTextStyle(lang: language),
+        primary: MyColors.primary,
+        language: language,
+        inputStyle: (
+                {String? label,
+                String? hint,
+                Widget? prefixIcon,
+                Widget? suffixIcon,
+                Color? hintColor,
+                Color? fillColor,
+                EdgeInsets? padding,
+                Color? enableColor}) =>
+            CustomInputDecoration(
+                lang: language,
+                labelTxt: label,
+                hint: hint,
+                prefixIcon: prefixIcon,
+                suffixIcon: suffixIcon,
+                enableColor: enableColor,
+                customFillColor: fillColor,
+                padding: padding));
   }
 
-
-  static Future<bool> manipulateLoginData(BuildContext context,dynamic data,String token)async{
+  static Future<bool> manipulateLoginData(
+      BuildContext context, dynamic data, String token) async {
     if (data != null) {
       int status = data["status"];
       if (status == 1) {
@@ -75,49 +73,50 @@ class Utils {
         await Utils.saveUserData(user);
         Utils.setCurrentUserData(user, context);
       } else if (status == 2) {
-        AutoRouter.of(context).push(ActiveAccountRoute(userId: data["data"]["id"]));
+        AutoRouter.of(context)
+            .push(ActiveAccountRoute(userId: data["data"]["id"]));
       }
       return true;
     }
     return false;
   }
 
-  static void  setCurrentUserData(UserModel model,BuildContext context)async{
+  static void setCurrentUserData(UserModel model, BuildContext context) async {
     // context.read<UserCubit>().onUpdateUserData(model);
     // ExtendedNavigator.of(context).push(Routes.home,arguments: HomeArguments(parentCount: parentCount));
   }
 
-  static Future<void> saveUserData(UserModel model)async{
+  static Future<void> saveUserData(UserModel model) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("user", json.encode(model.toJson()));
   }
 
-  static void changeLanguage(String lang,BuildContext context){
-    DioUtils.lang=lang;
-    WidgetUtils.lang=lang;
+  static void changeLanguage(String lang, BuildContext context) {
+    DioUtils.lang = lang;
+    WidgetUtils.lang = lang;
     context.read<LangCubit>().onUpdateLanguage(lang);
   }
 
-  static UserModel getSavedUser({required BuildContext context}){
+  static UserModel getSavedUser({required BuildContext context}) {
     return context.read<UserCubit>().state.model;
   }
 
-  static Future<String?> getDeviceId()async{
+  static Future<String?> getDeviceId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString("deviceId");
   }
 
-  static Future<void> setDeviceId(String token)async{
+  static Future<void> setDeviceId(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("deviceId",token);
+    prefs.setString("deviceId", token);
   }
 
-  static void clearSavedData()async{
+  static void clearSavedData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();
   }
 
-  static String getCurrentUserId({required BuildContext context}){
+  static String getCurrentUserId({required BuildContext context}) {
     var provider = context.watch<UserCubit>().state.model;
     return provider.id;
   }
@@ -177,7 +176,7 @@ class Utils {
 
   static void shareApp(url) {
     LoadingDialog.showLoadingDialog();
-    Share.share(url).whenComplete((){
+    Share.share(url).whenComplete(() {
       EasyLoading.dismiss();
     });
   }
@@ -185,17 +184,17 @@ class Utils {
   static Future<File?> getImage() async {
     final ImagePicker _picker = ImagePicker();
     XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image!=null) {
+    if (image != null) {
       File imageFile = File(image.path);
       return imageFile;
     }
     return null;
   }
 
-  static Future<List<File>> getImages()async{
+  static Future<List<File>> getImages() async {
     final ImagePicker _picker = ImagePicker();
     final List<XFile>? result = await _picker.pickMultiImage();
-    if(result != null) {
+    if (result != null) {
       List<File> files = result.map((e) => File(e.path)).toList();
       return files;
     } else {
@@ -206,56 +205,56 @@ class Utils {
   static Future<File?> getVideo() async {
     final ImagePicker _picker = ImagePicker();
     final XFile? video = await _picker.pickVideo(source: ImageSource.gallery);
-    if (video!=null) {
+    if (video != null) {
       File imageFile = File(video.path);
       return imageFile;
     }
     return null;
   }
 
-  static void copToClipboard({required String text,required GlobalKey<ScaffoldState> scaffold}){
-    if(text.trim().isEmpty){
+  static void copToClipboard(
+      {required String text, required GlobalKey<ScaffoldState> scaffold}) {
+    if (text.trim().isEmpty) {
       CustomToast.showToastNotification("لا يوجد بيانات للنسخ");
       return;
-    }else{
+    } else {
       Clipboard.setData(ClipboardData(text: "$text")).then((value) {
         CustomToast.showToastNotification("تم النسخ بنجاح");
       });
     }
   }
 
-  static Future<Position?> getCurrentLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    // Test if location services are enabled.
-    await Geolocator.requestPermission();
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      CustomToast.showSimpleToast(msg: 'Location services are disabled');
-      return null;
-    }
+  static Future<LocationData?> getCurrentLocation(BuildContext context) async {
+    Location location = new Location();
 
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        CustomToast.showSimpleToast(msg: 'Location permissions are denied');
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _loc;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
         return null;
       }
     }
 
-    if (permission == LocationPermission.deniedForever) {
-      CustomToast.showSimpleToast(msg: 'Location permissions are permanently denied, we cannot request permissions');
-      return null;
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return null;
+      }
     }
 
-    return await Geolocator.getCurrentPosition();
+    _loc = await location.getLocation();
+    return _loc;
   }
 
   static void navigateToMapWithDirection(
       {required String lat,
-        required String lng,
-        required BuildContext context}) async {
+      required String lng,
+      required BuildContext context}) async {
     if (lat == "0") return;
     try {
       final coords = Coords(double.parse(lat), double.parse(lng));
@@ -296,25 +295,23 @@ class Utils {
   }
 
   static Future<String> getAddress(LatLng latLng, BuildContext context) async {
-    final coordinates = new Coordinates(latLng.latitude, latLng.longitude);
     try {
-      List<Address>? addresses =
-      await Geocoder.local.findAddressesFromCoordinates(coordinates);
+      final coordinates = new Coordinates(latLng.latitude, latLng.longitude);
+      var addresses =
+          await Geocoder.local.findAddressesFromCoordinates(coordinates);
       var first = addresses.first;
       print("${first.featureName} : ${first.addressLine}");
-      return first.addressLine;
+      return first.addressLine ?? "";
     } catch (e) {
       return "";
     }
   }
 
-
-
   static String convertDigitsToLatin(String s) {
     var sb = new StringBuffer();
     for (int i = 0; i < s.length; i++) {
       switch (s[i]) {
-      //Arabic digits
+        //Arabic digits
         case '\u0660':
           sb.write('0');
           break;
@@ -352,5 +349,4 @@ class Utils {
     }
     return sb.toString();
   }
-
 }
