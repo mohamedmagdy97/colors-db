@@ -370,13 +370,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.3"
-  flutter_geocoder:
-    dependency: "direct main"
-    description:
-      name: flutter_geocoder
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.2-nullsafety"
   flutter_html:
     dependency: "direct main"
     description:
@@ -504,6 +497,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  geocoder:
+    dependency: "direct main"
+    description:
+      name: geocoder
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.1"
   glob:
     dependency: transitive
     description:
@@ -1061,7 +1061,7 @@ packages:
       name: tf_custom_widgets
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.5"
+    version: "1.0.6"
   tf_dio_cache:
     dependency: transitive
     description:
