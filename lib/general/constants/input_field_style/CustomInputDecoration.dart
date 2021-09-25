@@ -68,7 +68,7 @@ class CustomInputDecoration extends InputDecoration {
 
   @override
   // TODO: implement label
-  Widget? get label => Text(labelTxt??"",style: labelStyle,);
+  Widget? get label => labelTxt==null?super.label:Text(labelTxt??"",style: labelStyle,);
 
   @override
   // TODO: implement labelStyle
