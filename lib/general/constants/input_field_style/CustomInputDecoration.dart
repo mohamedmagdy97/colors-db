@@ -1,7 +1,7 @@
 import 'package:base_flutter/general/constants/MyColors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tf_custom_widgets/widgets/MyText.dart';
+
 
 class CustomInputDecoration extends InputDecoration {
   final String lang;

@@ -30,6 +30,7 @@ class Utils {
       language: lang,
       dismissFunc: EasyLoading.dismiss,
       showLoadingFunc: LoadingDialog.showLoadingDialog,
+      branch: ApiNames.branch,
     );
   }
 

@@ -1,6 +1,7 @@
 class ApiNames{
 
   static const String baseUrl = "https://hiraj.ip4s.com/api/v1/";
+  static const String branch = "1";
 
   static const String aboutApp = "AboutApp";
   static const String terms = "conditions";
