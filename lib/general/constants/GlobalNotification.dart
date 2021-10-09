@@ -70,8 +70,7 @@ class GlobalNotification {
     if (message == null) return;
     var android = AndroidNotificationDetails(
       "${DateTime.now()}",
-      "${message.notification?.title}",
-      "${message.notification?.body}",
+      "DEFAULT",
       priority: Priority.high,
       importance: Importance.max,
       playSound: true,
