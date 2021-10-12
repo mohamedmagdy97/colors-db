@@ -266,7 +266,7 @@ packages:
       name: dio_helper
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.9"
+    version: "1.0.10"
   equatable:
     dependency: transitive
     description:
@@ -511,13 +511,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  geocoder:
+  geocode:
     dependency: "direct main"
     description:
-      name: geocoder
+      name: geocode
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1"
+    version: "1.0.1"
   glob:
     dependency: transitive
     description:
@@ -706,7 +706,7 @@ packages:
       name: material_design_icons_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.5955"
+    version: "5.0.6295"
   meta:
     dependency: transitive
     description:
@@ -1131,7 +1131,7 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.9"
+    version: "6.0.12"
   url_launcher_linux:
     dependency: transitive
     description:

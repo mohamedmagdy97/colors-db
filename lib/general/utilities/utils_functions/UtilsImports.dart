@@ -7,7 +7,7 @@ import 'package:base_flutter/general/constants/input_field_style/CustomInputDeco
 import 'package:base_flutter/general/constants/input_field_style/CustomInputTextStyle.dart';
 import 'package:base_flutter/general/utilities/utils_functions/ApiNames.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:geocoder/geocoder.dart';
+import 'package:geocode/geocode.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:tf_custom_widgets/tf_custom_widgets.dart';

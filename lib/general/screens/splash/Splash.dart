@@ -17,7 +17,9 @@ class _SplashState extends State<Splash> {
   }
 
   _checkingData() async {
-    GlobalNotification.instance.setupNotification(context);
+    if (!kIsWeb) {
+      GlobalNotification.instance.setupNotification(context);
+    }
     Utils.manipulateSplashData(context);
   }
 

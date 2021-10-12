@@ -296,13 +296,13 @@ class Utils {
   }
 
   static Future<String> getAddress(LatLng latLng, BuildContext context) async {
+    GeoCode geoCode = GeoCode();
+
     try {
-      final coordinates = new Coordinates(latLng.latitude, latLng.longitude);
-      var addresses =
-          await Geocoder.local.findAddressesFromCoordinates(coordinates);
-      var first = addresses.first;
-      print("${first.featureName} : ${first.addressLine}");
-      return first.addressLine ?? "";
+      var address = await geoCode.reverseGeocoding(latitude: latLng.latitude, longitude: latLng.longitude);
+      var data = "${address.countryName??""}  ${address.city??""}  ${address.region??""}  ${address.streetAddress??""}";
+      print(data);
+      return data;
     } catch (e) {
       return "";
     }
