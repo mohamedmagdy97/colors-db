@@ -266,7 +266,7 @@ packages:
       name: dio_helper
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.10"
+    version: "1.0.16"
   equatable:
     dependency: transitive
     description:

@@ -31,6 +31,7 @@ class Utils {
       dismissFunc: EasyLoading.dismiss,
       showLoadingFunc: LoadingDialog.showLoadingDialog,
       branch: ApiNames.branch,
+      authClick: () {  },
     );
   }
 
