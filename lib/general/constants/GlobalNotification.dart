@@ -74,7 +74,7 @@ class GlobalNotification {
     String? path;
     BigPictureStyleInformation? bigPictureStyleInformation;
     if (message.notification?.android?.imageUrl!=null) {
-      path = await _downloadAndSaveFile("${message.notification?.android?.imageUrl}");
+      path = await _downloadAndSaveFile("${message.notification?.title}");
       bigPictureStyleInformation = BigPictureStyleInformation(
         FilePathAndroidBitmap(path),
         largeIcon: FilePathAndroidBitmap(path),
