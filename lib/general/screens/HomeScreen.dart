@@ -40,14 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView(
         padding: EdgeInsets.all(15),
         children: [
-          // Center(
-          //   child: Lottie.asset(
-          //     Res.delivery,
-          //     // width: 300,
-          //     // height: 300,
-          //     repeat: true,
-          //   ),
-          // ),
+          Center(
+            child: Lottie.asset(
+              Res.delivery,
+              // width: 300,
+              // height: 300,
+              repeat: true,
+            ),
+          ),
           BlocBuilder<GenericBloc<List<Category>>,
               GenericState<List<Category>>>(
             bloc: subCatsCubit,
