@@ -7,6 +7,7 @@ class Utils {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     initDio(lang: "ar");
     initCustomWidgets(language: "ar");
+    GlobalState.instance.set("token","");
     // await GeneralRepository(context).getHomeConstData();
     await location.requestPermission();
     var strUser = prefs.get("user");
