@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    subCatsCubit.onUpdateData([Category(id: 2, name: 'البنوك والمكاتب')]);
     super.initState();
   }
 

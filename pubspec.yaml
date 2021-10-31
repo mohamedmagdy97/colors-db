@@ -29,7 +29,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
 
   dio_helper: ^1.0.18
-  tf_custom_widgets: ^1.0.23
+  tf_custom_widgets: ^1.0.25
   tf_validator: ^0.0.2
   bloc: ^7.2.1
   flutter_bloc: ^7.3.1

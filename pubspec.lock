@@ -1068,7 +1068,7 @@ packages:
       name: tf_custom_widgets
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.23"
+    version: "1.0.25"
   tf_dio_cache:
     dependency: transitive
     description:
