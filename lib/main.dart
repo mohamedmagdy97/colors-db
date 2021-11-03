@@ -6,6 +6,7 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'general/MyApp.dart';
 
+
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   if (!kIsWeb) {
