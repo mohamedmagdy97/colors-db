@@ -28,11 +28,11 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
 
-  dio_helper: ^1.0.18
+  dio_helper: ^1.1.0
   tf_custom_widgets: ^1.0.25
   tf_validator: ^0.0.2
   bloc: ^7.2.1
-  flutter_bloc: ^7.3.1
+  flutter_bloc: ^7.3.2
   auto_route: ^3.0.4
   flutter_local_notifications: ^9.0.2
   shared_preferences: ^2.0.8
@@ -40,7 +40,6 @@ dependencies:
   url_launcher: ^6.0.12
   firebase_messaging: ^10.0.9
   firebase_core: ^1.8.0
-  page_view_indicator: ^2.0.4
   google_maps_flutter: ^2.1.0
   location: ^4.3.0
   geocode: ^1.0.1
