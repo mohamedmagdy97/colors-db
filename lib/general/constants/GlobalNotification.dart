@@ -21,7 +21,7 @@ class GlobalNotification {
   static FirebaseMessaging messaging = FirebaseMessaging.instance;
   GlobalNotification._();
 
-  GlobalNotification();
+
 
   setupNotification(BuildContext cxt)async{
     context = cxt;
