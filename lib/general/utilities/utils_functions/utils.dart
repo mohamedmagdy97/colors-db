@@ -43,13 +43,15 @@ class Utils {
         language: language,
         inputStyle: (
                 {String? label,
-                String? hint,
-                Widget? prefixIcon,
-                Widget? suffixIcon,
-                Color? hintColor,
-                Color? fillColor,
-                EdgeInsets? padding,
-                Color? enableColor}) =>
+                  String? hint,
+                  Widget? prefixIcon,
+                  Widget? suffixIcon,
+                  Color? hintColor,
+                  Color? fillColor,
+                  BorderRadius? radius,
+                  Color? focusBorderColor,
+                  EdgeInsets? padding,
+                  Color? enableColor}) =>
             CustomInputDecoration(
                 lang: language,
                 labelTxt: label,
