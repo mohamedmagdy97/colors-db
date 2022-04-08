@@ -39,7 +39,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "sa.aait.aspbranch.nullbaseF"
+        applicationId "com.meg.qTask"
         minSdkVersion 20
         targetSdkVersion 31
         multiDexEnabled true

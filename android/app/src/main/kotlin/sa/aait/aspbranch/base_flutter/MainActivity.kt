@@ -1,4 +1,4 @@
-package sa.aait.aspbranch.nullbaseF
+package com.meg.qTask
 
 import io.flutter.embedding.android.FlutterActivity
 

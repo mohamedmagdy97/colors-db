@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sa.aait.aspbranch.nullbaseF">
+    package="com.meg.qTask">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -19,7 +19,7 @@
 
     <application
         android:icon="@mipmap/launcher_icon"
-        android:label="base_flutter">
+        android:label="Q-Task">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDV1H2CcIYVHXtndUp8w_tu79A5OgLoAFU" />

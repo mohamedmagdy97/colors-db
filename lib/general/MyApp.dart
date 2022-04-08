@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
           return MaterialApp.router(
               debugShowCheckedModeBanner: false,
               theme: MainData.defaultThem,
-              title: "Base Flutter",
+              title: "Q-Task",
               supportedLocales: [
                 Locale('en', 'US'),
                 Locale('ar', 'EG')
