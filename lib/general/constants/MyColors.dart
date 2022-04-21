@@ -2,8 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class MyColors{
-  static Color primary =  Color(0xfff9646b);
-  static Color secondary =  Color(0xff2A4571);
+  static Color primary =  Color(0xff4F0091);
+  static Color secondary =  Color(0xffE8EAEF);
   static Color headerColor =  Color(0xff6e7c87);
   static Color bg=Color(0xfffffafa);
   static Color offWhite=Color(0xffF2F2F2);

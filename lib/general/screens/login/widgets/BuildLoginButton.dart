@@ -9,11 +9,11 @@ class BuildLoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoadingButton(
       btnKey: loginData.btnKey,
-      title: tr(context,"continue"),
+      title: 'دخول',
       onTap: () => loginData.userLogin(context),
       color: MyColors.primary,
       textColor: MyColors.white,
-      margin: const EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 50),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:tf_custom_widgets/tf_custom_widgets.dart';
 import 'package:tf_custom_widgets/utils/CustomButtonAnimation.dart';
 import 'package:base_flutter/general/resources/GeneralRepoImports.dart';
 import 'package:base_flutter/general/utilities/utils_functions/UtilsImports.dart';

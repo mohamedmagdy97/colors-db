@@ -9,7 +9,11 @@ class GeneralRepository {
     _generalHttpMethods = new GeneralHttpMethods(_context);
   }
 
-  Future<bool> setUserLogin(String phone, String pass)=> _generalHttpMethods.userLogin(phone, pass);
+  // Future<bool> setUserLogin(String email, String pass)=> _generalHttpMethods.userLogin(email, pass);
+  Future<bool> login(String email, String pass)=> _generalHttpMethods.login(email, pass);
+  Future<bool> register(RegisterModel model)=> _generalHttpMethods.register(model);
+  Future<HomeDetailsModel?> home(HomeModel model)=> _generalHttpMethods.home(model);
+/*
 
   Future<bool> sendCode(String code, String userId) =>
       _generalHttpMethods.sendCode(code, userId);
@@ -34,5 +38,6 @@ class GeneralRepository {
 
   Future<bool> sendMessage({ String? name, String? mail, String? message}) =>
       _generalHttpMethods.sendMessage(name, mail, message);
+*/
 
 }

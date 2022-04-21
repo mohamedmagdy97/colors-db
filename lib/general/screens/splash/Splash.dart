@@ -20,30 +20,41 @@ class _SplashState extends State<Splash> {
     if (!kIsWeb) {
       GlobalNotification.instance.setupNotification(context);
     }
-    Utils.manipulateSplashData(context);
+    Future.delayed(
+        Duration(seconds: 3), () => Utils.manipulateSplashData(context));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.bottomCenter,
-        color: MyColors.white,
-        child: Center(
-          child: AnimationContainer(
-              index: 0,
-              vertical: true,
-              duration: Duration(milliseconds: 1500),
-              distance: MediaQuery.of(context).size.height * .3,
-              child: Hero(
-                tag: Res.logo,
-                child: Image.asset(
-                  Res.logo,
-                  width: 200,
-                  height: 150,
-                ),
-              )),
-        ),
+      body: Stack(
+        children: [
+          Image.asset(
+            Res.bg,
+            fit: BoxFit.cover,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+          ),
+          Container(
+            alignment: Alignment.bottomCenter,
+            // color: MyColors.white,
+            child: Center(
+              child: AnimationContainer(
+                  index: 0,
+                  vertical: true,
+                  duration: Duration(milliseconds: 1500),
+                  distance: MediaQuery.of(context).size.height * .3,
+                  child: Hero(
+                    tag: Res.logo,
+                    child: Image.asset(
+                      Res.logo,
+                      width: 125,
+                      height: 125,
+                    ),
+                  )),
+            ),
+          ),
+        ],
       ),
     );
   }
