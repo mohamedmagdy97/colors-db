@@ -20,9 +20,7 @@ class _LoginState extends State<Login> {
           ),
           children: [
             HeaderLogo(),
-            // BuildText(),
             BuildFormInputs(loginData: loginData),
-            // BuildForgetText(),
             BuildLoginButton(loginData: loginData),
             BuildNewRegister(),
             BuildRegisterButton(),

@@ -17,11 +17,8 @@ class _SplashState extends State<Splash> {
   }
 
   _checkingData() async {
-    if (!kIsWeb) {
-      GlobalNotification.instance.setupNotification(context);
-    }
     Future.delayed(
-        Duration(seconds: 3), () => Utils.manipulateSplashData(context));
+        const Duration(seconds: 3), () => Utils.manipulateSplashData(context));
   }
 
   @override
@@ -37,20 +34,15 @@ class _SplashState extends State<Splash> {
           ),
           Container(
             alignment: Alignment.bottomCenter,
-            // color: MyColors.white,
             child: Center(
               child: AnimationContainer(
                   index: 0,
                   vertical: true,
-                  duration: Duration(milliseconds: 1500),
+                  duration: const Duration(milliseconds: 1500),
                   distance: MediaQuery.of(context).size.height * .3,
                   child: Hero(
                     tag: Res.logo,
-                    child: Image.asset(
-                      Res.logo,
-                      width: 125,
-                      height: 125,
-                    ),
+                    child: Image.asset(Res.logo, width: 125, height: 125),
                   )),
             ),
           ),

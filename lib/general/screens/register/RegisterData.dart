@@ -13,33 +13,23 @@ class RegisterData {
   final TextEditingController mail = new TextEditingController();
   final TextEditingController name = new TextEditingController();
 
-  String groupValue = '';
-
   void userLogin(BuildContext context) async {
     FocusScope.of(context).requestFocus(FocusNode());
     if (formKey.currentState!.validate()) {
-      // btnKey.currentState!.animateForward();
       RegisterModel model = RegisterModel(
         email: mail.text,
         phone: phone.text,
         userName: name.text,
         password: password.text,
-        // roles:
-        roles: ["user"],
+        // roles: ["user"],
+        roles: [typeBloc.state.data],
       );
-      print(model.toJson());
 
-      // String phoneEn = Utils.convertDigitsToLatin(phone.text);
-      // String passEn = Utils.convertDigitsToLatin(password.text);
       var res=await GeneralRepository(context).register(model);
-      print('>>>>>>>>>>$res');
       if(res){
         CustomToast.showSimpleToast(msg: 'User has been Registered');
         AutoRouter.of(context).popAndPush(LoginRoute());
-        print('>>>>>>>>>>LOOOOOL<<<<<<<');
       }
-
-      // btnKey.currentState!.animateReverse();
     }
   }
 }

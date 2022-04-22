@@ -11,18 +11,14 @@ class BuildExpandedField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpandableNotifier(
-      // <-- Provides ExpandableController to its children
       child: Column(
         children: [
           Expandable(
-            // <-- Driven by ExpandableController from ExpandableNotifier
             collapsed: ExpandableButton(
-              // <-- Expands when tapped on the cover photo
               child: BuildCardItem(model: model),
             ),
             expanded: Column(children: [
               ExpandableButton(
-                // <-- Collapses when tapped on
                 child: Card(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

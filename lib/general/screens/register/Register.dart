@@ -12,20 +12,17 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return AuthScaffold(
       child: GestureDetector(
-        onTap: ()=> FocusScope.of(context).requestFocus(FocusNode()),
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          physics: BouncingScrollPhysics(
+          physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),
           ),
           children: [
             HeaderLogo(),
-            // BuildText(),
             BuildFormInputs(registerData: registerData),
-            // BuildForgetText(),
             BuildRegisterButton(registerData: registerData),
-            // BuildNewRegister(),
-           ],
+          ],
         ),
       ),
     );

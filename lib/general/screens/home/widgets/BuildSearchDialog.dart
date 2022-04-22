@@ -1,85 +1,83 @@
 part of 'HomeWidgetsImports.dart';
 
-class BuildSearchDialog extends ModalRoute<void> {
-  @override
-  Duration get transitionDuration => Duration(milliseconds: 500);
+
+class BuildFilterDialog extends StatelessWidget {
+  const BuildFilterDialog({
+    Key? key,
+    required this.homeData,
+  }) : super(key: key);
+
+  final HomeData homeData;
 
   @override
-  bool get opaque => false;
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          MyText(title: 'من تاريخ', color: MyColors.primary, size: 14),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 22),
+            child: BlocBuilder<GenericBloc, GenericState>(
+              bloc: homeData.startDateCubit,
+              builder: (context, state) {
+                return DatePickerWidget(
+                  looping: false,
+                  firstDate: DateTime(2019, 01, 01),
+                  initialDate: DateTime(2020, 01, 01),
+                  dateFormat: "dd/MMMM/yyyy",
+                  onChange: (DateTime newDate, _) {
+                    homeData.startDateCubit.onUpdateData(newDate.toString());
 
-  @override
-  bool get barrierDismissible => false;
-
-  @override
-  Color get barrierColor => Colors.black.withOpacity(0.5);
-
-  @override
-  String? get barrierLabel => null;
-
-  @override
-  bool get maintainState => true;
-
-  @override
-  Widget buildPage(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-  ) {
-    // This makes sure that text and other content follows the material style
-    return Material(
-      type: MaterialType.transparency,
-      // make sure that the overlay content is not cut off
-      child: SafeArea(
-        child: _buildOverlayContent(context),
-      ),
-    );
-  }
-
-  Widget _buildOverlayContent(BuildContext context) {
-    DateTime selectedDate = DateTime.now();
-
-    Future<void> _selectDate(BuildContext context) async {
-      final DateTime? picked = await showDatePicker(
-          context: context,
-          initialDate: selectedDate,
-          firstDate: DateTime(2015, 8),
-          lastDate: DateTime(2101));
-      if (picked != null && picked != selectedDate) {
-        setState(() {
-          selectedDate = picked;
-        });
-      }
-    }
-
-    return Center(
-      child: Container(
-        decoration: BoxDecoration(
-            color: MyColors.white, borderRadius: BorderRadius.circular(8)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            MyText(title: 'من تاريخ', color: MyColors.primary, size: 12),
-
-            MyText(title: 'من تاريخ', color: MyColors.primary, size: 12),
-            RaisedButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('Dismiss'),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
-    // You can add your own animations for the overlay content
-    return FadeTransition(
-      opacity: animation,
-      child: ScaleTransition(
-        scale: animation,
-        child: child,
+                    print('===============${state.data}');
+                  },
+                  pickerTheme: DateTimePickerTheme(
+                    itemTextStyle: TextStyle(color: Colors.black, fontSize: 19),
+                    dividerColor: Colors.blue,
+                  ),
+                );
+              },
+            ),
+          ),
+          MyText(title: 'إلى تاريخ', color: MyColors.primary, size: 14),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 22),
+            child: BlocBuilder<GenericBloc, GenericState>(
+              bloc: homeData.endDateCubit,
+              builder: (context, state) {
+                return DatePickerWidget(
+                  looping: false,
+                  firstDate: DateTime(2020, 01, 01),
+                  initialDate: DateTime(2022, 05, 01),
+                  dateFormat: "dd/MMMM/yyyy",
+                  onChange: (DateTime newDate, _) {
+                    homeData.endDateCubit.onUpdateData(newDate.toString());
+                  },
+                  pickerTheme: DateTimePickerTheme(
+                    itemTextStyle: TextStyle(color: Colors.black, fontSize: 19),
+                    dividerColor: Colors.blue,
+                  ),
+                );
+              },
+            ),
+          ),
+          Row(
+            children: [
+              DefaultButton(
+                title: 'تحديد',
+                width: MediaQuery.of(context).size.width * 0.3,
+                onTap: () =>
+                    AutoRouter.of(context).pop({'start': '11', 'end': '22'}),
+              ),
+              DefaultButton(
+                title: 'إلغاء',
+                width: MediaQuery.of(context).size.width * 0.25,
+                onTap: () => Navigator.pop(context),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

@@ -34,31 +34,15 @@ dependencies:
   bloc: ^8.0.2
   flutter_bloc: ^8.0.1
   auto_route: ^3.2.3+1
-  flutter_local_notifications: ^9.3.2
   shared_preferences: ^2.0.13
   flutter_launcher_icons: ^0.9.2
-  url_launcher: ^6.0.20
-  firebase_messaging: ^11.2.6
-  firebase_core: ^1.12.0
-  google_maps_flutter: ^2.1.1
-  location: ^4.3.0
-  geocode: ^1.0.1
-  photo_view: ^0.13.0
   intl: ^0.17.0
   flutter_easyloading: ^3.0.3
   flutter_phoenix: ^1.0.0
-  flutter_swiper: ^1.1.6
-  share: ^2.0.4
   flutter_rounded_date_picker: ^2.0.2
   material_design_icons_flutter: ^5.0.6595
-  map_launcher: ^2.2.1+1
-  flutter_html: ^2.2.1
-  pin_code_fields: ^7.3.0
-  image_picker: ^0.8.4+9
-  flutter_svg: ^0.23.0+1
   json_serializable: ^6.1.4
   json_annotation: ^4.4.0
-  platform: ^3.1.0
   expandable: ^5.0.1
   infinite_scroll_pagination: ^3.1.0
   flutter_holo_date_picker: ^1.0.3
@@ -95,19 +79,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/anim/api_empty.json
-    - assets/anim/api_error.json
-    - assets/anim/delivery.json
-    - assets/anim/empty_cart.json
-    - assets/anim/success.json
     - assets/images/bg.png
     - assets/images/filter.png
-    - assets/images/following.png
-    - assets/images/hands.png
     - assets/images/icon.png
     - assets/images/logo.png
     - assets/images/logoWhite.png
-    - assets/images/marker.png
     - assets/images/nodata.png
     - assets/images/placeholder.png
     - assets/images/plus.png
