@@ -11,6 +11,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:tf_custom_widgets/tf_custom_widgets.dart';
 import 'package:base_flutter/general/utilities/utils_functions/LoadingDialog.dart';
 import 'package:base_flutter/general/widgets/NotData.dart';
+import 'package:base_flutter/general/models/UserModel.dart';
 
 part 'BuildCardItem.dart';
 part 'BuildExpandedField.dart';
@@ -18,3 +19,5 @@ part 'BuildSearchDialog.dart';
 part 'BuildHomeView.dart';
 part 'BuildTotalAndFilter.dart';
 part 'BuildPayments.dart';
+part 'BuildRowText.dart';
+part 'BuildProfileDialog.dart';

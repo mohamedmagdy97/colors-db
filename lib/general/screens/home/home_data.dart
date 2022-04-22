@@ -4,6 +4,7 @@ class HomeData {
   final GenericBloc<List<ItemModel>> homeBloc = GenericBloc([]);
   final GenericBloc<String> startDateCubit = GenericBloc('2020-01-01');
   final GenericBloc<String> endDateCubit = GenericBloc('2022-05-01');
+  final GenericBloc<String> amountCubit = GenericBloc('0');
 
   PagingController<int, ItemModel> pagingController =
       PagingController(firstPageKey: 1);
@@ -17,7 +18,9 @@ class HomeData {
         // userId: context.read<UserCubit>().state.model.id,
         userId: '',
         filter: {'PageNumber': pageKey, 'PageSize': pageSize});
+
     var data = await GeneralRepository(context).home(model);
+
     homeBloc.onUpdateData(data!.data);
 
     if (data != null) {
@@ -34,6 +37,13 @@ class HomeData {
         pagingController.appendPage(adds, nextPageKey);
       }
     }
+
+    if (homeBloc.state.data.length > 0) {
+      amountCubit.onUpdateData(
+          data.data.map((e) => e.amount).reduce((a, b) => a + b).toString());
+    } else {
+      amountCubit.onUpdateData('0');
+    }
   }
 
   void logout(BuildContext context) {
@@ -46,5 +56,11 @@ class HomeData {
         AutoRouter.of(context).replaceAll([LoginRoute()]);
       },
     );
+  }
+
+  void profile(BuildContext context) {
+    var user = context.read<UserCubit>().state.model;
+    showDialog(
+        context: context, builder: (_) => BuildProfileDialog(user: user));
   }
 }

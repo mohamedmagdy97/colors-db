@@ -14,9 +14,7 @@ class BuildExpandedField extends StatelessWidget {
       child: Column(
         children: [
           Expandable(
-            collapsed: ExpandableButton(
-              child: BuildCardItem(model: model),
-            ),
+            collapsed: ExpandableButton(child: BuildCardItem(model: model)),
             expanded: Column(children: [
               ExpandableButton(
                 child: Card(
@@ -55,49 +53,12 @@ class BuildExpandedField extends StatelessWidget {
                             )
                           ],
                         ),
-                        Divider(),
-                        Row(
-                          children: [
-                            MyText(
-                              title: 'رقم التحويل : ',
-                              color: MyColors.blackOpacity,
-                              size: 13,
-                            ),
-                            MyText(
-                              title: model.trxRef,
-                              color: MyColors.black,
-                              size: 13,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            MyText(
-                              title: 'تاريخ التحويل : ',
-                              color: MyColors.blackOpacity,
-                              size: 13,
-                            ),
-                            MyText(
-                              title: model.trxDate,
-                              color: MyColors.black,
-                              size: 13,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            MyText(
-                              title: 'اسم المنشأه : ',
-                              color: MyColors.blackOpacity,
-                              size: 13,
-                            ),
-                            MyText(
-                              title: model.fullNameAR,
-                              color: MyColors.primary,
-                              size: 13,
-                            ),
-                          ],
-                        ),
+                        const Divider(),
+                        BuildRowText(title: 'رقم التحويل', value: model.trxRef),
+                        BuildRowText(
+                            title: 'تاريخ التحويل', value: model.trxDate),
+                        BuildRowText(
+                            title: 'اسم المنشأه', value: model.fullNameAR),
                       ],
                     ),
                   ),

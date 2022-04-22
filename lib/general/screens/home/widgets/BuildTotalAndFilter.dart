@@ -1,13 +1,9 @@
 part of 'HomeWidgetsImports.dart';
 
 class BuildTotalAndFilter extends StatelessWidget {
-  const BuildTotalAndFilter({
-    Key? key,
-    required this.amount,
-    required this.homeData,
-  }) : super(key: key);
+  const BuildTotalAndFilter({Key? key, required this.homeData})
+      : super(key: key);
 
-  final String amount;
   final HomeData homeData;
 
   @override
@@ -27,9 +23,16 @@ class BuildTotalAndFilter extends StatelessWidget {
             children: [
               MyText(
                   title: 'إجمالي المدفوعات', color: MyColors.primary, size: 12),
-              FittedBox(
-                child: MyText(
-                    title: '$amount ريال ', color: MyColors.primary, size: 12),
+              BlocBuilder<GenericBloc, GenericState>(
+                bloc: homeData.amountCubit,
+                builder: (context, state) {
+                  return FittedBox(
+                    child: MyText(
+                        title: '${state.data} ريال ',
+                        color: MyColors.primary,
+                        size: 12),
+                  );
+                },
               ),
             ],
           ),
@@ -39,13 +42,8 @@ class BuildTotalAndFilter extends StatelessWidget {
             showDialog(
                     context: context,
                     builder: (_) => BuildFilterDialog(homeData: homeData))
-                .then((value) {
-              homeData.fetchData(context, pageKey: 1);
-
-              homeData.pagingController.addPageRequestListener((pageKey) {
-                homeData.fetchData(context, pageKey: pageKey);
-              });
-            });
+                .then((value) =>
+                    (value) ? homeData.fetchData(context, pageKey: 1) : null);
           },
           child: Container(
             width: MediaQuery.of(context).size.width * 0.13,

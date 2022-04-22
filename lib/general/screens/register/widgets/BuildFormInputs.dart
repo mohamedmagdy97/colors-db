@@ -102,9 +102,8 @@ class BuildFormInputs extends StatelessWidget {
                 type: TextInputType.text,
                 margin: const EdgeInsets.symmetric(vertical: 4),
                 suffixIcon: IconButton(
-                    onPressed: () {
-                      registerData.seenBloc.onUpdateData(!state.data);
-                    },
+                    onPressed: () =>
+                        registerData.seenBloc.onUpdateData(!state.data),
                     icon: Icon(state.data
                         ? Icons.visibility_off
                         : Icons.remove_red_eye)),

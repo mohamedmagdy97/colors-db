@@ -25,7 +25,14 @@ class _HomeState extends State<Home> {
       extendBodyBehindAppBar: true,
       appBar: DefaultAppBar(
         title: 'مدفوعات هلا',
-        leading: IconButton(onPressed: ()=>homeData.logout(context), icon: Icon(Icons.logout)),
+        actions: [
+          IconButton(
+              onPressed: () => homeData.profile(context),
+              icon: Icon(Icons.person))
+        ],
+        leading: IconButton(
+            onPressed: () => homeData.logout(context),
+            icon: Icon(Icons.logout)),
       ),
       body: Stack(
         children: [

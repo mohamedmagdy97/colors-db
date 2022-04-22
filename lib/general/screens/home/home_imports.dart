@@ -1,5 +1,5 @@
-
 import 'package:auto_route/auto_route.dart';
+import 'package:base_flutter/general/blocks/user_cubit/user_cubit.dart';
 import 'package:base_flutter/general/models/HomeModel.dart';
 import 'package:base_flutter/general/models/ItemModel.dart';
 import 'package:base_flutter/general/resources/GeneralRepoImports.dart';
@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:tf_custom_widgets/tf_custom_widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'home.dart';
 part 'home_data.dart';

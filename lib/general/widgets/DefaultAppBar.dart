@@ -17,7 +17,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
 
       title: MyText(
         title: "$title",
-        size: 14,
+        size: 16,
         color: MyColors.primary,
       ),
       centerTitle: true,
