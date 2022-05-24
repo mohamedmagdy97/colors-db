@@ -53,7 +53,7 @@ class HomeData {
       () {
         EasyLoading.dismiss();
         Utils.clearSavedData();
-        AutoRouter.of(context).replaceAll([LoginRoute()]);
+        AutoRouter.of(context).replaceAll([RegisterRoute()]);
       },
     );
   }

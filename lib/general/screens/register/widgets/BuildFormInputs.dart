@@ -60,30 +60,6 @@ class BuildFormInputs extends StatelessWidget {
             validate: (value) => value!.validateEmpty(context),
           ),
           const SizedBox(height: 16),
-          BlocBuilder<GenericBloc, GenericState>(
-            bloc: registerData.typeBloc,
-            builder: (context, state) {
-              return Column(
-                children: [
-                  RadioListTile(
-                      title: MyText(
-                          title: 'عميل', color: MyColors.black, size: 14),
-                      value: 'user',
-                      groupValue: state.data,
-                      onChanged: (v) =>
-                          registerData.typeBloc.onUpdateData(v.toString())),
-                  RadioListTile(
-                      title: MyText(
-                          title: 'مقدم خدمه', color: MyColors.black, size: 14),
-                      value: 'delegate',
-                      groupValue: state.data,
-                      onChanged: (v) =>
-                          registerData.typeBloc.onUpdateData(v.toString())),
-                ],
-              );
-            },
-          ),
-          const SizedBox(height: 16),
           MyText(title: 'كلمة المرور', color: MyColors.black, size: 12),
           BlocBuilder<GenericBloc, GenericState>(
             bloc: registerData.seenBloc,

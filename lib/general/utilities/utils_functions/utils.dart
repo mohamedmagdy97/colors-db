@@ -13,7 +13,7 @@ class Utils {
       GlobalState.instance.set("token", data.token);
       setCurrentUserData(data, context);
     } else {
-      AutoRouter.of(context).replaceAll([LoginRoute()]);
+      AutoRouter.of(context).replaceAll([RegisterRoute()]);
     }
   }
 
@@ -22,7 +22,7 @@ class Utils {
       baseUrl: ApiNames.baseUrl,
       style: CustomInputTextStyle(lang: lang),
       primary: MyColors.primary,
-      authLink: LoginRoute.name,
+      authLink: RegisterRoute.name,
       language: lang,
       dismissFunc: EasyLoading.dismiss,
       showLoadingFunc: LoadingDialog.showLoadingDialog,

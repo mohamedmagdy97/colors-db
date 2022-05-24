@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
           return MaterialApp.router(
               debugShowCheckedModeBanner: false,
               theme: MainData.defaultThem,
-              title: "multiCh-Task",
+              title: "Colors db",
               supportedLocales: [
                 Locale('en', 'US'),
                 Locale('ar', 'EG')

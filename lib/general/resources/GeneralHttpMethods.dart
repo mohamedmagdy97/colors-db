@@ -23,6 +23,12 @@ class GeneralHttpMethods {
     print("data is $_data");
     return (_data != null);
   }
+  Future<bool> getColors() async {
+    var _data = await DioHelper(context, forceRefresh: true)
+        .get('assets/json/colors.json',{});
+    print("data is $_data");
+    return (_data != null);
+  }
 
   Future<HomeDetailsModel?> home(HomeModel model) async {
     var _data = await DioHelper(context, forceRefresh: true)

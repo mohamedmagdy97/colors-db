@@ -48,7 +48,7 @@ class DioHelper {
             e.response?.data["message"].toString());
       } else if (e.response?.statusCode == 401 ||
           e.response?.statusCode == 301) {
-        tokenExpired();
+        // tokenExpired();
       } else if (e.response?.statusCode == 403) {
         CustomToast.showToastNotification(e.response?.data["error"].toString());
       } else if (e.response?.statusCode == 403) {
@@ -96,7 +96,7 @@ class DioHelper {
         }
       } else if (e.response?.statusCode == 401 ||
           e.response?.statusCode == 301) {
-        tokenExpired();
+        // tokenExpired();
       } else if (e.response?.statusCode == 403) {
         CustomToast.showSimpleToast(msg: e.response?.data["responseMessage"]);
       } else {
@@ -126,13 +126,13 @@ class DioHelper {
     };
   }
 
-  void tokenExpired() {
-    Future.delayed(Duration(seconds: 1), (() {
-      Utils.clearSavedData();
-      AutoRouter.of(context).pushAndPopUntil(
-        LoginRoute(),
-        predicate: (Route<dynamic> route) => false,
-      );
-    }));
-  }
+  // void tokenExpired() {
+  //   Future.delayed(Duration(seconds: 1), (() {
+  //     Utils.clearSavedData();
+  //     AutoRouter.of(context).pushAndPopUntil(
+  //      RegisterRoute(),
+  //       predicate: (Route<dynamic> route) => false,
+  //     );
+  //   }));
+  // }
 }

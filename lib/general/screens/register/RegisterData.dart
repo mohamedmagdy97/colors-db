@@ -28,7 +28,7 @@ class RegisterData {
       var res=await GeneralRepository(context).register(model);
       if(res){
         CustomToast.showSimpleToast(msg: 'User has been Registered');
-        AutoRouter.of(context).popAndPush(LoginRoute());
+        AutoRouter.of(context).popAndPush(HomeRoute());
       }
     }
   }

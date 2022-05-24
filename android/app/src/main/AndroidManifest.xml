@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.meg.multiCh">
+    package="com.meg.colorsDB">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -9,7 +9,7 @@
 
     <application
         android:icon="@mipmap/launcher_icon"
-        android:label="multiCh-Task">
+        android:label="Colors db">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDV1H2CcIYVHXtndUp8w_tu79A5OgLoAFU" />
