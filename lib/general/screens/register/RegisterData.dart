@@ -59,7 +59,7 @@ class RegisterData {
     if ('(${text.trim()})' == colorName.trim()) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(errorMsg),
-        duration: Duration(milliseconds: 1500),
+        duration:const Duration(milliseconds: 1500),
       ));
       return errorMsg;
     }
