@@ -6,30 +6,52 @@ class RegisterData {
   final GlobalKey<CustomButtonState> btnKey =
       new GlobalKey<CustomButtonState>();
 
-  final GenericBloc<String> typeBloc = GenericBloc('user');
-  final GenericBloc<bool> seenBloc = GenericBloc(false);
-  final TextEditingController password = new TextEditingController();
-  final TextEditingController phone = new TextEditingController();
-  final TextEditingController mail = new TextEditingController();
-  final TextEditingController name = new TextEditingController();
+  final GenericBloc<ColorModel?> colorsCubit = GenericBloc(null);
 
-  void userLogin(BuildContext context) async {
+  final GenericBloc<bool> startWithACubit = GenericBloc(false);
+  final TextEditingController forthController = new TextEditingController();
+  TextEditingController thirdController = new TextEditingController();
+  TextEditingValue textEditingValue = new TextEditingValue();
+  final TextEditingController secondController = new TextEditingController();
+  final TextEditingController firstController = new TextEditingController();
+
+  void doneValidate(BuildContext context) async {
     FocusScope.of(context).requestFocus(FocusNode());
     if (formKey.currentState!.validate()) {
-      RegisterModel model = RegisterModel(
-        email: mail.text,
-        phone: phone.text,
-        userName: name.text,
-        password: password.text,
-        // roles: ["user"],
-        roles: [typeBloc.state.data],
+      SelectionDataModel selectionDataModel = SelectionDataModel(
+        filedOne: firstController.text,
+        filedTwo: secondController.text,
+        filedThree: thirdController.text,
+        filedFour: forthController.text,
       );
+      AutoRouter.of(context)
+          .push(HomeRoute(selectionDataModel: selectionDataModel))
+          .then((value) {
+        firstController.clear();
+        secondController.clear();
+        thirdController.clear();
+        forthController.clear();
+      });
+    }
+  }
 
-      var res=await GeneralRepository(context).register(model);
-      if(res){
-        CustomToast.showSimpleToast(msg: 'User has been Registered');
-        AutoRouter.of(context).popAndPush(HomeRoute());
-      }
+  List<String> suggestions = [];
+
+  validateFirst() {
+    if (firstController.text.startsWith('a')) {
+      startWithACubit.onUpdateData(true);
+    } else {
+      startWithACubit.onUpdateData(false);
+    }
+  }
+
+  getColors(BuildContext context) async {
+    var res = await GeneralRepository(context).getColors();
+    if (res != null) {
+      colorsCubit.onUpdateData(res);
+      suggestions =
+          colorsCubit.state.data!.colorsGroupModel.autoSuggestionsColors;
+      forthController.text = colorsCubit.state.data!.red;
     }
   }
 }

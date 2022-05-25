@@ -9,10 +9,12 @@
 // **************************************************************************
 
 import 'package:auto_route/auto_route.dart' as _i4;
+import 'package:base_flutter/general/models/selection_model.dart' as _i7;
 import 'package:base_flutter/general/screens/home/home_imports.dart' as _i3;
 import 'package:base_flutter/general/screens/register/RegisterImports.dart'
     as _i2;
 import 'package:base_flutter/general/screens/splash/SplashImports.dart' as _i1;
+import 'package:flutter/foundation.dart' as _i6;
 import 'package:flutter/material.dart' as _i5;
 
 class AppRouter extends _i4.RootStackRouter {
@@ -32,8 +34,11 @@ class AppRouter extends _i4.RootStackRouter {
           routeData: routeData, child: _i2.Register());
     },
     HomeRoute.name: (routeData) {
+      final args = routeData.argsAs<HomeRouteArgs>();
       return _i4.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i3.Home());
+          routeData: routeData,
+          child: _i3.Home(
+              key: args.key, selectionDataModel: args.selectionDataModel));
     }
   };
 
@@ -76,8 +81,25 @@ class RegisterRoute extends _i4.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.Home]
-class HomeRoute extends _i4.PageRouteInfo<void> {
-  const HomeRoute() : super(HomeRoute.name, path: '/Home');
+class HomeRoute extends _i4.PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({_i6.Key? key, required _i7.SelectionDataModel selectionDataModel})
+      : super(HomeRoute.name,
+            path: '/Home',
+            args: HomeRouteArgs(
+                key: key, selectionDataModel: selectionDataModel));
 
   static const String name = 'HomeRoute';
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({this.key, required this.selectionDataModel});
+
+  final _i6.Key? key;
+
+  final _i7.SelectionDataModel selectionDataModel;
+
+  @override
+  String toString() {
+    return 'HomeRouteArgs{key: $key, selectionDataModel: $selectionDataModel}';
+  }
 }

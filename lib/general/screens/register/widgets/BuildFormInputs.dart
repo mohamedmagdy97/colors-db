@@ -12,82 +12,10 @@ class BuildFormInputs extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MyText(title: 'اسم المستخدم', color: MyColors.black, size: 12),
-          GenericTextField(
-            fieldTypes: FieldTypes.normal,
-            hint: tr(context, "name"),
-            controller: registerData.name,
-            fillColor: MyColors.white,
-            enableBorderColor: MyColors.primary,
-            margin: const EdgeInsets.symmetric(vertical: 4),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-            action: TextInputAction.next,
-            type: TextInputType.text,
-            radius: const BorderRadius.all(Radius.circular(4)),
-            validate: (value) => value!.validateEmpty(context),
-          ),
-          const SizedBox(height: 16),
-          MyText(title: 'البريد الالكتروني', color: MyColors.black, size: 12),
-          GenericTextField(
-            fieldTypes: FieldTypes.normal,
-            hint: tr(context, "mail"),
-            controller: registerData.mail,
-            fillColor: MyColors.white,
-            enableBorderColor: MyColors.primary,
-            margin: const EdgeInsets.symmetric(vertical: 4),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-            action: TextInputAction.next,
-            type: TextInputType.emailAddress,
-            radius: const BorderRadius.all(Radius.circular(4)),
-            validate: (value) => value!.validateEmpty(context),
-          ),
-          const SizedBox(height: 16),
-          MyText(title: 'رقم الهاتف', color: MyColors.black, size: 12),
-          GenericTextField(
-            fieldTypes: FieldTypes.normal,
-            hint: tr(context, "phone"),
-            controller: registerData.phone,
-            fillColor: MyColors.white,
-            enableBorderColor: MyColors.primary,
-            margin: const EdgeInsets.symmetric(vertical: 4),
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-            action: TextInputAction.next,
-            type: TextInputType.phone,
-            radius: const BorderRadius.all(Radius.circular(4)),
-            validate: (value) => value!.validateEmpty(context),
-          ),
-          const SizedBox(height: 16),
-          MyText(title: 'كلمة المرور', color: MyColors.black, size: 12),
-          BlocBuilder<GenericBloc, GenericState>(
-            bloc: registerData.seenBloc,
-            builder: (context, state) {
-              return GenericTextField(
-                fieldTypes:
-                    state.data ? FieldTypes.normal : FieldTypes.password,
-                hint: tr(context, "password"),
-                fillColor: MyColors.white,
-                enableBorderColor: MyColors.primary,
-                controller: registerData.password,
-                radius: const BorderRadius.all(Radius.circular(4)),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-                validate: (value) => value!.validateEmpty(context),
-                type: TextInputType.text,
-                margin: const EdgeInsets.symmetric(vertical: 4),
-                suffixIcon: IconButton(
-                    onPressed: () =>
-                        registerData.seenBloc.onUpdateData(!state.data),
-                    icon: Icon(state.data
-                        ? Icons.visibility_off
-                        : Icons.remove_red_eye)),
-                action: TextInputAction.done,
-                onSubmit: () => registerData.userLogin(context),
-              );
-            },
-          ),
+          BuildFirstField(registerData: registerData),
+          BuildSecondField(registerData: registerData),
+          BuildSuggestionField(registerData: registerData),
+          BuildAutoAssignField(registerData: registerData)
         ],
       ),
     );

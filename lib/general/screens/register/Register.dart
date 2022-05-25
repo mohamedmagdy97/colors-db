@@ -9,6 +9,12 @@ class _RegisterState extends State<Register> {
   RegisterData registerData = new RegisterData();
 
   @override
+  void initState() {
+    registerData.getColors(context);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AuthScaffold(
       child: GestureDetector(

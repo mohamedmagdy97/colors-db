@@ -39,13 +39,9 @@ dependencies:
   intl: ^0.17.0
   flutter_easyloading: ^3.0.3
   flutter_phoenix: ^1.0.0
-  flutter_rounded_date_picker: ^2.0.2
-  material_design_icons_flutter: ^5.0.6595
   json_serializable: ^6.1.4
   json_annotation: ^4.4.0
-  expandable: ^5.0.1
-  infinite_scroll_pagination: ^3.1.0
-  flutter_holo_date_picker: ^1.0.3
+
 
 
 
@@ -80,14 +76,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/bg.png
-    - assets/images/filter.png
     - assets/images/icon.png
     - assets/images/logo.png
     - assets/images/logoWhite.png
-    - assets/images/nodata.png
-    - assets/images/placeholder.png
-    - assets/images/plus.png
-    - assets/images/splash.png
+    - assets/json/colors.json
     - assets/lang/ar.json
     - assets/lang/en.json
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -9,8 +9,8 @@ class BuildRegisterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return LoadingButton(
       btnKey: registerData.btnKey,
-      title: 'دخول',
-      onTap: () => registerData.userLogin(context),
+      title: 'Enter',
+      onTap: () => registerData.doneValidate(context),
       color: MyColors.primary,
       textColor: MyColors.white,
       margin: const EdgeInsets.symmetric(vertical: 50),

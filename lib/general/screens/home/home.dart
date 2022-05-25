@@ -1,37 +1,23 @@
 part of 'home_imports.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final SelectionDataModel selectionDataModel;
+
+  const Home({Key? key, required this.selectionDataModel}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  HomeData homeData = HomeData();
-
-  @override
-  void initState() {
-    homeData.fetchData(context, pageKey: 1);
-    homeData.pagingController.addPageRequestListener((pageKey) {
-      homeData.fetchData(context, pageKey: pageKey);
-    });
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: DefaultAppBar(
-        title: 'مدفوعات هلا',
-        actions: [
-          IconButton(
-              onPressed: () => homeData.profile(context),
-              icon: Icon(Icons.person))
-        ],
+        title: 'Home',
         leading: IconButton(
-            onPressed: () => homeData.logout(context),
+            onPressed: () => AutoRouter.of(context).pop(),
             icon: Icon(Icons.logout)),
       ),
       body: Stack(
@@ -42,7 +28,7 @@ class _HomeState extends State<Home> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
           ),
-          BuildHomeView(homeData: homeData)
+          BuildHomeBody(widget: widget),
         ],
       ),
     );

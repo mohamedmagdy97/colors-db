@@ -1,10 +1,10 @@
 part of 'HomeWidgetsImports.dart';
 
-class BuildRowText extends StatelessWidget {
+class BuildRowTitle extends StatelessWidget {
   final String title;
   final String value;
 
-  const BuildRowText({
+  const BuildRowTitle({
     Key? key,
     required this.title,
     required this.value,
@@ -13,16 +13,13 @@ class BuildRowText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        MyText(
-          title: '$title : ',
-          color: MyColors.blackOpacity,
-          size: 13,
-        ),
+        MyText(title: title, color: MyColors.black, size: 16),
         MyText(
           title: value,
           color: MyColors.primary,
-          size: 13,
+          size: 14,
         ),
       ],
     );
