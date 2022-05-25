@@ -1,10 +1,8 @@
 part of 'RegisterWidgetsImports.dart';
 
 class BuildSuggestionField extends StatelessWidget {
-  const BuildSuggestionField({
-    Key? key,
-    required this.registerData,
-  }) : super(key: key);
+  const BuildSuggestionField({Key? key, required this.registerData})
+      : super(key: key);
 
   final RegisterData registerData;
 
@@ -23,10 +21,8 @@ class BuildSuggestionField extends StatelessWidget {
             return option.contains(textEditingValue.text.toLowerCase());
           });
         },
-        displayStringForOption: (val) {
-          return val;
-        },
-       fieldViewBuilder:
+        displayStringForOption: (val) => val,
+        fieldViewBuilder:
             (context, controllerView, focusNode, onEditingComplete) {
           registerData.thirdController = controllerView;
           return TextFormField(

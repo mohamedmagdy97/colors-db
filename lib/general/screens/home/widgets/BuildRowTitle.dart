@@ -16,11 +16,7 @@ class BuildRowTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MyText(title: title, color: MyColors.black, size: 16),
-        MyText(
-          title: value,
-          color: MyColors.primary,
-          size: 14,
-        ),
+        MyText(title: value, color: MyColors.primary, size: 14),
       ],
     );
   }

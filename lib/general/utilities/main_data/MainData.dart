@@ -13,10 +13,4 @@ class MainData {
       ),
     ),
   );
-
-  static List<BlocProvider> providers(BuildContext context) => [
-        BlocProvider<AuthCubit>(
-          create: (BuildContext context) => AuthCubit(),
-        ),
-      ];
 }

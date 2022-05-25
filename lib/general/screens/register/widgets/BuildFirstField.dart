@@ -22,11 +22,7 @@ class BuildFirstField extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 4),
           contentPadding:
               const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
-          onChange: (val) {
-            val.startsWith('a')
-                ? registerData.startWithACubit.onUpdateData(true)
-                : registerData.startWithACubit.onUpdateData(false);
-          },
+          onChange: (text) => registerData.validateFirst(text),
           action: TextInputAction.next,
           type: TextInputType.text,
           radius: const BorderRadius.all(Radius.circular(4)),

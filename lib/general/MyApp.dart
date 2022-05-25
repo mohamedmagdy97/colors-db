@@ -19,36 +19,33 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: MainData.providers(context),
-      child: BlocBuilder<LangCubit, LangState>(
-        builder: (context, state) {
-          return MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              theme: MainData.defaultThem,
-              title: "Colors db",
-              supportedLocales: [
-                Locale('en', 'US'),
-                Locale('ar', 'EG')
-              ],
-              localizationsDelegates: [
-                SetLocalization.localizationsDelegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              locale: state.locale,
-              routerDelegate: _appRouter.delegate(
-                  initialRoutes: [SplashRoute(navigatorKey: navigatorKey)]
-              ),
-              routeInformationParser: _appRouter.defaultRouteParser(),
-              builder: (ctx, child) {
-                child = FlutterEasyLoading(child: child); //do something
-                return child;
-              }
-          );
-        },
-      ),
+    return BlocBuilder<LangCubit, LangState>(
+      builder: (context, state) {
+        return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            theme: MainData.defaultThem,
+            title: "Colors db",
+            supportedLocales: [
+              Locale('en', 'US'),
+              Locale('ar', 'EG')
+            ],
+            localizationsDelegates: [
+              SetLocalization.localizationsDelegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            locale: state.locale,
+            routerDelegate: _appRouter.delegate(
+                initialRoutes: [SplashRoute(navigatorKey: navigatorKey)]
+            ),
+            routeInformationParser: _appRouter.defaultRouteParser(),
+            builder: (ctx, child) {
+              child = FlutterEasyLoading(child: child); //do something
+              return child;
+            }
+        );
+      },
     );
   }
 }

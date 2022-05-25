@@ -31,7 +31,9 @@ class BuildSecondField extends StatelessWidget {
                 action: TextInputAction.next,
                 type: TextInputType.emailAddress,
                 radius: const BorderRadius.all(Radius.circular(4)),
-                validate: (value) => value!.validateEmpty(context),
+                validate: (value) => registerData.validateSecond(value!,context),
+                onChange: (val) =>registerData.validateSecond(val,context)
+
               ),
             ],
           ),
