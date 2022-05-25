@@ -12,7 +12,7 @@ class RegisterData {
   final GenericBloc<bool> isErrorCubit = GenericBloc(false);
   final GenericBloc<String> isErrorCubitS = GenericBloc('');
 
-  TextEditingValue textEditingValue = new TextEditingValue();
+  final TextEditingValue textEditingValue = new TextEditingValue();
 
   final TextEditingController firstController = new TextEditingController();
   final TextEditingController secondController = new TextEditingController();
@@ -59,7 +59,7 @@ class RegisterData {
     if ('(${text.trim()})' == colorName.trim()) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(errorMsg),
-        duration:const Duration(milliseconds: 1500),
+        duration: const Duration(milliseconds: 1500),
       ));
       return errorMsg;
     }
