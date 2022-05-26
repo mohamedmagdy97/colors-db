@@ -12,11 +12,26 @@ class BuildRowTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
       children: [
-        MyText(title: title, color: MyColors.black, size: 16),
-        MyText(title: value, color: MyColors.primary, size: 14),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            MyText(
+              title: title,
+              color: MyColors.black,
+              size: 16,
+              fontFamily: GoogleFonts.josefinSans().fontFamily,
+            ),
+            MyText(
+              title: value,
+              color: MyColors.primary,
+              size: 14,
+              fontFamily: GoogleFonts.josefinSans().fontFamily,
+            ),
+          ],
+        ),
+        const Divider(),
       ],
     );
   }

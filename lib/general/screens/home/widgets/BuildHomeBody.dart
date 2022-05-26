@@ -32,7 +32,7 @@ class BuildHomeBody extends StatelessWidget {
               title: 'Forth',
               value: widget.selectionDataModel.filedFour,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             DefaultButton(
               title: 'Back to Main',
               onTap: () => AutoRouter.of(context).pop(),

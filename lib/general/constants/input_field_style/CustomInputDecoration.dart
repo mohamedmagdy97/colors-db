@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 class CustomInputDecoration extends InputDecoration {
-  final String lang;
   final String? labelTxt;
   final String? hint;
   final Widget? prefixIcon;
@@ -17,7 +16,7 @@ class CustomInputDecoration extends InputDecoration {
   final EdgeInsets? padding;
 
   CustomInputDecoration(
-      {required this.lang,
+      {
       this.hint,
       this.labelTxt,
       this.prefixIcon,
@@ -58,9 +57,7 @@ class CustomInputDecoration extends InputDecoration {
 
   @override
   // TODO: implement errorStyle
-  TextStyle get errorStyle => lang != "ar"
-      ? GoogleFonts.roboto(fontSize: 12)
-      : GoogleFonts.cairo(fontSize: 10);
+  TextStyle get errorStyle =>GoogleFonts.josefinSans(fontSize: 12);
 
   @override
   // TODO: implement hintText
@@ -72,15 +69,11 @@ class CustomInputDecoration extends InputDecoration {
 
   @override
   // TODO: implement labelStyle
-  TextStyle get labelStyle => lang != "ar"
-      ? GoogleFonts.roboto(fontSize: 16, color: hintColor ?? Colors.black54)
-      : GoogleFonts.cairo(fontSize: 14, color: hintColor ?? Colors.black54);
+  TextStyle get labelStyle =>  GoogleFonts.josefinSans(fontSize: 16, color: hintColor ?? Colors.black54);
 
   @override
   // TODO: implement hintStyle
-  TextStyle? get hintStyle => lang != "ar"
-      ? GoogleFonts.roboto(fontSize: 16, color: hintColor ?? Colors.black54)
-      : GoogleFonts.cairo(fontSize: 14, color: hintColor ?? Colors.black54);
+  TextStyle? get hintStyle => GoogleFonts.josefinSans(fontSize: 16, color: hintColor ?? Colors.black54);
 
   @override
   // TODO: implement contentPadding

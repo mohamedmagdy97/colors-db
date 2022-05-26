@@ -2,16 +2,16 @@ part of 'UtilsImports.dart';
 
 class Utils {
   static Future<void> manipulateSplashData(BuildContext context) async {
-    initCustomWidgets(language: "ar");
+    initCustomWidgets();
 
     AutoRouter.of(context).replaceAll([RegisterRoute()]);
   }
 
-  static initCustomWidgets({required String language}) {
+  static initCustomWidgets() {
     WidgetUtils.init(
-        style: CustomInputTextStyle(lang: language),
+        style: CustomInputTextStyle(),
         primary: MyColors.primary,
-        language: language,
+        language: 'en',
         inputStyle: (
                 {String? label,
                 String? hint,
@@ -24,7 +24,6 @@ class Utils {
                 EdgeInsets? padding,
                 Color? enableColor}) =>
             CustomInputDecoration(
-                lang: language,
                 labelTxt: label,
                 hint: hint,
                 prefixIcon: prefixIcon,

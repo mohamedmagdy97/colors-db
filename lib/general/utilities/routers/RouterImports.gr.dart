@@ -13,8 +13,7 @@
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:colors_db/general/models/selection_model.dart' as _i6;
 import 'package:colors_db/general/screens/home/home_imports.dart' as _i3;
-import 'package:colors_db/general/screens/register/RegisterImports.dart'
-    as _i2;
+import 'package:colors_db/general/screens/register/RegisterImports.dart' as _i2;
 import 'package:colors_db/general/screens/splash/SplashImports.dart' as _i1;
 import 'package:flutter/material.dart' as _i5;
 
@@ -25,10 +24,8 @@ class AppRouter extends _i4.RootStackRouter {
   @override
   final Map<String, _i4.PageFactory> pagesMap = {
     SplashRoute.name: (routeData) {
-      final args = routeData.argsAs<SplashRouteArgs>();
       return _i4.AdaptivePage<dynamic>(
-          routeData: routeData,
-          child: _i1.Splash(navigatorKey: args.navigatorKey));
+          routeData: routeData, child: const _i1.Splash());
     },
     RegisterRoute.name: (routeData) {
       return _i4.AdaptivePage<dynamic>(
@@ -53,23 +50,10 @@ class AppRouter extends _i4.RootStackRouter {
 
 /// generated route for
 /// [_i1.Splash]
-class SplashRoute extends _i4.PageRouteInfo<SplashRouteArgs> {
-  SplashRoute({required _i5.GlobalKey<_i5.NavigatorState> navigatorKey})
-      : super(SplashRoute.name,
-            path: '/', args: SplashRouteArgs(navigatorKey: navigatorKey));
+class SplashRoute extends _i4.PageRouteInfo<void> {
+  const SplashRoute() : super(SplashRoute.name, path: '/');
 
   static const String name = 'SplashRoute';
-}
-
-class SplashRouteArgs {
-  const SplashRouteArgs({required this.navigatorKey});
-
-  final _i5.GlobalKey<_i5.NavigatorState> navigatorKey;
-
-  @override
-  String toString() {
-    return 'SplashRouteArgs{navigatorKey: $navigatorKey}';
-  }
 }
 
 /// generated route for

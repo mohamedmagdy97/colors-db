@@ -6,11 +6,9 @@ class MainData {
     focusColor: MyColors.primary,
     accentColor: MyColors.primary,
     primaryColor: MyColors.primary,
-    fontFamily: GoogleFonts.cairo().fontFamily,
+    fontFamily: GoogleFonts.josefinSans().fontFamily,
     textTheme: TextTheme(
-      subtitle1: GoogleFonts.cairo(
-        fontSize: 14,
-      ),
+      subtitle1: GoogleFonts.josefinSans(fontSize: 14),
     ),
   );
 }

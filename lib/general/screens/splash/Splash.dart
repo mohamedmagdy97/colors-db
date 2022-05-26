@@ -1,9 +1,8 @@
 part of 'SplashImports.dart';
 
 class Splash extends StatefulWidget {
-  final GlobalKey<NavigatorState> navigatorKey;
 
-  const Splash({required this.navigatorKey});
+  const Splash({Key? key}) : super(key: key);
 
   @override
   _SplashState createState() => _SplashState();
