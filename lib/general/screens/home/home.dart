@@ -16,9 +16,12 @@ class _HomeState extends State<Home> {
       extendBodyBehindAppBar: true,
       appBar: DefaultAppBar(
         title: 'Home',
-        leading: IconButton(
+        actions: [
+          IconButton(
             onPressed: () => AutoRouter.of(context).pop(),
-            icon: Icon(Icons.logout)),
+            icon: Icon(Icons.logout),
+          )
+        ],
       ),
       body: Stack(
         children: [
