@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
+  sdk: ">=2.16.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -37,8 +37,6 @@ dependencies:
   shared_preferences: ^2.0.13
   flutter_launcher_icons: ^0.9.2
   intl: ^0.17.0
-  flutter_easyloading: ^3.0.3
-  flutter_phoenix: ^1.0.0
 
 
 flutter_icons:
@@ -53,6 +51,7 @@ dev_dependencies:
     sdk: flutter
   auto_route_generator: ^3.2.0
   build_runner: ^2.1.7
+  test:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

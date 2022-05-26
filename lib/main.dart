@@ -1,7 +1,6 @@
 import 'package:base_flutter/general/blocks/lang_cubit/lang_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'general/MyApp.dart';
 
 void main() async {
@@ -9,6 +8,6 @@ void main() async {
 
   runApp(BlocProvider(
     create: (BuildContext context) => LangCubit(),
-    child: Phoenix(child: MyApp()),
+    child: MyApp(),
   ));
 }

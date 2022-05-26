@@ -15,7 +15,7 @@ extension Validator on String {
     }
 
     if (this.trim().length < 5 || this.trim().length > 9) {
-      return message ?? 'Enter from 5 to 9 char';
+      return message ?? 'Value should be between 5 to 9 char';
     }
 
     return null;

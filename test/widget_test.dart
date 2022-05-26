@@ -6,14 +6,25 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:base_flutter/general/MyApp.dart';
+import 'package:base_flutter/general/models/selection_model.dart';
+import 'package:base_flutter/general/screens/home/home_imports.dart';
+import 'package:base_flutter/general/screens/register/RegisterImports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(
+      Home(
+        selectionDataModel: SelectionDataModel(
+          filedOne: 'filedOne',
+          filedTwo: 'filedTwo',
+          filedThree: 'filedThree',
+          filedFour: 'filedFour',
+        ),
+      ),
+    );
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
