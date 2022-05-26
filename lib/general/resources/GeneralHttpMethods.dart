@@ -9,10 +9,6 @@ class GeneralHttpMethods {
     String data = await DefaultAssetBundle.of(context)
         .loadString("assets/json/colors.json");
     final jsonResult = jsonDecode(data);
-    if (data != null) {
-      return ColorModel.fromJson(jsonResult);
-    } else {
-      return null;
-    }
+    return ColorModel.fromJson(jsonResult);
   }
 }
