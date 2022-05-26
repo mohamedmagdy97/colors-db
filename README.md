@@ -1,4 +1,4 @@
-# Flutter >> 2.10.2
+# Dart >> 2.16.0
 
 A new Flutter application.
 

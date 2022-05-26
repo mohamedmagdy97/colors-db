@@ -1,4 +1,4 @@
-import 'package:base_flutter/general/models/add_to_color_model.dart';
+import 'package:colors_db/general/models/add_to_color_model.dart';
 
 class FavoriteColorModel {
   late final List<AddToColorModel> addToTheseColors;

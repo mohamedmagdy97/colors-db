@@ -1,4 +1,4 @@
-import 'package:base_flutter/general/utilities/routers/RouterImports.gr.dart';
+import 'package:colors_db/general/utilities/routers/RouterImports.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

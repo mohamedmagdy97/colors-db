@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:base_flutter/res.dart';
+import 'package:colors_db/res.dart';
 
 class HeaderLogo extends StatelessWidget {
   @override

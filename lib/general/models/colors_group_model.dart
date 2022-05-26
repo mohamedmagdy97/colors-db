@@ -1,5 +1,5 @@
-import 'package:base_flutter/general/models/validate_color_model.dart';
-import 'package:base_flutter/general/models/favorite_color_model.dart';
+import 'package:colors_db/general/models/validate_color_model.dart';
+import 'package:colors_db/general/models/favorite_color_model.dart';
 
 
 class ColorsGroupModel {

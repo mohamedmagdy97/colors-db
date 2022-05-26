@@ -1,4 +1,4 @@
-import 'package:base_flutter/res.dart';
+import 'package:colors_db/res.dart';
 import 'package:flutter/material.dart';
 
 class AuthScaffold extends StatelessWidget {
